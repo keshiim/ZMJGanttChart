@@ -12,5 +12,5 @@
 @property (nonatomic, assign) NSInteger column;
 
 - (instancetype)initWithRow:(NSInteger)row column:(NSInteger)column;
-
++ (instancetype)locationWithRow:(NSInteger)row column:(NSInteger)column;
 @end

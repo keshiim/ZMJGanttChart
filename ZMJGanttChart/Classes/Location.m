@@ -22,6 +22,10 @@
     return [self initWithRow:indexPath.row column:indexPath.column];
 }
 
++ (instancetype)locationWithRow:(NSInteger)row column:(NSInteger)column {
+    return [[self alloc] initWithRow:row column:column];
+}
+
 - (NSUInteger)hash {
     return 32768 * _row * _column;
 }
