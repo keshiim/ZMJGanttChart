@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ZMJGanttChart_Example' do
+  pod 'ZMJGanttChart', :path => '../'
+
+  target 'ZMJGanttChart_Tests' do
+    inherit! :search_paths
+
+    pod 'Kiwi'
+  end
+end
