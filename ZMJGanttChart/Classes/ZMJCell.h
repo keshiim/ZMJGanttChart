@@ -16,13 +16,14 @@
 @property (nonatomic, strong) UIView *selectedBackgroundView;
 
 @property (nonatomic, assign, getter=isHighlighted) BOOL highlighted;
-@property (nonatomic, assign, getter=isSelected) BOOL selected;
+@property (nonatomic, assign, getter=isSelected)    BOOL selected;
 
 @property (nonatomic, strong) Gridlines *gridlines;
 @property (nonatomic, strong) Gridlines *grids;
 
 @property (nonatomic, strong) Borders *borders;
 
+@property (nonatomic, strong, readonly) NSString *reuseIdentifier;
 @end
 
 @interface BlankCell: ZMJCell
