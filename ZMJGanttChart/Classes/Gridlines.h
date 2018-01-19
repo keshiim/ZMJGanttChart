@@ -38,6 +38,7 @@ typedef NS_ENUM(NSInteger, GridStyle_Enum) {
 @property (nonatomic, assign) CGFloat width;
 @property (nonatomic, strong) UIColor *color;
 
+- (instancetype)initWithStyle:(GridStyle_Enum)style_enum width:(CGFloat)widith color:(UIColor *)color;
 + (instancetype)borderStyleNone;
 @end
 

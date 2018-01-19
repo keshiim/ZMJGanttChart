@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, BorderStyle_Enum) {
 @property (nonatomic, strong) UIColor *color;
 @property (nonatomic, assign) BorderStyle_Enum border_enum;
 
+- (instancetype)initWithStyle:(BorderStyle_Enum)style_enum width:(CGFloat)widith color:(UIColor *)color;
 + (instancetype)borderStyleNone;
 @end
 
