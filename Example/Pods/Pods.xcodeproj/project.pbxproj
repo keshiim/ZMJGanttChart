@@ -124,6 +124,40 @@
 		962334EF2011C8630016840F /* ReuseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 962334E82011C8620016840F /* ReuseQueue.m */; };
 		962334F02011C8630016840F /* ZMJScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 962334E92011C8630016840F /* ZMJScrollView.h */; };
 		962334F12011C8630016840F /* ZMJScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 962334E92011C8630016840F /* ZMJScrollView.h */; };
+		962334F42011D02D0016840F /* Address.h in Headers */ = {isa = PBXBuildFile; fileRef = 962334F22011D02D0016840F /* Address.h */; };
+		962334F52011D02D0016840F /* Address.h in Headers */ = {isa = PBXBuildFile; fileRef = 962334F22011D02D0016840F /* Address.h */; };
+		962334F62011D02D0016840F /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 962334F32011D02D0016840F /* Address.m */; };
+		962334F72011D02D0016840F /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 962334F32011D02D0016840F /* Address.m */; };
+		962335002011DB080016840F /* ZMJCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 962334FE2011DB080016840F /* ZMJCell.h */; };
+		962335012011DB080016840F /* ZMJCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 962334FE2011DB080016840F /* ZMJCell.h */; };
+		962335022011DB080016840F /* ZMJCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 962334FF2011DB080016840F /* ZMJCell.m */; };
+		962335032011DB080016840F /* ZMJCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 962334FF2011DB080016840F /* ZMJCell.m */; };
+		962335062011DB7E0016840F /* Gridlines.h in Headers */ = {isa = PBXBuildFile; fileRef = 962335042011DB7E0016840F /* Gridlines.h */; };
+		962335072011DB7E0016840F /* Gridlines.h in Headers */ = {isa = PBXBuildFile; fileRef = 962335042011DB7E0016840F /* Gridlines.h */; };
+		962335082011DB7E0016840F /* Gridlines.m in Sources */ = {isa = PBXBuildFile; fileRef = 962335052011DB7E0016840F /* Gridlines.m */; };
+		962335092011DB7E0016840F /* Gridlines.m in Sources */ = {isa = PBXBuildFile; fileRef = 962335052011DB7E0016840F /* Gridlines.m */; };
+		9623350C2011DBC00016840F /* Borders.h in Headers */ = {isa = PBXBuildFile; fileRef = 9623350A2011DBC00016840F /* Borders.h */; };
+		9623350D2011DBC00016840F /* Borders.h in Headers */ = {isa = PBXBuildFile; fileRef = 9623350A2011DBC00016840F /* Borders.h */; };
+		9623350E2011DBC00016840F /* Borders.m in Sources */ = {isa = PBXBuildFile; fileRef = 9623350B2011DBC00016840F /* Borders.m */; };
+		9623350F2011DBC00016840F /* Borders.m in Sources */ = {isa = PBXBuildFile; fileRef = 9623350B2011DBC00016840F /* Borders.m */; };
+		962335122011DE880016840F /* ZMJLayoutEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 962335102011DE880016840F /* ZMJLayoutEngine.h */; };
+		962335132011DE880016840F /* ZMJLayoutEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 962335102011DE880016840F /* ZMJLayoutEngine.h */; };
+		962335142011DE880016840F /* ZMJLayoutEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 962335112011DE880016840F /* ZMJLayoutEngine.m */; };
+		962335152011DE880016840F /* ZMJLayoutEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 962335112011DE880016840F /* ZMJLayoutEngine.m */; };
+		962335182011E2ED0016840F /* ZMJCellRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 962335162011E2ED0016840F /* ZMJCellRange.h */; };
+		962335192011E2ED0016840F /* ZMJCellRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 962335162011E2ED0016840F /* ZMJCellRange.h */; };
+		9623351A2011E2ED0016840F /* ZMJCellRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 962335172011E2ED0016840F /* ZMJCellRange.m */; };
+		9623351B2011E2ED0016840F /* ZMJCellRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 962335172011E2ED0016840F /* ZMJCellRange.m */; };
+		9623351E2011E32B0016840F /* Location.h in Headers */ = {isa = PBXBuildFile; fileRef = 9623351C2011E32B0016840F /* Location.h */; };
+		9623351F2011E32B0016840F /* Location.h in Headers */ = {isa = PBXBuildFile; fileRef = 9623351C2011E32B0016840F /* Location.h */; };
+		962335202011E32B0016840F /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 9623351D2011E32B0016840F /* Location.m */; };
+		962335212011E32B0016840F /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 9623351D2011E32B0016840F /* Location.m */; };
+		962335242011E4620016840F /* NSIndexPath+column.h in Headers */ = {isa = PBXBuildFile; fileRef = 962335222011E4620016840F /* NSIndexPath+column.h */; };
+		962335252011E4620016840F /* NSIndexPath+column.h in Headers */ = {isa = PBXBuildFile; fileRef = 962335222011E4620016840F /* NSIndexPath+column.h */; };
+		962335262011E4620016840F /* NSIndexPath+column.m in Sources */ = {isa = PBXBuildFile; fileRef = 962335232011E4620016840F /* NSIndexPath+column.m */; };
+		962335272011E4620016840F /* NSIndexPath+column.m in Sources */ = {isa = PBXBuildFile; fileRef = 962335232011E4620016840F /* NSIndexPath+column.m */; };
+		9623352A2011E5BE0016840F /* NSArray+BinarySearch.h in Headers */ = {isa = PBXBuildFile; fileRef = 962335282011E5BE0016840F /* NSArray+BinarySearch.h */; };
+		9623352B2011E5BE0016840F /* NSArray+BinarySearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 962335292011E5BE0016840F /* NSArray+BinarySearch.m */; };
 		96EA8C50F8B764CEC8A8963ECD14EBFC /* KWAfterEachNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D4231E2CE9493759EE9354A8DAC0314 /* KWAfterEachNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9754C75C21F39ED9880180C5A888588F /* KWBeforeAllNode.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF2FC14B970E9E26F66066A5EE39839 /* KWBeforeAllNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		989AD231EEC12F9D0BC8B83EE0887D7F /* KWAfterEachNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 721CBB5CFC3AFC010910DAA539C4DF59 /* KWAfterEachNode.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
@@ -375,6 +409,24 @@
 		962334E72011C8620016840F /* ZMJScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMJScrollView.m; sourceTree = "<group>"; };
 		962334E82011C8620016840F /* ReuseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReuseQueue.m; sourceTree = "<group>"; };
 		962334E92011C8630016840F /* ZMJScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMJScrollView.h; sourceTree = "<group>"; };
+		962334F22011D02D0016840F /* Address.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
+		962334F32011D02D0016840F /* Address.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
+		962334FE2011DB080016840F /* ZMJCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMJCell.h; sourceTree = "<group>"; };
+		962334FF2011DB080016840F /* ZMJCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJCell.m; sourceTree = "<group>"; };
+		962335042011DB7E0016840F /* Gridlines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gridlines.h; sourceTree = "<group>"; };
+		962335052011DB7E0016840F /* Gridlines.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Gridlines.m; sourceTree = "<group>"; };
+		9623350A2011DBC00016840F /* Borders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Borders.h; sourceTree = "<group>"; };
+		9623350B2011DBC00016840F /* Borders.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Borders.m; sourceTree = "<group>"; };
+		962335102011DE880016840F /* ZMJLayoutEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMJLayoutEngine.h; sourceTree = "<group>"; };
+		962335112011DE880016840F /* ZMJLayoutEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJLayoutEngine.m; sourceTree = "<group>"; };
+		962335162011E2ED0016840F /* ZMJCellRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMJCellRange.h; sourceTree = "<group>"; };
+		962335172011E2ED0016840F /* ZMJCellRange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJCellRange.m; sourceTree = "<group>"; };
+		9623351C2011E32B0016840F /* Location.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		9623351D2011E32B0016840F /* Location.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		962335222011E4620016840F /* NSIndexPath+column.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+column.h"; sourceTree = "<group>"; };
+		962335232011E4620016840F /* NSIndexPath+column.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+column.m"; sourceTree = "<group>"; };
+		962335282011E5BE0016840F /* NSArray+BinarySearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+BinarySearch.h"; sourceTree = "<group>"; };
+		962335292011E5BE0016840F /* NSArray+BinarySearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BinarySearch.m"; sourceTree = "<group>"; };
 		969F25D914AF9E313506E0817AAA02AD /* KWMatcherFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWMatcherFactory.m; path = Classes/Core/KWMatcherFactory.m; sourceTree = "<group>"; };
 		975757BB5A74FCD47B2BB40E7D80E392 /* KWMessageSpying.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWMessageSpying.h; path = Classes/Core/KWMessageSpying.h; sourceTree = "<group>"; };
 		9795227F493D9349B527EB839486C8E6 /* KWRespondToSelectorMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWRespondToSelectorMatcher.m; path = Classes/Matchers/KWRespondToSelectorMatcher.m; sourceTree = "<group>"; };
@@ -826,6 +878,24 @@
 				962334E82011C8620016840F /* ReuseQueue.m */,
 				962334E92011C8630016840F /* ZMJScrollView.h */,
 				962334E72011C8620016840F /* ZMJScrollView.m */,
+				962334F22011D02D0016840F /* Address.h */,
+				962334F32011D02D0016840F /* Address.m */,
+				9623351C2011E32B0016840F /* Location.h */,
+				9623351D2011E32B0016840F /* Location.m */,
+				962335222011E4620016840F /* NSIndexPath+column.h */,
+				962335232011E4620016840F /* NSIndexPath+column.m */,
+				962335282011E5BE0016840F /* NSArray+BinarySearch.h */,
+				962335292011E5BE0016840F /* NSArray+BinarySearch.m */,
+				962334FE2011DB080016840F /* ZMJCell.h */,
+				962334FF2011DB080016840F /* ZMJCell.m */,
+				962335042011DB7E0016840F /* Gridlines.h */,
+				962335052011DB7E0016840F /* Gridlines.m */,
+				9623350A2011DBC00016840F /* Borders.h */,
+				9623350B2011DBC00016840F /* Borders.m */,
+				962335102011DE880016840F /* ZMJLayoutEngine.h */,
+				962335112011DE880016840F /* ZMJLayoutEngine.m */,
+				962335162011E2ED0016840F /* ZMJCellRange.h */,
+				962335172011E2ED0016840F /* ZMJCellRange.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -855,8 +925,17 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9623350D2011DBC00016840F /* Borders.h in Headers */,
+				962335252011E4620016840F /* NSIndexPath+column.h in Headers */,
+				9623351F2011E32B0016840F /* Location.h in Headers */,
 				C557F12F0325866EE773AAD465F2714A /* ZMJGanttChart-umbrella.h in Headers */,
+				962334F52011D02D0016840F /* Address.h in Headers */,
+				962335012011DB080016840F /* ZMJCell.h in Headers */,
+				9623352A2011E5BE0016840F /* NSArray+BinarySearch.h in Headers */,
+				962335192011E2ED0016840F /* ZMJCellRange.h in Headers */,
+				962335132011DE880016840F /* ZMJLayoutEngine.h in Headers */,
 				962334F12011C8630016840F /* ZMJScrollView.h in Headers */,
+				962335072011DB7E0016840F /* Gridlines.h in Headers */,
 				962334EB2011C8630016840F /* ReuseQueue.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -865,6 +944,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				962335002011DB080016840F /* ZMJCell.h in Headers */,
 				B6FB21DCD638999FA2A3484D0F8F0EBF /* Kiwi-umbrella.h in Headers */,
 				8AE140717EC43CB6CD24D3E58D00E3CC /* Kiwi.h in Headers */,
 				4F932F5B556C639DDB006453EF1A65D0 /* KiwiBlockMacros.h in Headers */,
@@ -878,8 +958,10 @@
 				8F1080919BF46F8AF338CEA8E730398C /* KWBeBetweenMatcher.h in Headers */,
 				F90A8097D3CE59DE0D13C484BA833EE8 /* KWBeEmptyMatcher.h in Headers */,
 				9754C75C21F39ED9880180C5A888588F /* KWBeforeAllNode.h in Headers */,
+				9623351E2011E32B0016840F /* Location.h in Headers */,
 				70AF8257EBAD9CA5BB5BC083C17A7B21 /* KWBeforeEachNode.h in Headers */,
 				FB902766CDFF2B5CC4C21971DE885D53 /* KWBeIdenticalToMatcher.h in Headers */,
+				962335122011DE880016840F /* ZMJLayoutEngine.h in Headers */,
 				E1DE22CA21F615E0C469B07D7BD03DC6 /* KWBeKindOfClassMatcher.h in Headers */,
 				ABAEB220D8F1F97279AE1FC528E8EF04 /* KWBeMemberOfClassMatcher.h in Headers */,
 				1F96D88C0D7B8E811143768F70DEC54A /* KWBeSubclassOfClassMatcher.h in Headers */,
@@ -892,6 +974,7 @@
 				A73C37C44D91CB867CFCADBD0F614423 /* KWCallSite.h in Headers */,
 				07B32A126F329CB17E5BF006F79479A4 /* KWCaptureSpy.h in Headers */,
 				EF00E91C93E9D6C93F7BF7B43951EB50 /* KWChangeMatcher.h in Headers */,
+				962335062011DB7E0016840F /* Gridlines.h in Headers */,
 				9554DEE7D6922CB22CD99230311114BB /* KWConformToProtocolMatcher.h in Headers */,
 				24C599CAD24FADEAD041A86C510A3E6F /* KWContainMatcher.h in Headers */,
 				A6DAF6CB9A191442FB2446B9C267428E /* KWContainStringMatcher.h in Headers */,
@@ -906,6 +989,7 @@
 				7C6DE5AC2CE255A1AB69F2CC77011C2D /* KWExampleSuite.h in Headers */,
 				2E57B0924487B774D1A5E79911CBC859 /* KWExampleSuiteBuilder.h in Headers */,
 				A2E10A79D9A3F7F702114D610D7FEA9C /* KWExistVerifier.h in Headers */,
+				962334F42011D02D0016840F /* Address.h in Headers */,
 				E3A990E5163D7DE66E1930A54A23212C /* KWExpectationType.h in Headers */,
 				75F6E446424FA454FBB20F39D51310A2 /* KWFailure.h in Headers */,
 				3EA60288F60E8A4331D531B7210C728D /* KWFormatter.h in Headers */,
@@ -927,6 +1011,7 @@
 				B7F022431FB6693EF5A4C4A3E792803F /* KWMatchers.h in Headers */,
 				2D41DA4103E603B263BD5151B9145AE0 /* KWMatching.h in Headers */,
 				D6E2C3C07B9C62974074FCA0A1169A5B /* KWMatchVerifier.h in Headers */,
+				962335242011E4620016840F /* NSIndexPath+column.h in Headers */,
 				165CF948B4444B2D4A738A644DBD6991 /* KWMessagePattern.h in Headers */,
 				01392827EA1441FA4146AC1422DEB8E5 /* KWMessageSpying.h in Headers */,
 				3DBCBD55A4E21ACE64DE39B103FAA29D /* KWMessageTracker.h in Headers */,
@@ -952,8 +1037,10 @@
 				C36451542704BC745CBB1FFA23922ED3 /* KWStub.h in Headers */,
 				AA7709C2A2A62A577754308E89BC9E2C /* KWSuiteConfigurationBase.h in Headers */,
 				6534635DAE1A061BBCC127E1466C5449 /* KWSymbolicator.h in Headers */,
+				9623350C2011DBC00016840F /* Borders.h in Headers */,
 				78966619B22098339A78DFAF433DF933 /* KWUserDefinedMatcher.h in Headers */,
 				962334F02011C8630016840F /* ZMJScrollView.h in Headers */,
+				962335182011E2ED0016840F /* ZMJCellRange.h in Headers */,
 				5F15304F06BAA09E176CEF6238DA8AAC /* KWValue.h in Headers */,
 				1DB755A43BD6EF454A8901D3B9FF246D /* KWVerifying.h in Headers */,
 				12B832DE307BD43617EC84DC5E777BCD /* KWWorkarounds.h in Headers */,
@@ -1099,12 +1186,15 @@
 				8E0BCA0BFE40BBDC8F1C2EE7534A01F6 /* KWAllTestsSuite.m in Sources */,
 				D15BA5B424F9B1227656A708AE472668 /* KWAny.m in Sources */,
 				5A4525A1FDC8FA1712D6AC6FD90E3A57 /* KWAsyncVerifier.m in Sources */,
+				962335142011DE880016840F /* ZMJLayoutEngine.m in Sources */,
+				962334F62011D02D0016840F /* Address.m in Sources */,
 				16F311C0978BA0196A305CA278A74EA4 /* KWBackgroundTask.m in Sources */,
 				DE51443F84DFFFB7633D85C257097937 /* KWBeBetweenMatcher.m in Sources */,
 				C892FBAA9C8A82D4E28C3A10D819DB75 /* KWBeEmptyMatcher.m in Sources */,
 				76F14C992CFFF06401BB053612016947 /* KWBeforeAllNode.m in Sources */,
 				05FE0F2F0AA21B529737BA004D7053B6 /* KWBeforeEachNode.m in Sources */,
 				D4D25E3DC1D8B567BF9B1B9A5567BF29 /* KWBeIdenticalToMatcher.m in Sources */,
+				962335262011E4620016840F /* NSIndexPath+column.m in Sources */,
 				DB71648982519BCB86F8474C6BDF33C7 /* KWBeKindOfClassMatcher.m in Sources */,
 				9D741A6F6E8DA3AA4261B211078E7FDB /* KWBeMemberOfClassMatcher.m in Sources */,
 				A24B41AAC19D22642512A8AB5179D7A7 /* KWBeSubclassOfClassMatcher.m in Sources */,
@@ -1117,6 +1207,7 @@
 				54BECFDC58AD3FC45F083276D07A7596 /* KWCallSite.m in Sources */,
 				E6E957356F911A54887DC4C15BF4287D /* KWCaptureSpy.m in Sources */,
 				9B5F50B22572D79B691CF3A8A29199A9 /* KWChangeMatcher.m in Sources */,
+				9623350E2011DBC00016840F /* Borders.m in Sources */,
 				0629F1455B078FB79932D188A5F5586B /* KWConformToProtocolMatcher.m in Sources */,
 				8D6F104C797EFD6DA6F73DC633757654 /* KWContainMatcher.m in Sources */,
 				E1A2A2604B62B71837306DB6B9AFED5E /* KWContainStringMatcher.m in Sources */,
@@ -1125,6 +1216,7 @@
 				6CF934D1B305BDF50780187B752C167C /* KWEqualMatcher.m in Sources */,
 				8C0C52BB13AD64014555B9C49855D2A8 /* KWExample.m in Sources */,
 				15479D8CAD501697A69117A1772C1EF5 /* KWExampleSuite.m in Sources */,
+				9623351A2011E2ED0016840F /* ZMJCellRange.m in Sources */,
 				94B88AE0EBBB8D8D34B7E10BBA535AEF /* KWExampleSuiteBuilder.m in Sources */,
 				2FE8C88733D882FAAB455CEC6D893B4F /* KWExistVerifier.m in Sources */,
 				A5B563D9DDEF5338E9353A4F3C701F12 /* KWFailure.m in Sources */,
@@ -1149,6 +1241,7 @@
 				AB2697B643429809F1A63CCEE35E7938 /* KWMessageTracker.m in Sources */,
 				6588243C3226D4E28F1CEEB7F68E12AC /* KWMock.m in Sources */,
 				23B0255C045844F5E1FFC96FBCA16AA2 /* KWNilMatcher.m in Sources */,
+				962335022011DB080016840F /* ZMJCell.m in Sources */,
 				17902CEFE48E6D6CBFBFC675B6B2EC4B /* KWNotificationMatcher.m in Sources */,
 				D59E7DF486DAB09783B4FDA50AE968B8 /* KWNull.m in Sources */,
 				16F4313F6EF208AEA0351691EB1C20EA /* KWObjCUtilities.m in Sources */,
@@ -1158,6 +1251,7 @@
 				CA97C5CC52FEA7C777CAEE7D07C92CE2 /* KWRegisterMatchersNode.m in Sources */,
 				BC8CCE24E583DFF4F7922EE69C6EFDC2 /* KWRegularExpressionPatternMatcher.m in Sources */,
 				39171E035448177C4C6CE5A9DCEE10A7 /* KWRespondToSelectorMatcher.m in Sources */,
+				962335082011DB7E0016840F /* Gridlines.m in Sources */,
 				F6EBF111EBCACF88F4AFCF42FD905813 /* KWSharedExample.m in Sources */,
 				462CD4A943E501CB9269720E8D645AF6 /* KWSharedExampleRegistry.m in Sources */,
 				159CCFEFDEDBD49CA1C65B5A0FE9FAB2 /* KWSpec.m in Sources */,
@@ -1178,6 +1272,7 @@
 				AA5D9CC9D6CDA309F795E264285180FF /* NSObject+KiwiMockAdditions.m in Sources */,
 				55150399E37D42EFD16CF1F831F78761 /* NSObject+KiwiSpyAdditions.m in Sources */,
 				29DEC0FAF6AF7EA9D841634E4DD5A31D /* NSObject+KiwiStubAdditions.m in Sources */,
+				962335202011E32B0016840F /* Location.m in Sources */,
 				3A313EC6DFFB8A8F3BF7009A5BD2C765 /* NSObject+KiwiVerifierAdditions.m in Sources */,
 				1F5DB6110C251C3078156A5819C02760 /* NSProxy+KiwiVerifierAdditions.m in Sources */,
 				F959FDB1ACA6861154381B7D58411530 /* NSValue+KiwiAdditions.m in Sources */,
@@ -1188,8 +1283,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				962335272011E4620016840F /* NSIndexPath+column.m in Sources */,
 				962334EF2011C8630016840F /* ReuseQueue.m in Sources */,
+				962335152011DE880016840F /* ZMJLayoutEngine.m in Sources */,
+				9623351B2011E2ED0016840F /* ZMJCellRange.m in Sources */,
+				962335092011DB7E0016840F /* Gridlines.m in Sources */,
 				962334ED2011C8630016840F /* ZMJScrollView.m in Sources */,
+				9623350F2011DBC00016840F /* Borders.m in Sources */,
+				9623352B2011E5BE0016840F /* NSArray+BinarySearch.m in Sources */,
+				962335212011E32B0016840F /* Location.m in Sources */,
+				962335032011DB080016840F /* ZMJCell.m in Sources */,
+				962334F72011D02D0016840F /* Address.m in Sources */,
 				B7C40C62337BC7D42703ACF5C6441DDC /* ZMJGanttChart-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

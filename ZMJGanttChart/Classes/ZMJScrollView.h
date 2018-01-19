@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^TouchHandler)(NSSet<UITouch *> *touches, UIEvent *event);
+
 @interface ZMJScrollView : UIScrollView
 
 @end
