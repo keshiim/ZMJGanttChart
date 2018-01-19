@@ -37,4 +37,19 @@
     return self;
 }
 
+- (BOOL)containsIndexPath:(NSIndexPath *)indexPath {
+    return
+    self.from.column <= indexPath.column &&
+    self.to.column >= indexPath.column &&
+    self.from.row <= indexPath.row &&
+    self.to.row >= indexPath.row;
+}
+- (BOOL)containsCellRange:(ZMJCellRange *)cellRange {
+    return
+    self.from.column <= cellRange.from.column &&
+    self.to.column >= cellRange.to.column &&
+    self.from.row <= cellRange.from.row &&
+    self.to.row >= cellRange.to.row;
+}
+
 @end
