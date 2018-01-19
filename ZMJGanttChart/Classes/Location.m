@@ -26,7 +26,7 @@
     return [[self alloc] initWithRow:row column:column];
 }
 
-- (NSUInteger)hash {
+- (NSUInteger)hashValue {
     return 32768 * _row * _column;
 }
 

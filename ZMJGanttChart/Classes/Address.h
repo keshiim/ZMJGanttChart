@@ -12,4 +12,6 @@
 @property (nonatomic, assign) NSInteger column;
 @property (nonatomic, assign) NSInteger rowIndex;
 @property (nonatomic, assign) NSInteger columnIndex;
+
+- (NSUInteger)hashValue;
 @end

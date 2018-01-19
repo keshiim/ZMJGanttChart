@@ -30,7 +30,7 @@
     return copy;
 }
 
-- (NSUInteger)hash {
+- (NSUInteger)hashValue {
     return 32768 * _rowIndex + _columnIndex;
 }
 
