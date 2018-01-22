@@ -53,11 +53,16 @@
 @end
 
 @implementation ReusableCollection
+{
+    NSRecursiveLock *_lock;
+}
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
+        _lock = [NSRecursiveLock new];
+        
         _pairs = [NSMutableDictionary dictionary];
         _addresses = [NSMutableOrderedSet orderedSet];
     }
@@ -81,6 +86,17 @@
 }
 - (void)setObject:(id)obj forKeyedSubscript:(Address *)key {
     self.pairs[key] = obj;
+}
+
+#pragma mark - NSFastEnumeration
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained _Nullable [_Nonnull])buffer count:(NSUInteger)len {
+//    LOCK(NSUInteger count = [_pairs countByEnumeratingWithState:state objects:stackbuf count:len]);
+    LOCK(NSUInteger count = [_pairs countByEnumeratingWithState:state objects:buffer count:len]);
+    return count;
+}
+
+- (NSEnumerator *)objectEnumerator {
+    LOCK(NSEnumerator * e = [_pairs objectEnumerator]); return e;
 }
 
 @end

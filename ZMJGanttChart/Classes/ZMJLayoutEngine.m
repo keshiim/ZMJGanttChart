@@ -7,40 +7,38 @@
 
 #import "ZMJLayoutEngine.h"
 #import "ZMJCellRange.h"
-
-typedef NS_ENUM(NSInteger, RectEdge) {
-    top,
-    bottom,
-    left,
-    right,
-};
-
-struct ZMJLayoutAttributes {
-    NSInteger startColumn;
-    NSInteger startRow;
-    NSInteger numberOfColumns;
-    NSInteger numberOfRows;
-    NSInteger columnCount;
-    NSInteger rowCount;
-    CGPoint insets;
-};
-typedef struct ZMJLayoutAttributes LayoutAttributes;
-
-struct ZMJGridLayout {
-    CGFloat gridWidth;
-    __unsafe_unretained UIColor* gridColor;
-    CGPoint origin;
-    CGFloat length;
-    RectEdge edge;
-    CGFloat priority;
-};
-typedef struct ZMJGridLayout GridLayout;
-
-
+#import "Location.h"
 
 @implementation ZMJLayoutEngine
 
-- (instancetype)initWithNumberOfColumns:(NSInteger)NumberOfColumns
+@end
+
+@implementation ZMJLayoutProperties
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _numberOfColumns = 0;
+        _numberOfRows    = 0;
+        _frozenColumns   = 0;
+        _frozenRows      = 0;
+        
+        _frozenColumnWidth = 0.f;
+        _frozenRowHeight   = 0.f;
+        _columnWidth       = 0.f;
+        _rowHeight         = 0.f;
+        
+        _columnWidthCache = [NSMutableArray new];
+        _rowHeightCache   = [NSMutableArray new];
+        
+        _mergedCells      = [NSMutableArray new];
+        _mergedCellLayouts= [NSMutableDictionary new];
+    }
+    return self;
+}
+
+- (instancetype)initWithNumberOfColumns:(NSInteger)numberOfColumns
                            numberOfRows:(NSInteger)numberOfRows
                           frozenColumns:(NSInteger)frozenColumns
                              frozenRows:(NSInteger)frozenRows
@@ -51,9 +49,26 @@ typedef struct ZMJGridLayout GridLayout;
                        columnWidthCache:(NSArray<NSNumber *> *)columnWidthCache
                          rowHeightCache:(NSArray<NSNumber *> *)rowHeightCache
                             mergedCells:(NSArray<ZMJCellRange *> *)mergedCells
-                      mergedCellLayouts:(NSArray<ZMJCellRange *> *)mergedCellLayouts
+                      mergedCellLayouts:(NSDictionary<Location *, ZMJCellRange *> *)mergedCellLayouts
 {
-    
+    self = [super init];
+    if (self) {
+        self.numberOfColumns = numberOfColumns;
+        self.numberOfRows    = numberOfRows;
+        self.frozenColumns   = frozenColumns;
+        self.frozenRows      = frozenRows;
+        
+        self.frozenColumnWidth = frozenColumnWidth;
+        self.frozenRowHeight   = frozenRowHeight;
+        self.columnWidth  = columnWidth;
+        self.rowHeight    = rowHeight;
+        self.columnWidthCache = columnWidthCache.mutableCopy;
+        self.rowHeightCache   = rowHeightCache.mutableCopy;
+        
+        self.mergedCells      = mergedCells.mutableCopy;
+        self.mergedCellLayouts= mergedCellLayouts.mutableCopy;
+    }
+    return self;
 }
 
 @end

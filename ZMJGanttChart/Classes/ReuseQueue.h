@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#define LOCK(...) [_lock lock]; \
+__VA_ARGS__; \
+[_lock unlock];
+
 @class Address;
 
 @interface ReuseQueue<__covariant Reusable> : NSObject
@@ -16,7 +20,7 @@
 - (Reusable)dequeueOrCreate;
 @end
 
-@interface ReusableCollection<__covariant Reusable> : NSObject
+@interface ReusableCollection<__covariant Reusable> : NSObject <NSFastEnumeration>
 
 - (BOOL)contains:(Address *)member;
 - (void)insert:(Address *)newMember;

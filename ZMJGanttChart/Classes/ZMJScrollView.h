@@ -10,6 +10,21 @@
 
 typedef void(^TouchHandler)(NSSet<UITouch *> *touches, UIEvent *event);
 
-@interface ZMJScrollView : UIScrollView
+struct ZMJState {
+    CGRect frame;
+    CGSize contentSize;
+    CGSize contentOffset;
+};
+typedef struct ZMJState State;
 
+@interface ZMJScrollView : UIScrollView
+@property (nonatomic, strong) NSMutableArray<NSNumber *> *columnRecords; // number -> CGFloat
+@property (nonatomic, strong) NSMutableArray<NSNumber *> *rowRecords;    // number -> CGFloat
+
+@property (nonatomic, copy) TouchHandler touchesBegan;
+@property (nonatomic, copy) TouchHandler touchesEnded;
+@property (nonatomic, copy) TouchHandler touchesCancelled;
+
+@property (nonatomic, assign) LayoutAttributes layoutAttributes;
+@property (nonatomic, assign) State state;
 @end
