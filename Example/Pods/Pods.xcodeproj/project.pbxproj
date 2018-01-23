@@ -158,6 +158,8 @@
 		962335272011E4620016840F /* NSIndexPath+column.m in Sources */ = {isa = PBXBuildFile; fileRef = 962335232011E4620016840F /* NSIndexPath+column.m */; };
 		9623352A2011E5BE0016840F /* NSArray+BinarySearch.h in Headers */ = {isa = PBXBuildFile; fileRef = 962335282011E5BE0016840F /* NSArray+BinarySearch.h */; };
 		9623352B2011E5BE0016840F /* NSArray+BinarySearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 962335292011E5BE0016840F /* NSArray+BinarySearch.m */; };
+		96B8D9962015CB8300AC4F5B /* CircualrScrolling.h in Headers */ = {isa = PBXBuildFile; fileRef = 96B8D9942015CB8300AC4F5B /* CircualrScrolling.h */; };
+		96B8D9972015CB8300AC4F5B /* CircualrScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B8D9952015CB8300AC4F5B /* CircualrScrolling.m */; };
 		96EA8C50F8B764CEC8A8963ECD14EBFC /* KWAfterEachNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D4231E2CE9493759EE9354A8DAC0314 /* KWAfterEachNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9754C75C21F39ED9880180C5A888588F /* KWBeforeAllNode.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF2FC14B970E9E26F66066A5EE39839 /* KWBeforeAllNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		989AD231EEC12F9D0BC8B83EE0887D7F /* KWAfterEachNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 721CBB5CFC3AFC010910DAA539C4DF59 /* KWAfterEachNode.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
@@ -428,6 +430,8 @@
 		962335282011E5BE0016840F /* NSArray+BinarySearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+BinarySearch.h"; sourceTree = "<group>"; };
 		962335292011E5BE0016840F /* NSArray+BinarySearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BinarySearch.m"; sourceTree = "<group>"; };
 		969F25D914AF9E313506E0817AAA02AD /* KWMatcherFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWMatcherFactory.m; path = Classes/Core/KWMatcherFactory.m; sourceTree = "<group>"; };
+		96B8D9942015CB8300AC4F5B /* CircualrScrolling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircualrScrolling.h; sourceTree = "<group>"; };
+		96B8D9952015CB8300AC4F5B /* CircualrScrolling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CircualrScrolling.m; sourceTree = "<group>"; };
 		975757BB5A74FCD47B2BB40E7D80E392 /* KWMessageSpying.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWMessageSpying.h; path = Classes/Core/KWMessageSpying.h; sourceTree = "<group>"; };
 		9795227F493D9349B527EB839486C8E6 /* KWRespondToSelectorMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWRespondToSelectorMatcher.m; path = Classes/Matchers/KWRespondToSelectorMatcher.m; sourceTree = "<group>"; };
 		97EE0E7D5A457754CA9129144F6D53E1 /* KWWorkarounds.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWWorkarounds.m; path = Classes/Core/KWWorkarounds.m; sourceTree = "<group>"; };
@@ -896,6 +900,8 @@
 				962335112011DE880016840F /* ZMJLayoutEngine.m */,
 				962335162011E2ED0016840F /* ZMJCellRange.h */,
 				962335172011E2ED0016840F /* ZMJCellRange.m */,
+				96B8D9942015CB8300AC4F5B /* CircualrScrolling.h */,
+				96B8D9952015CB8300AC4F5B /* CircualrScrolling.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -931,6 +937,7 @@
 				C557F12F0325866EE773AAD465F2714A /* ZMJGanttChart-umbrella.h in Headers */,
 				962334F52011D02D0016840F /* Address.h in Headers */,
 				962335012011DB080016840F /* ZMJCell.h in Headers */,
+				96B8D9962015CB8300AC4F5B /* CircualrScrolling.h in Headers */,
 				9623352A2011E5BE0016840F /* NSArray+BinarySearch.h in Headers */,
 				962335192011E2ED0016840F /* ZMJCellRange.h in Headers */,
 				962335132011DE880016840F /* ZMJLayoutEngine.h in Headers */,
@@ -1154,6 +1161,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					E8EBFD4435B14233349B66D06E36311E = {
+						LastSwiftMigration = 0920;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1284,6 +1296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				962335272011E4620016840F /* NSIndexPath+column.m in Sources */,
+				96B8D9972015CB8300AC4F5B /* CircualrScrolling.m in Sources */,
 				962334EF2011C8630016840F /* ReuseQueue.m in Sources */,
 				962335152011DE880016840F /* ZMJLayoutEngine.m in Sources */,
 				9623351B2011E2ED0016840F /* ZMJCellRange.m in Sources */,
@@ -1554,6 +1567,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3ED506806B9374DBA59425A6003C9921 /* ZMJGanttChart.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1577,6 +1591,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1636,6 +1651,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3ED506806B9374DBA59425A6003C9921 /* ZMJGanttChart.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1659,6 +1675,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
