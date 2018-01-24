@@ -10,7 +10,7 @@
 #import "Location.h"
 #import "NSIndexPath+column.h"
 #import "Gridlines.h"
-//#import "CircualrScrolling.h"
+#import "CircualrScrolling.h"
 #import "Address.h"
 
 @implementation ZMJLayoutProperties
@@ -79,7 +79,7 @@
 
 @property (nonatomic, assign) CGSize     intercellSpacing;
 @property (nonatomic, strong) GridStyle *defaultGridStyle;
-//@property (nonatomic, strong) Options   *circularScrollingOptions;
+@property (nonatomic, strong) Options   *circularScrollingOptions;
 @property (nonatomic, strong) NSString  *blankCellReuseIdentifier;
 @property (nonatomic, strong) NSSet<NSIndexPath *> *highlightedIndexPaths;
 @property (nonatomic, strong) NSSet<NSIndexPath *> *selectedIndexPaths;
