@@ -13,6 +13,7 @@
 
 - (instancetype)initWithRow:(NSInteger)row column:(NSInteger)column;
 + (instancetype)locationWithRow:(NSInteger)row column:(NSInteger)column;
++ (instancetype)indexPath:(NSIndexPath *)indexPath;
 
 - (NSUInteger)hashValue;
 @end

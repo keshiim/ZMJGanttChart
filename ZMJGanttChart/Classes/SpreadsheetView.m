@@ -209,10 +209,10 @@
     [self resetScrollViewFrame];
     [self resetScrollViewArrangement];
     
-    if (self.circularScrollingOptions.direction == Direction_horizontally && self.tableView.contentOffset.x == 0) {
+    if ((self.circularScrollingOptions.direction & Direction_horizontally) && self.tableView.contentOffset.x == 0) {
         [self scrollToHorizontalCenter];
     }
-    if (self.circularScrollingOptions.direction == Direction_vertically && self.tableView.contentOffset.y == 0) {
+    if ((self.circularScrollingOptions.direction & Direction_vertically) && self.tableView.contentOffset.y == 0) {
         [self scrollToVerticalCenter];
     }
     
@@ -309,8 +309,68 @@
     [rowRecords addObjectsFromArray:self.tableView.rowRecords];
     
     CGPoint contentOffset = CGPointMake(columnRecords[column].floatValue, rowRecords[row].floatValue);
-    CGFloat widith;
+    CGFloat width;
     CGFloat height;
+    ZMJCellRange *mergedCell = [self mergedCellFor:[Location indexPath:indexPath]];
+    if (mergedCell) {
+        width = [[self.layoutProperties.columnWidthCache wbg_reduceWithIndex:^NSNumber* _Nonnull(NSNumber* _Nullable prev, NSNumber * _Nonnull curr, NSUInteger idx) {
+            CGFloat total = 0.f;
+            if (idx >= mergedCell.from.column && idx <= mergedCell.to.column) {
+                total = prev.floatValue + curr.floatValue;
+            }
+            return @(total);
+        }] floatValue] + self.intercellSpacing.width;
+        height = [[self.layoutProperties.rowHeightCache wbg_reduceWithIndex:^NSNumber* _Nonnull(NSNumber* _Nullable prev, NSNumber * _Nonnull curr, NSUInteger idx) {
+            CGFloat total = 0.0f;
+            if (idx >= mergedCell.from.row && idx <= mergedCell.to.row) {
+                total = prev.floatValue + curr.floatValue;
+            }
+            return @(total);
+        }] floatValue] + self.intercellSpacing.height;
+    } else {
+        width = self.layoutProperties.columnWidthCache[indexPath.column].floatValue;
+        height = self.layoutProperties.rowHeightCache[indexPath.row].floatValue;
+    }
+    
+    if (self.circularScrollingOptions.direction & Direction_horizontally) {
+        if (contentOffset.x > self.centerOffset.x) {
+            contentOffset.x -= self.centerOffset.x;
+        } else {
+            contentOffset.x += self.centerOffset.x;
+        }
+    }
+    NSInteger horizontalGroupCount = 0;
+    if (scrollPosition & ScrollPosition_left) {
+        horizontalGroupCount += 1;
+    }
+    if (scrollPosition & ScrollPosition_centeredHorizontally) {
+        horizontalGroupCount += 1;
+        contentOffset.x = MAX(self.tableView.contentOffset.x + (contentOffset.x - (self.tableView.contentOffset.x + (self.tableView.frame.size.width - (width + self.intercellSpacing.width * 2)) / 2)), 0);
+    }
+    if (scrollPosition & ScrollPosition_right) {
+        horizontalGroupCount += 1;
+        contentOffset.x = MAX(contentOffset.x - self.tableView.frame.size.width + width + self.intercellSpacing.width * 2, 0);
+    }
+    
+    if (self.circularScrollingOptions.direction & Direction_vertically) {
+        if (contentOffset.y > self.centerOffset.y) {
+            contentOffset.y -= self.centerOffset.y;
+        } else {
+            contentOffset.y += self.centerOffset.y;
+        }
+    }
+    NSInteger verticalGroupCount = 0;
+    if (scrollPosition & ScrollPosition_top) {
+        verticalGroupCount += 1;
+    }
+    if (scrollPosition & ScrollPosition_centeredVertiically) {
+        verticalGroupCount += 1;
+        contentOffset.y = MAX(self.tableView.contentOffset.y + contentOffset.y - (self.tableView.contentOffset.y + (self.tableView.frame.size.height - (height + self.intercellSpacing.height * 2)) / 2), 0);
+    }
+    if (scrollPosition & ScrollPosition_bottom) {
+        verticalGroupCount += 1;
+        contentOffset.y = MAX(contentOffset.y - self.tableView.frame.size.height + height + self.intercellSpacing.height * 2, 0);
+    }
     
 }
 

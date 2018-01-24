@@ -26,6 +26,10 @@
     return [[self alloc] initWithRow:row column:column];
 }
 
++ (instancetype)indexPath:(NSIndexPath *)indexPath {
+    return [[self alloc] initWithIndexPath:indexPath];
+}
+
 - (NSUInteger)hashValue {
     return 32768 * _row * _column;
 }
