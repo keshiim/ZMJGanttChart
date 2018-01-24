@@ -11,7 +11,6 @@
     Borders *_borders;
 }
 @property (nonatomic, assign) BOOL         hasBorder;
-@property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, strong) NSString    *reuseIdentifier;
 
 @property (nonatomic, strong) UIView *contentView;

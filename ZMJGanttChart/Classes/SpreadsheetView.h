@@ -110,7 +110,7 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 /// - Note: This method returns the complete list of visible cells displayed by the collection view.
 ///
 /// - Returns: An array of `Cell` objects. If no cells are visible, this method returns an empty array.
-@property (nonatomic, strong) NSArray<ZMJCell *> *visibleCells;
+@property (nonatomic, strong, readonly) NSArray<ZMJCell *> *visibleCells;
 
 /// An array of the visible items in the collection view.
 /// - Note: The value of this property is a sorted array of IndexPath objects, each of which corresponds to a visible cell in the spreadsheet view.
@@ -130,7 +130,7 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 /// If this property is `true` and the user begins dragging in one general direction (horizontally or vertically), the scroll view disables scrolling in the other direction.
 /// If the drag direction is diagonal, then scrolling will not be locked and the user can drag in any direction until the drag completes.
 /// The default value is `false`
-@property (nonatomic, assign) BOOL isDirectionalLockEnabled;
+@property (nonatomic, assign, getter=isDirectionalLockEnabled) BOOL directionalLockEnabled;
 
 /// A Boolean value that controls whether the scroll view bounces past the edge of content and back again.
 /// - Note: If the value of this property is `true`, the scroll view bounces when it encounters a boundary of the content.
@@ -172,13 +172,13 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 /// A Boolean value that determines whether paging is enabled for the scroll view.
 /// - Note: If the value of this property is `true`, the scroll view stops on multiples of the scroll view’s bounds when the user scrolls.
 /// The default value is false.
-@property (nonatomic, assign) BOOL isPagingEnabled;
+@property (nonatomic, assign, getter=isPagingEnabled) BOOL pagingEnabled;
 
 /// A Boolean value that determines whether scrolling is enabled.
 /// - Note: If the value of this property is `true`, scrolling is enabled, and if it is `false`, scrolling is disabled. The default is `true`.
 ///
 /// When scrolling is disabled, the scroll view does not accept touch events; it forwards them up the responder chain.
-@property (nonatomic, assign) BOOL isScrollEnabled;
+@property (nonatomic, assign, getter=isScrollEnabled) BOOL scrollEnabled;
 
 /// The style of the scroll indicators.
 /// - Note: The default style is `default`. See `UIScrollViewIndicatorStyle` for descriptions of these constants.
@@ -196,5 +196,26 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 
 @property (nonatomic, assign, readonly) UIScrollView *scrollView;
 
-@property (nonatomic, assign) LayoutAttributes layoutProperties;
+- (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
+
+- (void)registerNib:(UINib *)cellNib forCellWithReuseIdentifier:(NSString *)identifier;
+
+- (void)reloadData;
+
+- (ZMJCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier  forIndexPath:(NSIndexPath *)indexPath;
+
+- (void)scrollToItemIndexPath:(NSIndexPath *)indexPath at:(ZMJScrollPosition)scrollPosition animated:(BOOL)animated;
+
+- (void)selectItemIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(ZMJScrollPosition)scrollPosition;
+
+- (void)deselectItemIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
+
+- (NSIndexPath *)indexPathForItemAt:(CGPoint)point;
+
+- (ZMJCell *)cellForItemAt:(NSIndexPath *)indexPath;
+
+- (NSArray<ZMJCell *> *)cellsForItemAt:(NSIndexPath *)indexPath;
+
+- (CGRect)rectForItemAt:(NSIndexPath *)indexPath;
+
 @end

@@ -7,19 +7,8 @@
 //
 
 #import "ZMJScrollView.h"
-#import "ReuseQueue.h"
-#import "Gridlines.h"
-#import "Borders.h"
-#import "ZMJCell.h"
 
 @interface ZMJScrollView() <UIGestureRecognizerDelegate>
-
-@property (nonatomic, strong) ReusableCollection<ZMJCell *>  *visibleCells;
-@property (nonatomic, strong) ReusableCollection<Gridline *> *visibleVerticalGridlines;
-@property (nonatomic, strong) ReusableCollection<Gridline *> *visibleHorizontalGridlines;
-@property (nonatomic, strong) ReusableCollection<Border *>   *visibleBorders;
-
-@property (nonatomic, assign) BOOL hasDisplayedContent;
 
 @end
 

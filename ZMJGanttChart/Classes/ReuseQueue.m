@@ -50,6 +50,8 @@
 @interface ReusableCollection<__covariant Reusable>()
 @property (nonatomic, strong) NSMutableDictionary<Address *, id> *pairs;
 @property (nonatomic, strong) NSMutableOrderedSet<Address *>     *addresses;
+
+@property (nonatomic, strong) NSArray<id> *array;
 @end
 
 @implementation ReusableCollection
@@ -67,6 +69,10 @@
         _addresses = [NSMutableOrderedSet orderedSet];
     }
     return self;
+}
+
+- (NSArray<id> *)array {
+    return self.addresses.array;
 }
 
 - (BOOL)contains:(Address *)member {

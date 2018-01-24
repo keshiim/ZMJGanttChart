@@ -137,6 +137,8 @@
 		960D61D4201832D3004D9626 /* SpreadsheetView.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61D2201832D3004D9626 /* SpreadsheetView.h */; };
 		960D61D5201832D3004D9626 /* SpreadsheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61D3201832D3004D9626 /* SpreadsheetView.m */; };
 		960D61D720183623004D9626 /* SpreadsheetViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61D620183623004D9626 /* SpreadsheetViewDelegate.h */; };
+		960D61DA20187EE5004D9626 /* NSArray+WBGAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61D820187EE4004D9626 /* NSArray+WBGAddition.m */; };
+		960D61DB20187EE5004D9626 /* NSArray+WBGAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61D920187EE5004D9626 /* NSArray+WBGAddition.h */; };
 		9693F61BA469B25DB506983BAF20098D /* Define.h in Headers */ = {isa = PBXBuildFile; fileRef = 602602D98D653DD705D15D39924471E6 /* Define.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96EA8C50F8B764CEC8A8963ECD14EBFC /* KWAfterEachNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D4231E2CE9493759EE9354A8DAC0314 /* KWAfterEachNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9754C75C21F39ED9880180C5A888588F /* KWBeforeAllNode.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF2FC14B970E9E26F66066A5EE39839 /* KWBeforeAllNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -411,6 +413,8 @@
 		960D61D2201832D3004D9626 /* SpreadsheetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpreadsheetView.h; sourceTree = "<group>"; };
 		960D61D3201832D3004D9626 /* SpreadsheetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpreadsheetView.m; sourceTree = "<group>"; };
 		960D61D620183623004D9626 /* SpreadsheetViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpreadsheetViewDelegate.h; sourceTree = "<group>"; };
+		960D61D820187EE4004D9626 /* NSArray+WBGAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+WBGAddition.m"; sourceTree = "<group>"; };
+		960D61D920187EE5004D9626 /* NSArray+WBGAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+WBGAddition.h"; sourceTree = "<group>"; };
 		969F25D914AF9E313506E0817AAA02AD /* KWMatcherFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWMatcherFactory.m; path = Classes/Core/KWMatcherFactory.m; sourceTree = "<group>"; };
 		975757BB5A74FCD47B2BB40E7D80E392 /* KWMessageSpying.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWMessageSpying.h; path = Classes/Core/KWMessageSpying.h; sourceTree = "<group>"; };
 		9795227F493D9349B527EB839486C8E6 /* KWRespondToSelectorMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWRespondToSelectorMatcher.m; path = Classes/Matchers/KWRespondToSelectorMatcher.m; sourceTree = "<group>"; };
@@ -565,6 +569,8 @@
 		067CF7792A86ED5B1AC4698CCDC571DB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				960D61D920187EE5004D9626 /* NSArray+WBGAddition.h */,
+				960D61D820187EE4004D9626 /* NSArray+WBGAddition.m */,
 				602602D98D653DD705D15D39924471E6 /* Define.h */,
 				8A7335B46AD39E7C5A2773A07D9361A7 /* Address.h */,
 				5C83B934E09BD69E1D6E836940A6471F /* Address.m */,
@@ -1053,6 +1059,7 @@
 				04C3CC200FE5D69DECAB9228D786F2FD /* ReuseQueue.h in Headers */,
 				C8C7F06D33FB30FD6D5C14A192279E1E /* ZMJCell.h in Headers */,
 				960D61D4201832D3004D9626 /* SpreadsheetView.h in Headers */,
+				960D61DB20187EE5004D9626 /* NSArray+WBGAddition.h in Headers */,
 				FFFB25128B56C0AF743DDAED970076CA /* ZMJCellRange.h in Headers */,
 				7E70AEE08993F8BF065645349F83BAE3 /* ZMJGanttChart-umbrella.h in Headers */,
 				CA53935BCA9B863C753933BC8517BE1E /* ZMJLayoutEngine.h in Headers */,
@@ -1275,6 +1282,7 @@
 				1DA53B00E2789E8A34662825ADFBCA5A /* Gridlines.m in Sources */,
 				161BB4A3289626876A329559112A438F /* Location.m in Sources */,
 				09D840E467E2B635EE9335A3D9E93B0C /* NSArray+BinarySearch.m in Sources */,
+				960D61DA20187EE5004D9626 /* NSArray+WBGAddition.m in Sources */,
 				000E0B9AB91BA3D8AD754C519D0D36BF /* NSIndexPath+column.m in Sources */,
 				906F4DB78E7F0D9CE916A611EED70640 /* ReuseQueue.m in Sources */,
 				0F67E0204E65229B5C3FE06EF3533CF6 /* ZMJCell.m in Sources */,

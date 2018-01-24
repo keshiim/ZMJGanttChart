@@ -8,6 +8,9 @@
 #ifndef Define_h
 #define Define_h
 
+#define IOS_VERSION_11_OR_LATER (([[[UIDevice currentDevice] systemVersion] floatValue] >=11.0)? (YES):(NO))
+
+
 typedef void(^TouchHandler)(NSSet<UITouch *> *touches, UIEvent *event);
 
 typedef struct ZMJState {

@@ -21,6 +21,7 @@ __VA_ARGS__; \
 @end
 
 @interface ReusableCollection<__covariant Reusable> : NSObject <NSFastEnumeration>
+@property (nonatomic, strong, readonly) NSArray<Reusable> *array;
 
 - (BOOL)contains:(Address *)member;
 - (void)insert:(Address *)newMember;
@@ -28,4 +29,5 @@ __VA_ARGS__; \
 
 - (Reusable)objectForKeyedSubscript:(Address *)key;
 - (void)setObject:(Reusable)obj forKeyedSubscript:(Address *)key;
+
 @end
