@@ -139,6 +139,12 @@
 		960D61D720183623004D9626 /* SpreadsheetViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61D620183623004D9626 /* SpreadsheetViewDelegate.h */; };
 		960D61DA20187EE5004D9626 /* NSArray+WBGAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61D820187EE4004D9626 /* NSArray+WBGAddition.m */; };
 		960D61DB20187EE5004D9626 /* NSArray+WBGAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61D920187EE5004D9626 /* NSArray+WBGAddition.h */; };
+		960D61DE20188D19004D9626 /* SpreadsheetView+Layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61DC20188D19004D9626 /* SpreadsheetView+Layout.h */; };
+		960D61DF20188D19004D9626 /* SpreadsheetView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61DD20188D19004D9626 /* SpreadsheetView+Layout.m */; };
+		960D61E22018908B004D9626 /* SpreadsheetView+CirclularScrolling.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61E02018908B004D9626 /* SpreadsheetView+CirclularScrolling.h */; };
+		960D61E32018908B004D9626 /* SpreadsheetView+CirclularScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61E12018908B004D9626 /* SpreadsheetView+CirclularScrolling.m */; };
+		960D61E62018A760004D9626 /* SpreadsheetView+Touches.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61E42018A760004D9626 /* SpreadsheetView+Touches.h */; };
+		960D61E72018A760004D9626 /* SpreadsheetView+Touches.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61E52018A760004D9626 /* SpreadsheetView+Touches.m */; };
 		9693F61BA469B25DB506983BAF20098D /* Define.h in Headers */ = {isa = PBXBuildFile; fileRef = 602602D98D653DD705D15D39924471E6 /* Define.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96EA8C50F8B764CEC8A8963ECD14EBFC /* KWAfterEachNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D4231E2CE9493759EE9354A8DAC0314 /* KWAfterEachNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9754C75C21F39ED9880180C5A888588F /* KWBeforeAllNode.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF2FC14B970E9E26F66066A5EE39839 /* KWBeforeAllNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -415,6 +421,12 @@
 		960D61D620183623004D9626 /* SpreadsheetViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpreadsheetViewDelegate.h; sourceTree = "<group>"; };
 		960D61D820187EE4004D9626 /* NSArray+WBGAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+WBGAddition.m"; sourceTree = "<group>"; };
 		960D61D920187EE5004D9626 /* NSArray+WBGAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+WBGAddition.h"; sourceTree = "<group>"; };
+		960D61DC20188D19004D9626 /* SpreadsheetView+Layout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpreadsheetView+Layout.h"; sourceTree = "<group>"; };
+		960D61DD20188D19004D9626 /* SpreadsheetView+Layout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SpreadsheetView+Layout.m"; sourceTree = "<group>"; };
+		960D61E02018908B004D9626 /* SpreadsheetView+CirclularScrolling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpreadsheetView+CirclularScrolling.h"; sourceTree = "<group>"; };
+		960D61E12018908B004D9626 /* SpreadsheetView+CirclularScrolling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SpreadsheetView+CirclularScrolling.m"; sourceTree = "<group>"; };
+		960D61E42018A760004D9626 /* SpreadsheetView+Touches.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpreadsheetView+Touches.h"; sourceTree = "<group>"; };
+		960D61E52018A760004D9626 /* SpreadsheetView+Touches.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SpreadsheetView+Touches.m"; sourceTree = "<group>"; };
 		969F25D914AF9E313506E0817AAA02AD /* KWMatcherFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWMatcherFactory.m; path = Classes/Core/KWMatcherFactory.m; sourceTree = "<group>"; };
 		975757BB5A74FCD47B2BB40E7D80E392 /* KWMessageSpying.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWMessageSpying.h; path = Classes/Core/KWMessageSpying.h; sourceTree = "<group>"; };
 		9795227F493D9349B527EB839486C8E6 /* KWRespondToSelectorMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWRespondToSelectorMatcher.m; path = Classes/Matchers/KWRespondToSelectorMatcher.m; sourceTree = "<group>"; };
@@ -600,6 +612,12 @@
 				960D61D620183623004D9626 /* SpreadsheetViewDelegate.h */,
 				960D61D2201832D3004D9626 /* SpreadsheetView.h */,
 				960D61D3201832D3004D9626 /* SpreadsheetView.m */,
+				960D61DC20188D19004D9626 /* SpreadsheetView+Layout.h */,
+				960D61DD20188D19004D9626 /* SpreadsheetView+Layout.m */,
+				960D61E02018908B004D9626 /* SpreadsheetView+CirclularScrolling.h */,
+				960D61E12018908B004D9626 /* SpreadsheetView+CirclularScrolling.m */,
+				960D61E42018A760004D9626 /* SpreadsheetView+Touches.h */,
+				960D61E52018A760004D9626 /* SpreadsheetView+Touches.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1057,10 +1075,13 @@
 				960D61D720183623004D9626 /* SpreadsheetViewDelegate.h in Headers */,
 				A1315C8C6F26D23AC84C9B2737EC73F2 /* NSIndexPath+column.h in Headers */,
 				04C3CC200FE5D69DECAB9228D786F2FD /* ReuseQueue.h in Headers */,
+				960D61E22018908B004D9626 /* SpreadsheetView+CirclularScrolling.h in Headers */,
 				C8C7F06D33FB30FD6D5C14A192279E1E /* ZMJCell.h in Headers */,
+				960D61DE20188D19004D9626 /* SpreadsheetView+Layout.h in Headers */,
 				960D61D4201832D3004D9626 /* SpreadsheetView.h in Headers */,
 				960D61DB20187EE5004D9626 /* NSArray+WBGAddition.h in Headers */,
 				FFFB25128B56C0AF743DDAED970076CA /* ZMJCellRange.h in Headers */,
+				960D61E62018A760004D9626 /* SpreadsheetView+Touches.h in Headers */,
 				7E70AEE08993F8BF065645349F83BAE3 /* ZMJGanttChart-umbrella.h in Headers */,
 				CA53935BCA9B863C753933BC8517BE1E /* ZMJLayoutEngine.h in Headers */,
 				960D61CD20183189004D9626 /* SpreadsheetViewDataSource.h in Headers */,
@@ -1283,6 +1304,7 @@
 				161BB4A3289626876A329559112A438F /* Location.m in Sources */,
 				09D840E467E2B635EE9335A3D9E93B0C /* NSArray+BinarySearch.m in Sources */,
 				960D61DA20187EE5004D9626 /* NSArray+WBGAddition.m in Sources */,
+				960D61E72018A760004D9626 /* SpreadsheetView+Touches.m in Sources */,
 				000E0B9AB91BA3D8AD754C519D0D36BF /* NSIndexPath+column.m in Sources */,
 				906F4DB78E7F0D9CE916A611EED70640 /* ReuseQueue.m in Sources */,
 				0F67E0204E65229B5C3FE06EF3533CF6 /* ZMJCell.m in Sources */,
@@ -1291,6 +1313,8 @@
 				D4C23EDB74076343ED12857C904347F0 /* ZMJGanttChart-dummy.m in Sources */,
 				875F98D31494377F14AB729D702F9287 /* ZMJLayoutEngine.m in Sources */,
 				E3A2BF294072F443C37561D6BD7B8CAD /* ZMJScrollView.m in Sources */,
+				960D61DF20188D19004D9626 /* SpreadsheetView+Layout.m in Sources */,
+				960D61E32018908B004D9626 /* SpreadsheetView+CirclularScrolling.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

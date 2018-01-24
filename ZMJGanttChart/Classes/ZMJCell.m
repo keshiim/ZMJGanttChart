@@ -10,8 +10,7 @@
 @interface ZMJCell () {
     Borders *_borders;
 }
-@property (nonatomic, assign) BOOL         hasBorder;
-@property (nonatomic, strong) NSString    *reuseIdentifier;
+@property (nonatomic, assign) BOOL hasBorder;
 
 @property (nonatomic, strong) UIView *contentView;
 @end
@@ -143,4 +142,7 @@
 }
 */
 
+@end
+
+@implementation BlankCell
 @end

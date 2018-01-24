@@ -10,8 +10,12 @@
 #import "ReuseQueue.h"
 #import "NSArray+WBGAddition.h"
 #import "ZMJLayoutEngine.h"
+#import "SpreadsheetView+Layout.h"
+#import "SpreadsheetView+CirclularScrolling.h"
+#import "SpreadsheetView+Touches.h"
+#import "NSIndexPath+column.h"
 
-@interface SpreadsheetView ()
+@interface SpreadsheetView () <UIScrollViewDelegate>
 @property (nonatomic, strong) ZMJLayoutProperties *layoutProperties;
 
 @property (nonatomic, strong) UIScrollView *rootView;
@@ -22,9 +26,9 @@
 @property (nonatomic, strong) ZMJScrollView *cornerView;
 @property (nonatomic, strong) ZMJScrollView *tableView;
 
-@property (nonatomic, strong) NSDictionary<NSString *, Class  > *cellClasses;
-@property (nonatomic, strong) NSDictionary<NSString *, UINib *> *cellNibs;
-@property (nonatomic, strong) NSDictionary<NSString *, ReuseQueue<ZMJCell *> *> *cellReuseQueues;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, Class  > *cellClasses;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, UINib *> *cellNibs;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, ReuseQueue<ZMJCell *> *> *cellReuseQueues;
 @property (nonatomic, strong) NSString *blankCellReuseIdentifier;
 
 @property (nonatomic, strong) ReuseQueue<Gridline *> *horizontalGridlineReuseQueue;
@@ -92,30 +96,221 @@
     self.stickyColumnHeader = NO;
     
     self.layoutProperties = [ZMJLayoutProperties new];
+    
+    self.rootView    = [UIScrollView new];
+    self.overlayView = [UIScrollView new];
+    
+    self.columnHeaderView = [ZMJScrollView new];
+    self.rowHeaderView    = [ZMJScrollView new];
+    self.cornerView       = [ZMJScrollView new];
+    self.tableView        = [ZMJScrollView new];
+    
+    self.cellClasses = [NSMutableDictionary new];
+    self.cellNibs    = [NSMutableDictionary new];
+    self.cellReuseQueues          = [NSMutableDictionary new];
+    self.blankCellReuseIdentifier = [NSUUID UUID].UUIDString;
+    
+    self.horizontalGridlineReuseQueue = [ReuseQueue new];
+    self.verticalGridlineReuseQueue   = [ReuseQueue new];
+    self.borderReuseQueue             = [ReuseQueue new];
+    
+    self.highlightedIndexPaths = [NSSet new];
+    self.selectedIndexPaths    = [NSSet new];
+
+    self.needsReload = YES;
+    ////////////////////////////////////////////////////////
+    self.rootView.frame = self.bounds;
+    self.rootView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.rootView.showsHorizontalScrollIndicator = NO;
+    self.rootView.showsVerticalScrollIndicator = NO;
+    self.rootView.delegate = self;
+    [super addSubview:self.rootView];
+    
+    self.tableView.frame = self.bounds;
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.tableView.autoresizesSubviews = NO;
+    self.tableView.showsHorizontalScrollIndicator = NO;
+    self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.delegate = self;
+    
+    CGRect frame = self.bounds;
+    frame.size.width = 0;
+    self.columnHeaderView.frame = frame;
+    self.columnHeaderView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    self.columnHeaderView.autoresizesSubviews = NO;
+    self.columnHeaderView.showsHorizontalScrollIndicator = NO;
+    self.columnHeaderView.showsVerticalScrollIndicator = NO;
+    self.columnHeaderView.hidden = YES;
+    self.columnHeaderView.delegate = self;
+    
+    frame = self.bounds;
+    frame.size.height = 0;
+    self.columnHeaderView.frame = frame;
+    self.columnHeaderView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.columnHeaderView.autoresizesSubviews = NO;
+    self.columnHeaderView.showsHorizontalScrollIndicator = NO;
+    self.columnHeaderView.showsVerticalScrollIndicator = NO;
+    self.columnHeaderView.hidden = YES;
+    self.columnHeaderView.delegate = self;
+    
+    self.cornerView.autoresizesSubviews = NO;
+    self.cornerView.hidden = YES;
+    self.cornerView.delegate = self;
+    
+    self.overlayView.frame = self.bounds;
+    self.overlayView.autoresizingMask    = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.overlayView.autoresizesSubviews = NO;
+    self.overlayView.userInteractionEnabled = NO;
+    
+    [self.rootView addSubview:self.tableView];
+    [self.rootView addSubview:self.columnHeaderView];
+    [self.rootView addSubview:self.rowHeaderView];
+    [self.rootView addSubview:self.cornerView];
+    [super addSubview:self.overlayView];
+    
+    [@[self.tableView, self.columnHeaderView, self.rowHeaderView, self.cornerView, self.overlayView] enumerateObjectsUsingBlock:^(UIScrollView* _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self addGestureRecognizer:obj.panGestureRecognizer];
+        if (IOS_VERSION_11_OR_LATER && [obj respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
+            if (@available(iOS 11.0, *)) {
+                obj.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            }
+        }
+    }];
 }
 
 - (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
-
+    self.cellClasses[identifier] = cellClass;
 }
 
-- (void)reloadDataIfNeeded {
+- (void)registerNib:(UINib *)cellNib forCellWithReuseIdentifier:(NSString *)identifier {
+    self.cellNibs[identifier] = cellNib;
+}
+
+- (void)reloadData {
+    self.layoutProperties            = [self resetLayoutProperties];
+    self.circularScrollScalingFactor = [self determineCircularScrollScalingFactor];
+    self.centerOffset = [self calculateCenterOffset];
     
-}
-
-- (CGPoint)contentOffsetForScrollingToItemIndexPath:(NSIndexPath *)indexPath at:(ZMJScrollPosition)scrollPosition {
+    self.cornerView.layoutAttributes       = [self layoutAttributeForCornerView];
+    self.columnHeaderView.layoutAttributes = [self layoutAttributeForColumnHeaderView];
+    self.rowHeaderView.layoutAttributes    = [self layoutAttributeForRowHeaderView];
+    self.tableView.layoutAttributes        = [self layoutAttributeForTableView];
     
-}
-
-- (void)deselectAllItems:(BOOL)animated {
+    [self.cornerView resetReusableObjects];
+    [self.columnHeaderView resetReusableObjects];
+    [self.rowHeaderView resetReusableObjects];
+    [self.tableView resetReusableObjects];
     
-}
-
-- (void)set_needsReload {
-    _needsReload = YES;
+    [self resetContentSize:self.cornerView];
+    [self resetContentSize:self.columnHeaderView];
+    [self resetContentSize:self.rowHeaderView];
+    [self resetContentSize:self.tableView];
+    
+    [self resetScrollViewFrame];
+    [self resetScrollViewArrangement];
+    
+    if (self.circularScrollingOptions.direction == Direction_horizontally && self.tableView.contentOffset.x == 0) {
+        [self scrollToHorizontalCenter];
+    }
+    if (self.circularScrollingOptions.direction == Direction_vertically && self.tableView.contentOffset.y == 0) {
+        [self scrollToVerticalCenter];
+    }
+    
+    self.needsReload = NO;
     [self setNeedsLayout];
 }
 
+- (void)reloadDataIfNeeded {
+    if (self.needsReload) {
+        [self reloadData];
+    }
+}
+
+- (void)set_needsReload {
+    self.needsReload = YES;
+    [self setNeedsLayout];
+}
+
+- (ZMJCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath {
+    ReuseQueue<ZMJCell *> * reuseQueue = [self.cellReuseQueues objectForKey:identifier];
+    if (reuseQueue) {
+        ZMJCell *cell = [reuseQueue dequeue];
+        if (cell) {
+            [cell preppareForReuse];
+            return cell;
+        }
+    } else {
+        reuseQueue = [ReuseQueue new];
+        self.cellReuseQueues[identifier] = reuseQueue;
+    }
+    
+    if (self.blankCellReuseIdentifier) {
+        ZMJCell *cell = [BlankCell new];
+        cell.reuseIdentifier = self.blankCellReuseIdentifier;
+        return cell;
+    }
+    Class clazz = [self.cellClasses objectForKey:identifier];
+    if (clazz) {
+        ZMJCell *cell = [clazz new];
+        cell.reuseIdentifier = identifier;
+        return cell;
+    }
+    UINib *nib = [self.cellNibs objectForKey:identifier];
+    if (nib) {
+        ZMJCell *cell = (ZMJCell *)[nib instantiateWithOwner:nil options:nil].firstObject;
+        if (cell) {
+            cell.reuseIdentifier = identifier;
+            return cell;
+        }
+    }
+    
+    [NSExpression expressionWithFormat:@"could not dequeue a view with identifier cell - must register a nib or a class for the identifier"];
+    return nil;
+}
+
 - (void)resetTouchHandlers:(NSArray<ZMJScrollView *> *)scrollViews {
+    __weak typeof(self)weak_self = self;
+    [scrollViews enumerateObjectsUsingBlock:^(ZMJScrollView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (self.dataSource) {
+            obj.touchesBegan = ^(NSSet<UITouch *> *touches, UIEvent *event){
+                [weak_self touchesBegan:touches event:event];
+            };
+            obj.touchesEnded = ^(NSSet<UITouch *> *touches, UIEvent *event) {
+                [weak_self touchesEnded:touches event:event];
+            };
+            obj.touchesCancelled = ^(NSSet<UITouch *> *touches, UIEvent *event) {
+                [weak_self touchesCancelled:touches event:event];
+            };
+        } else {
+            obj.touchesBegan     = nil;
+            obj.touchesEnded     = nil;
+            obj.touchesCancelled = nil;
+        }
+    }];
+}
+
+- (void)scrollToItemIndexPath:(NSIndexPath *)indexPath at:(ZMJScrollPosition)scrollPosition animated:(BOOL)animated {
+    
+}
+
+- (CGPoint)contentOffsetForScrollingToItem:(NSIndexPath *)indexPath scrollPosition:(ZMJScrollPosition)scrollPosition {
+    NSInteger column = indexPath.column;
+    NSInteger row    = indexPath.row;
+    
+    if (column >= self.numberOfColumns || row >= self.numberOfRows) {
+        [NSExpression expressionWithFormat:@"attempt to scroll to invalid index path: {column = %ld, row = %ld}", (long)column, (long)row];
+    }
+    
+    NSMutableArray<NSNumber *> *columnRecords = [NSMutableArray new];
+    NSMutableArray<NSNumber *> *rowRecords = [NSMutableArray new];
+    [columnRecords addObjectsFromArray:self.columnHeaderView.columnRecords];
+    [columnRecords addObjectsFromArray:self.tableView.columnRecords];
+    [rowRecords addObjectsFromArray:self.rowHeaderView.rowRecords];
+    [rowRecords addObjectsFromArray:self.tableView.rowRecords];
+    
+    CGPoint contentOffset = CGPointMake(columnRecords[column].floatValue, rowRecords[row].floatValue);
+    CGFloat widith;
+    CGFloat height;
     
 }
 
@@ -124,6 +319,14 @@
 }
 
 - (ZMJCellRange *)mergedCellFor:(Location *)indexPath {
+    
+}
+
+- (CGPoint)contentOffsetForScrollingToItemIndexPath:(NSIndexPath *)indexPath at:(ZMJScrollPosition)scrollPosition {
+    
+}
+
+- (void)deselectAllItems:(BOOL)animated {
     
 }
 

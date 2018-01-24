@@ -23,10 +23,11 @@
 
 @property (nonatomic, strong) Borders *borders;
 
-@property (nonatomic, strong, readonly) NSString *reuseIdentifier;
+@property (nonatomic, strong) NSString *reuseIdentifier;
 @property (nonatomic, strong) NSIndexPath *indexPath;
 
 - (NSComparisonResult)compare:(ZMJCell *)aValue;
+- (void)preppareForReuse;
 @end
 
 @interface BlankCell: ZMJCell

@@ -30,4 +30,6 @@
 @property (nonatomic, strong) ReusableCollection<Border *>   *visibleBorders;
 
 @property (nonatomic, assign) BOOL hasDisplayedContent;
+
+- (void)resetReusableObjects;
 @end
