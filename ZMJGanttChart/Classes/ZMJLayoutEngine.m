@@ -103,8 +103,8 @@
 @property (nonatomic, assign) CGPoint   insets;
 
 /// NSNumber who wrapper of <CGFloat>
-@property (nonatomic, strong) NSNumber *columnRecords;
-@property (nonatomic, strong) NSNumber *rowRecords;
+@property (nonatomic, strong) NSArray<NSNumber *> *columnRecords;
+@property (nonatomic, strong) NSArray<NSNumber *> *rowRecords;
 
 @property (nonatomic, strong) NSSet<Address *>                   *mergedCellAddress;
 @property (nonatomic, strong) NSDictionary<Address *, NSValue *> *mergedCellRects;  /// NSValue who wrapper of <CGRect>
@@ -120,6 +120,41 @@
 @end
 
 @implementation ZMJLayoutEngine
+
+- (instancetype)initWithSpreadsheetView:(SpreadsheetView *)spreadsheetView scrollView:(ZMJScrollView *)scrollView {
+    self = [super init];
+    if (self) {
+        self.spreadsheetView = spreadsheetView;
+        self.scrollView = scrollView;
+        
+//FIXME: 未完成
+        self.visibleRect = CGRectMake(scrollView.state.contentOffset.x,
+                                      scrollView.state.contentOffset.y,
+                                      scrollView.state.frame.size.width,
+                                      scrollView.state.frame.size.height);
+        self.cellOrigin = CGPointZero;
+        
+        self.startColumn     = scrollView.layoutAttributes.startColumn;
+        self.startRow        = scrollView.layoutAttributes.startRow;
+        self.numberOfColumns = scrollView.layoutAttributes.numberOfColumns;
+        self.numberOfRows    = scrollView.layoutAttributes.numberOfRows;
+        self.columnCount     = scrollView.layoutAttributes.columnCount;
+        self.rowCount        = scrollView.layoutAttributes.rowCount;
+        self.insets          = scrollView.layoutAttributes.insets;
+    
+        self.columnRecords = scrollView.columnRecords;
+        self.rowRecords    = scrollView.rowRecords;
+    }
+    return self;
+}
+
+- (void)layout {
+    if (_startColumn == _columnCount || _startRow == _rowCount) {
+        return;
+    }
+    //FIXME: 未完成
+}
+
 - (void)aa {
     GridLayout gl;
     [NSValue value:&gl withObjCType:@encode(GridLayout)];

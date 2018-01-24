@@ -133,15 +133,17 @@
 		94ABAA8761CF91C2892566315C8F989D /* KWMatchers.m in Sources */ = {isa = PBXBuildFile; fileRef = A399FFBAEFCA157BF63057B4CF90D256 /* KWMatchers.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		94B88AE0EBBB8D8D34B7E10BBA535AEF /* KWExampleSuiteBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EB65DDF7CFFAC162C2D31B8FE14 /* KWExampleSuiteBuilder.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		9554DEE7D6922CB22CD99230311114BB /* KWConformToProtocolMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = F78669E17F649D5A1050094F05C1A4E5 /* KWConformToProtocolMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		960D61CD20183189004D9626 /* SpreadsheetViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61CC20183189004D9626 /* SpreadsheetViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		960D61D4201832D3004D9626 /* SpreadsheetView.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61D2201832D3004D9626 /* SpreadsheetView.h */; };
+		960D61D5201832D3004D9626 /* SpreadsheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61D3201832D3004D9626 /* SpreadsheetView.m */; };
+		960D61D720183623004D9626 /* SpreadsheetViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61D620183623004D9626 /* SpreadsheetViewDelegate.h */; };
 		9693F61BA469B25DB506983BAF20098D /* Define.h in Headers */ = {isa = PBXBuildFile; fileRef = 602602D98D653DD705D15D39924471E6 /* Define.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96EA8C50F8B764CEC8A8963ECD14EBFC /* KWAfterEachNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D4231E2CE9493759EE9354A8DAC0314 /* KWAfterEachNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9754C75C21F39ED9880180C5A888588F /* KWBeforeAllNode.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF2FC14B970E9E26F66066A5EE39839 /* KWBeforeAllNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		989AD231EEC12F9D0BC8B83EE0887D7F /* KWAfterEachNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 721CBB5CFC3AFC010910DAA539C4DF59 /* KWAfterEachNode.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		99A0F20E65D7E9B41484A538F72C7F36 /* KWBlockRaiseMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A538C88D668DA5728D12DB097837B70 /* KWBlockRaiseMatcher.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		9A47557B029AF8E670F0F067BC965583 /* SpreadsheetView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D1F32149352D50397D6CC9D87FA56B8 /* SpreadsheetView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B5F50B22572D79B691CF3A8A29199A9 /* KWChangeMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 469D2EBFA686608D9ADBE1879D8A0E2C /* KWChangeMatcher.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		9D741A6F6E8DA3AA4261B211078E7FDB /* KWBeMemberOfClassMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CB4DAA6F1320AF267D53DC9EF5705E /* KWBeMemberOfClassMatcher.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		9DBC9FE24B287EFD5260DECC5DF437D6 /* SpreadsheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C96779AB740932E10DEA4FD9B717751B /* SpreadsheetView.m */; };
 		9E842DCBEE5504B1DC8B8A8A6850B2EB /* KWProbe.h in Headers */ = {isa = PBXBuildFile; fileRef = 235B79C18E279F2B524C0D1D4D62DE1D /* KWProbe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F142CDCDC1471A85F523EE089BA9938 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C83B934E09BD69E1D6E836940A6471F /* Address.m */; };
 		9F1A7CD0601EFEFC5FC8FD3FEC90EF09 /* NSObject+KiwiVerifierAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 99F6294A8F07C181496F6F2EF578E1EE /* NSObject+KiwiVerifierAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -396,7 +398,6 @@
 		899E240E9A30AE3D9B1A0EE0F734A2D4 /* Pods-ZMJGanttChart_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZMJGanttChart_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8A7335B46AD39E7C5A2773A07D9361A7 /* Address.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
 		8B3E98D3310FB25A55AE63A319827879 /* Gridlines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Gridlines.h; sourceTree = "<group>"; };
-		8D1F32149352D50397D6CC9D87FA56B8 /* SpreadsheetView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SpreadsheetView.h; sourceTree = "<group>"; };
 		8E27415D015B4F9465260F8F29F7DDD8 /* KWProbePoller.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWProbePoller.h; path = Classes/Core/KWProbePoller.h; sourceTree = "<group>"; };
 		90E0580B9B55ED3E18CAA663EB26271A /* ZMJGanttChart-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ZMJGanttChart-prefix.pch"; sourceTree = "<group>"; };
 		92CB4DAA6F1320AF267D53DC9EF5705E /* KWBeMemberOfClassMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWBeMemberOfClassMatcher.m; path = Classes/Matchers/KWBeMemberOfClassMatcher.m; sourceTree = "<group>"; };
@@ -406,6 +407,10 @@
 		94F5893F2A96661E37B6B6047F1D673D /* Pods-ZMJGanttChart_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZMJGanttChart_Example.release.xcconfig"; sourceTree = "<group>"; };
 		95117280C80DBC3B2884D2EB8E4E2011 /* ZMJScrollView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ZMJScrollView.m; sourceTree = "<group>"; };
 		95BF71FA9EABFDBF14D69972D2797205 /* KWContainStringMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWContainStringMatcher.h; path = Classes/Matchers/KWContainStringMatcher.h; sourceTree = "<group>"; };
+		960D61CC20183189004D9626 /* SpreadsheetViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpreadsheetViewDataSource.h; sourceTree = "<group>"; };
+		960D61D2201832D3004D9626 /* SpreadsheetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpreadsheetView.h; sourceTree = "<group>"; };
+		960D61D3201832D3004D9626 /* SpreadsheetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpreadsheetView.m; sourceTree = "<group>"; };
+		960D61D620183623004D9626 /* SpreadsheetViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpreadsheetViewDelegate.h; sourceTree = "<group>"; };
 		969F25D914AF9E313506E0817AAA02AD /* KWMatcherFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWMatcherFactory.m; path = Classes/Core/KWMatcherFactory.m; sourceTree = "<group>"; };
 		975757BB5A74FCD47B2BB40E7D80E392 /* KWMessageSpying.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWMessageSpying.h; path = Classes/Core/KWMessageSpying.h; sourceTree = "<group>"; };
 		9795227F493D9349B527EB839486C8E6 /* KWRespondToSelectorMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWRespondToSelectorMatcher.m; path = Classes/Matchers/KWRespondToSelectorMatcher.m; sourceTree = "<group>"; };
@@ -454,7 +459,6 @@
 		C78B55D74EE10A962E91C19A907935F8 /* Pods-ZMJGanttChart_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZMJGanttChart_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		C7B2349CE5A568F495FC2E38790C67D4 /* Borders.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Borders.h; sourceTree = "<group>"; };
 		C8552FCAACF784FD3A1BD19F439A3D7B /* KWBeWithinMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWBeWithinMatcher.m; path = Classes/Matchers/KWBeWithinMatcher.m; sourceTree = "<group>"; };
-		C96779AB740932E10DEA4FD9B717751B /* SpreadsheetView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SpreadsheetView.m; sourceTree = "<group>"; };
 		CB581A155421EB0F3A986050BEE631E3 /* Pods_ZMJGanttChart_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJGanttChart_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC034D134799F0DAE2295124760D3A6C /* KWObjCUtilities.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWObjCUtilities.m; path = Classes/Core/KWObjCUtilities.m; sourceTree = "<group>"; };
 		CC8C30C21FC38FD27D42EA88F91C7F3F /* Kiwi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Kiwi.h; path = Classes/Core/Kiwi.h; sourceTree = "<group>"; };
@@ -561,13 +565,13 @@
 		067CF7792A86ED5B1AC4698CCDC571DB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				602602D98D653DD705D15D39924471E6 /* Define.h */,
 				8A7335B46AD39E7C5A2773A07D9361A7 /* Address.h */,
 				5C83B934E09BD69E1D6E836940A6471F /* Address.m */,
 				C7B2349CE5A568F495FC2E38790C67D4 /* Borders.h */,
 				133B29AA5D899B95B68CF2C567AEBC10 /* Borders.m */,
 				67C29C58DFD2E74C92CCF8F834D18933 /* CircualrScrolling.h */,
 				AF1C398E45D5D5A31C4D4973FD4F80A5 /* CircualrScrolling.m */,
-				602602D98D653DD705D15D39924471E6 /* Define.h */,
 				8B3E98D3310FB25A55AE63A319827879 /* Gridlines.h */,
 				F54E22645DB16C7B47B73B85B0E7C5C0 /* Gridlines.m */,
 				4D628E25431837650678F025556C1233 /* Location.h */,
@@ -578,8 +582,6 @@
 				D4B2DE4C1653630AE43FC4A25152CEA1 /* NSIndexPath+column.m */,
 				2FEAFFF20D2D27AB275068B7A9278DE9 /* ReuseQueue.h */,
 				9847535ED8B9276CBC346095A39E324F /* ReuseQueue.m */,
-				8D1F32149352D50397D6CC9D87FA56B8 /* SpreadsheetView.h */,
-				C96779AB740932E10DEA4FD9B717751B /* SpreadsheetView.m */,
 				0C94404A774D02CCE7F5517E36DD7719 /* ZMJCell.h */,
 				E37545CD3EEC322E856DD57C451FE96B /* ZMJCell.m */,
 				003E4C49626884C12D372426F4872265 /* ZMJCellRange.h */,
@@ -588,6 +590,10 @@
 				D0547B61368BEA904B039295D7FE0DCB /* ZMJLayoutEngine.m */,
 				B2BE5DD88D24B8959C59D58C8EB08AE1 /* ZMJScrollView.h */,
 				95117280C80DBC3B2884D2EB8E4E2011 /* ZMJScrollView.m */,
+				960D61CC20183189004D9626 /* SpreadsheetViewDataSource.h */,
+				960D61D620183623004D9626 /* SpreadsheetViewDelegate.h */,
+				960D61D2201832D3004D9626 /* SpreadsheetView.h */,
+				960D61D3201832D3004D9626 /* SpreadsheetView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1042,13 +1048,15 @@
 				2FD2EF3A9441E419EC02A3E69079C833 /* Gridlines.h in Headers */,
 				F6C14561425AD0DC09EAC23ED466968B /* Location.h in Headers */,
 				55C77DECB5E3641A6DB91484E655FCF4 /* NSArray+BinarySearch.h in Headers */,
+				960D61D720183623004D9626 /* SpreadsheetViewDelegate.h in Headers */,
 				A1315C8C6F26D23AC84C9B2737EC73F2 /* NSIndexPath+column.h in Headers */,
 				04C3CC200FE5D69DECAB9228D786F2FD /* ReuseQueue.h in Headers */,
-				9A47557B029AF8E670F0F067BC965583 /* SpreadsheetView.h in Headers */,
 				C8C7F06D33FB30FD6D5C14A192279E1E /* ZMJCell.h in Headers */,
+				960D61D4201832D3004D9626 /* SpreadsheetView.h in Headers */,
 				FFFB25128B56C0AF743DDAED970076CA /* ZMJCellRange.h in Headers */,
 				7E70AEE08993F8BF065645349F83BAE3 /* ZMJGanttChart-umbrella.h in Headers */,
 				CA53935BCA9B863C753933BC8517BE1E /* ZMJLayoutEngine.h in Headers */,
+				960D61CD20183189004D9626 /* SpreadsheetViewDataSource.h in Headers */,
 				3D79445BD2913B562E99F7F715161F9F /* ZMJScrollView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1269,8 +1277,8 @@
 				09D840E467E2B635EE9335A3D9E93B0C /* NSArray+BinarySearch.m in Sources */,
 				000E0B9AB91BA3D8AD754C519D0D36BF /* NSIndexPath+column.m in Sources */,
 				906F4DB78E7F0D9CE916A611EED70640 /* ReuseQueue.m in Sources */,
-				9DBC9FE24B287EFD5260DECC5DF437D6 /* SpreadsheetView.m in Sources */,
 				0F67E0204E65229B5C3FE06EF3533CF6 /* ZMJCell.m in Sources */,
+				960D61D5201832D3004D9626 /* SpreadsheetView.m in Sources */,
 				B23974F2B5F03582955349C0BF24312D /* ZMJCellRange.m in Sources */,
 				D4C23EDB74076343ED12857C904347F0 /* ZMJGanttChart-dummy.m in Sources */,
 				875F98D31494377F14AB729D702F9287 /* ZMJLayoutEngine.m in Sources */,

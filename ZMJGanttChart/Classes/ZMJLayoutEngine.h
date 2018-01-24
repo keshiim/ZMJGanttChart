@@ -48,7 +48,9 @@
 
 
 @interface ZMJLayoutEngine : NSObject
-//- (instancetype)initWithSpreadsheetView:(SpreadsheetView *)spreadsheetView scrollView:(ZMJScrollView *)scrollView;
+- (instancetype)initWithSpreadsheetView:(SpreadsheetView *)spreadsheetView scrollView:(ZMJScrollView *)scrollView;
+
+- (void)layout;
 @end
 
 

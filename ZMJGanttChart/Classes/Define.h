@@ -11,9 +11,9 @@
 typedef void(^TouchHandler)(NSSet<UITouch *> *touches, UIEvent *event);
 
 typedef struct ZMJState {
-    CGRect frame;
-    CGSize contentSize;
-    CGSize contentOffset;
+    CGRect  frame;
+    CGSize  contentSize;
+    CGPoint contentOffset;
 } State;
 
 typedef NS_OPTIONS(NSUInteger, ZMJScrollPosition) {
