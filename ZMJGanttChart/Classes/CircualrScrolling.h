@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Define.h"
 
 @protocol CircularScrollingConfigurationState;
 @protocol CircularScrollingConfiguration;
@@ -23,23 +24,6 @@
 @class Options;
 @class CircualrScrolling;
 @class CircularScrollingConfigurationBuilder;
-
-typedef NS_OPTIONS(NSUInteger, ZMJDirection) {
-    Direction_vertically   = 1 << 0,
-    Direction_horizontally = 1 << 1,
-    Direction_both         = Direction_vertically | Direction_horizontally,
-} Direction;
-
-typedef NS_OPTIONS(NSUInteger, ZMJTableStyle) {
-    TableStyle_columnHeaderNotRepeated  = 1 << 0,
-    TableStyle_rowHeaderNotRepeated     = 1 << 1,
-};
-
-typedef NS_ENUM(NSUInteger, ZMJHeaderStyle) {
-    HeaderStyle_none,
-    HeaderStyle_columnHeaderStartsFirstRow,
-    HeaderStyle_rowHeaderStartsFirstColumn,
-} HeaderStyle;
 
 #pragma mark - Protocol
 @protocol CircularScrollingConfigurationState
@@ -113,10 +97,10 @@ typedef NS_ENUM(NSUInteger, ZMJHeaderStyle) {
 @interface CircualrScrolling : NSObject
 
 @property (class, nonatomic, strong) Configuration *Configuration;
-@property (class, nonatomic, strong) id<CircularScrollingConfigurationState>    None;
-@property (class, nonatomic, strong) id<CircularScrollingConfigurationState>    Horizontally;
-@property (class, nonatomic, strong) id<CircularScrollingConfigurationState>    Vertically;
-@property (class, nonatomic, strong) id<CircularScrollingConfigurationState>    Both;
+@property (class, nonatomic, strong) CircularScrollingConfigurationState_None         *None;
+@property (class, nonatomic, strong) CircularScrollingConfigurationState_Horizontally *Horizontally;
+@property (class, nonatomic, strong) CircularScrollingConfigurationState_Vertically   *Vertically;
+@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both         *Both;
 
 @property (class, nonatomic, assign) ZMJDirection      Direction;
 @property (class, nonatomic, assign) ZMJHeaderStyle    HeaderStyle;

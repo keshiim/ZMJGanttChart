@@ -7,20 +7,14 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
-typedef NS_ENUM(NSInteger, GridStyle_Enum) {
-    GridStyle_default = 0,
-    GridStyle_none,
-    GridStyle_solid,
-};
+#import "Define.h"
 
 @class GridStyle;
-
 @interface Gridlines : NSObject
-@property (nonatomic, assign) GridStyle *top;
-@property (nonatomic, assign) GridStyle *bottom;
-@property (nonatomic, assign) GridStyle *left;
-@property (nonatomic, assign) GridStyle *right;
+@property (nonatomic, strong) GridStyle *top;
+@property (nonatomic, strong) GridStyle *bottom;
+@property (nonatomic, strong) GridStyle *left;
+@property (nonatomic, strong) GridStyle *right;
 
 - (instancetype)initWithTop:(GridStyle *)top bottom:(GridStyle *)bottom left:(GridStyle *)left right:(GridStyle *)right;
 + (instancetype)all:(GridStyle *)style;

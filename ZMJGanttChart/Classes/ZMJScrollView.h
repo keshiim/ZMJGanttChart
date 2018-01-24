@@ -7,29 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZMJLayoutEngine.h"
-
-typedef void(^TouchHandler)(NSSet<UITouch *> *touches, UIEvent *event);
-
-struct ZMJState {
-    CGRect frame;
-    CGSize contentSize;
-    CGSize contentOffset;
-};
-typedef struct ZMJState State;
-
-typedef NS_OPTIONS(NSUInteger, ZMJScrollPosition) {
-    // The vertical positions are mutually exclusive to each other, but are bitwise or-able with the horizontal scroll positions.
-    // Combining positions from the same grouping (horizontal or vertical) will result in an NSInvalidArgumentException.
-    ScrollPosition_top                 = 1 << 0,
-    ScrollPosition_centeredVertiically = 1 << 1,
-    ScrollPosition_bottom              = 1 << 2,
-    
-    // Likewise, the horizontal positions are mutually exclusive to each other.
-    ScrollPosition_left                = 1 << 3,
-    ScrollPosition_centeredHorizontally= 1 << 4,
-    ScrollPosition_right               = 1 << 5,
-} ScrollPosition;
+#import "Define.h"
 
 @interface ZMJScrollView : UIScrollView
 @property (nonatomic, strong) NSMutableArray<NSNumber *> *columnRecords; // number -> CGFloat

@@ -6,18 +6,14 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef NS_ENUM(NSInteger, BorderStyle_Enum) {
-    BorderStyle_None,
-    BorderStyle_solid,
-};
+#import "Define.h"
 
 @class BorderStyle;
-
 @interface Borders : NSObject
-@property (nonatomic, assign) BorderStyle *top;
-@property (nonatomic, assign) BorderStyle *bottom;
-@property (nonatomic, assign) BorderStyle *left;
-@property (nonatomic, assign) BorderStyle *right;
+@property (nonatomic, strong) BorderStyle *top;
+@property (nonatomic, strong) BorderStyle *bottom;
+@property (nonatomic, strong) BorderStyle *left;
+@property (nonatomic, strong) BorderStyle *right;
 
 - (instancetype)initWithTop:(BorderStyle *)top bottom:(BorderStyle *)bottom left:(BorderStyle *)left right:(BorderStyle *)right;
 + (instancetype)all:(BorderStyle *)style;

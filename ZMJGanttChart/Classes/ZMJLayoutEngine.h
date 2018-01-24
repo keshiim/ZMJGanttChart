@@ -6,55 +6,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SpreadsheetView.h"
+#import "ZMJScrollView.h"
+#import "Define.h"
+
 @class ZMJCellRange;
 @class Location;
-
-#pragma mark - Defines
-struct ZMJDirect {
-    CGFloat left;
-    CGFloat right;
-    CGFloat top;
-    CGFloat bottom;
-};
-typedef struct ZMJDirect Direct;
-
-struct ZMJRectEdge {
-    //top || bottom
-    Direct top;
-    Direct bottom;
-    
-    //left || right
-    Direct left;
-    Direct right;
-};
-typedef struct ZMJRectEdge RectEdge;
-
-struct ZMJLayoutAttributes {
-    NSInteger startColumn;
-    NSInteger startRow;
-    NSInteger numberOfColumns;
-    NSInteger numberOfRows;
-    NSInteger columnCount;
-    NSInteger rowCount;
-    CGPoint insets;
-};
-typedef struct ZMJLayoutAttributes LayoutAttributes;
-
-struct ZMJGridLayout {
-    CGFloat gridWidth;
-    __unsafe_unretained UIColor* gridColor;
-    CGPoint origin;
-    CGFloat length;
-    RectEdge edge;
-    CGFloat priority;
-};
-typedef struct ZMJGridLayout GridLayout;
+@class ZMJScrollView;
 
 #pragma mark - Class interface
-@interface ZMJLayoutEngine : NSObject
-
-@end
-
 @interface ZMJLayoutProperties: NSObject
 @property (nonatomic, assign) NSInteger numberOfColumns;
 @property (nonatomic, assign) NSInteger numberOfRows;
@@ -85,3 +45,34 @@ typedef struct ZMJGridLayout GridLayout;
                             mergedCells:(NSArray<ZMJCellRange *> *)mergedCells
                       mergedCellLayouts:(NSDictionary<Location *, ZMJCellRange *> *)mergedCellLayouts;
 @end
+
+
+@interface ZMJLayoutEngine : NSObject
+//- (instancetype)initWithSpreadsheetView:(SpreadsheetView *)spreadsheetView scrollView:(ZMJScrollView *)scrollView;
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

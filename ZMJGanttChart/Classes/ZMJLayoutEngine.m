@@ -8,10 +8,10 @@
 #import "ZMJLayoutEngine.h"
 #import "ZMJCellRange.h"
 #import "Location.h"
-
-@implementation ZMJLayoutEngine
-
-@end
+#import "NSIndexPath+column.h"
+#import "Gridlines.h"
+//#import "CircualrScrolling.h"
+#import "Address.h"
 
 @implementation ZMJLayoutProperties
 
@@ -72,3 +72,89 @@
 }
 
 @end
+
+@interface ZMJLayoutEngine ()
+@property (nonatomic, strong) SpreadsheetView *spreadsheetView;
+@property (nonatomic, strong) ZMJScrollView   *scrollView;
+
+@property (nonatomic, assign) CGSize     intercellSpacing;
+@property (nonatomic, strong) GridStyle *defaultGridStyle;
+//@property (nonatomic, strong) Options   *circularScrollingOptions;
+@property (nonatomic, strong) NSString  *blankCellReuseIdentifier;
+@property (nonatomic, strong) NSSet<NSIndexPath *> *highlightedIndexPaths;
+@property (nonatomic, strong) NSSet<NSIndexPath *> *selectedIndexPaths;
+
+@property (nonatomic, assign) NSInteger frozenColumn;
+@property (nonatomic, assign) NSInteger frozenRows;
+
+/// NSNumber who wrapper of <CGFloat>
+@property (nonatomic, strong) NSNumber *columnWidthCache;
+@property (nonatomic, strong) NSNumber *rowHeightCache;
+
+@property (nonatomic, assign) CGRect visibleRect;
+@property (nonatomic, assign) CGPoint cellOrigin;
+
+@property (nonatomic, assign) NSInteger startColumn;
+@property (nonatomic, assign) NSInteger startRow;
+@property (nonatomic, assign) NSInteger numberOfColumns;
+@property (nonatomic, assign) NSInteger numberOfRows;
+@property (nonatomic, assign) NSInteger columnCount;
+@property (nonatomic, assign) NSInteger rowCount;
+@property (nonatomic, assign) CGPoint   insets;
+
+/// NSNumber who wrapper of <CGFloat>
+@property (nonatomic, strong) NSNumber *columnRecords;
+@property (nonatomic, strong) NSNumber *rowRecords;
+
+@property (nonatomic, strong) NSSet<Address *>                   *mergedCellAddress;
+@property (nonatomic, strong) NSDictionary<Address *, NSValue *> *mergedCellRects;  /// NSValue who wrapper of <CGRect>
+
+@property (nonatomic, strong) NSSet<Address *> *visibleCellAddresses;
+
+@property (nonatomic, strong) NSDictionary<Address *, NSValue *> *horizontalGridLayouts; /// NSValue who wrapper of <GridLayout>
+@property (nonatomic, strong) NSDictionary<Address *, NSValue *> *verticalGridLayouts;   /// NSValue who wrapper of <GridLayout>
+
+@property (nonatomic, strong) NSSet<Address *> *visibleHorizontalGridAddresses;
+@property (nonatomic, strong) NSSet<Address *> *visibleVerticalGridAddresses;
+@property (nonatomic, strong) NSSet<Address *> *visibleBorderAddresses;
+@end
+
+@implementation ZMJLayoutEngine
+- (void)aa {
+    GridLayout gl;
+    [NSValue value:&gl withObjCType:@encode(GridLayout)];
+}
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
