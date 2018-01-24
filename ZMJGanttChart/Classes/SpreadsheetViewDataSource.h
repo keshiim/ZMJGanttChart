@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SpreadsheetView.h"
 #import "ZMJCell.h"
-#Import "ZMJCellRange.h"
+#import "ZMJCellRange.h"
+
+@class SpreadsheetView;
 
 /// Implement this protocol to provide data to an `SpreadsheetView`.
 @protocol SpreadsheetViewDataSource
