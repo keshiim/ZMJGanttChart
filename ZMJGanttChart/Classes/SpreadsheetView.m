@@ -16,8 +16,6 @@
 #import "Address.h"
 
 @interface SpreadsheetView () <UIScrollViewDelegate>
-@property (nonatomic, strong) UIScrollView *rootView;
-
 @property (nonatomic, strong) NSMutableDictionary<NSString *, Class  > *cellClasses;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, UINib *> *cellNibs;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, ReuseQueue<ZMJCell *> *> *cellReuseQueues;

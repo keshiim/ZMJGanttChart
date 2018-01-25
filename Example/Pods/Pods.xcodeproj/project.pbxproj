@@ -151,6 +151,8 @@
 		960D61EF2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61ED2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.m */; };
 		960D61F22019EF0D004D9626 /* SpreadsheetView+UISnapshotting.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61F02019EF0D004D9626 /* SpreadsheetView+UISnapshotting.h */; };
 		960D61F32019EF0D004D9626 /* SpreadsheetView+UISnapshotting.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61F12019EF0D004D9626 /* SpreadsheetView+UISnapshotting.m */; };
+		960D61F62019F076004D9626 /* SpreadsheetView+UIScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61F42019F076004D9626 /* SpreadsheetView+UIScrollView.h */; };
+		960D61F72019F076004D9626 /* SpreadsheetView+UIScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61F52019F076004D9626 /* SpreadsheetView+UIScrollView.m */; };
 		9693F61BA469B25DB506983BAF20098D /* Define.h in Headers */ = {isa = PBXBuildFile; fileRef = 602602D98D653DD705D15D39924471E6 /* Define.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96EA8C50F8B764CEC8A8963ECD14EBFC /* KWAfterEachNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D4231E2CE9493759EE9354A8DAC0314 /* KWAfterEachNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9754C75C21F39ED9880180C5A888588F /* KWBeforeAllNode.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF2FC14B970E9E26F66066A5EE39839 /* KWBeforeAllNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -439,6 +441,8 @@
 		960D61ED2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SpreadsheetView+UIViewHierarchy.m"; sourceTree = "<group>"; };
 		960D61F02019EF0D004D9626 /* SpreadsheetView+UISnapshotting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpreadsheetView+UISnapshotting.h"; sourceTree = "<group>"; };
 		960D61F12019EF0D004D9626 /* SpreadsheetView+UISnapshotting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SpreadsheetView+UISnapshotting.m"; sourceTree = "<group>"; };
+		960D61F42019F076004D9626 /* SpreadsheetView+UIScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpreadsheetView+UIScrollView.h"; sourceTree = "<group>"; };
+		960D61F52019F076004D9626 /* SpreadsheetView+UIScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SpreadsheetView+UIScrollView.m"; sourceTree = "<group>"; };
 		969F25D914AF9E313506E0817AAA02AD /* KWMatcherFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWMatcherFactory.m; path = Classes/Core/KWMatcherFactory.m; sourceTree = "<group>"; };
 		975757BB5A74FCD47B2BB40E7D80E392 /* KWMessageSpying.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWMessageSpying.h; path = Classes/Core/KWMessageSpying.h; sourceTree = "<group>"; };
 		9795227F493D9349B527EB839486C8E6 /* KWRespondToSelectorMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWRespondToSelectorMatcher.m; path = Classes/Matchers/KWRespondToSelectorMatcher.m; sourceTree = "<group>"; };
@@ -636,6 +640,8 @@
 				960D61ED2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.m */,
 				960D61F02019EF0D004D9626 /* SpreadsheetView+UISnapshotting.h */,
 				960D61F12019EF0D004D9626 /* SpreadsheetView+UISnapshotting.m */,
+				960D61F42019F076004D9626 /* SpreadsheetView+UIScrollView.h */,
+				960D61F52019F076004D9626 /* SpreadsheetView+UIScrollView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1085,6 +1091,7 @@
 			files = (
 				22A96509C0A131E15A4647ED476128F1 /* Address.h in Headers */,
 				4A119995E380F4BFB8241A706ACAB33B /* Borders.h in Headers */,
+				960D61F62019F076004D9626 /* SpreadsheetView+UIScrollView.h in Headers */,
 				8026303E93F4A8D403BBDD79CFC02737 /* CircualrScrolling.h in Headers */,
 				9693F61BA469B25DB506983BAF20098D /* Define.h in Headers */,
 				2FD2EF3A9441E419EC02A3E69079C833 /* Gridlines.h in Headers */,
@@ -1325,6 +1332,7 @@
 				161BB4A3289626876A329559112A438F /* Location.m in Sources */,
 				09D840E467E2B635EE9335A3D9E93B0C /* NSArray+BinarySearch.m in Sources */,
 				960D61DA20187EE5004D9626 /* NSArray+WBGAddition.m in Sources */,
+				960D61F72019F076004D9626 /* SpreadsheetView+UIScrollView.m in Sources */,
 				960D61E72018A760004D9626 /* SpreadsheetView+Touches.m in Sources */,
 				960D61F32019EF0D004D9626 /* SpreadsheetView+UISnapshotting.m in Sources */,
 				000E0B9AB91BA3D8AD754C519D0D36BF /* NSIndexPath+column.m in Sources */,
