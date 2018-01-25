@@ -10,6 +10,8 @@
 #import "SpreadsheetViewDelegate.h"
 #import "Gridlines.h"
 #import "CircualrScrolling.h"
+#import "ZMJScrollView.h"
+#import "ZMJLayoutEngine.h"
 
 typedef struct CircularScrollScalingFactor {
     NSInteger horizontal;
@@ -200,6 +202,13 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 @property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *highlightedIndexPaths;
 @property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *selectedIndexPaths;
 @property (nonatomic, strong) UITouch              *currentTouch;
+
+@property (nonatomic, strong) ZMJScrollView *columnHeaderView;
+@property (nonatomic, strong) ZMJScrollView *rowHeaderView;
+@property (nonatomic, strong) ZMJScrollView *cornerView;
+@property (nonatomic, strong) ZMJScrollView *tableView;
+
+@property (nonatomic, strong) ZMJLayoutProperties *layoutProperties;
 
 - (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
 

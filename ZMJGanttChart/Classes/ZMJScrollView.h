@@ -22,7 +22,7 @@
 @property (nonatomic, copy) TouchHandler touchesCancelled;
 
 @property (nonatomic, assign) LayoutAttributes layoutAttributes;
-@property (nonatomic, assign) State state;
+@property (nonatomic, assign, readwrite) State state;
 
 @property (nonatomic, strong) ReusableCollection<ZMJCell *>  *visibleCells;
 @property (nonatomic, strong) ReusableCollection<Gridline *> *visibleVerticalGridlines;

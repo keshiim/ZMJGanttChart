@@ -6,11 +6,9 @@
 //
 
 #import "SpreadsheetView.h"
-#import "ZMJScrollView.h"
 #import "ReuseQueue.h"
 #import "NSArray+WBGAddition.h"
 #import "NSDictionary+WBGAdd.h"
-#import "ZMJLayoutEngine.h"
 #import "SpreadsheetView+Layout.h"
 #import "SpreadsheetView+CirclularScrolling.h"
 #import "SpreadsheetView+Touches.h"
@@ -18,15 +16,8 @@
 #import "Address.h"
 
 @interface SpreadsheetView () <UIScrollViewDelegate>
-@property (nonatomic, strong) ZMJLayoutProperties *layoutProperties;
-
 @property (nonatomic, strong) UIScrollView *rootView;
 @property (nonatomic, strong) UIScrollView *overlayView;
-
-@property (nonatomic, strong) ZMJScrollView *columnHeaderView;
-@property (nonatomic, strong) ZMJScrollView *rowHeaderView;
-@property (nonatomic, strong) ZMJScrollView *cornerView;
-@property (nonatomic, strong) ZMJScrollView *tableView;
 
 @property (nonatomic, strong) NSMutableDictionary<NSString *, Class  > *cellClasses;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, UINib *> *cellNibs;
