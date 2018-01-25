@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <YYCategories/NSDictionary+YYAdd.h>
 
 #ifndef WBG_WARN_RESULT_UNUSED
 #define WBG_WARN_RESULT_UNUSED __attribute__((warn_unused_result))

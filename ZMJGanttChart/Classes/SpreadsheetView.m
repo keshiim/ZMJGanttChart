@@ -292,7 +292,8 @@
 }
 
 - (void)scrollToItemIndexPath:(NSIndexPath *)indexPath at:(ZMJScrollPosition)scrollPosition animated:(BOOL)animated {
-    
+    CGPoint contentOffset = [self contentOffsetForScrollingToItem:indexPath scrollPosition:scrollPosition];
+    [self.tableView setContentOffset:contentOffset animated:animated];
 }
 
 - (CGPoint)contentOffsetForScrollingToItem:(NSIndexPath *)indexPath scrollPosition:(ZMJScrollPosition)scrollPosition {
@@ -558,13 +559,78 @@
     return nil;
 }
 
-- (ZMJCellRange *)mergedCellFor:(Location *)indexPath {
-    
+- (NSArray<ZMJCell *> *)cellsForItemAt:(NSIndexPath *)indexPath {
+    NSMutableArray<ZMJCell *> *cells = [NSMutableArray array];
+    [cells addObjectsFromArray:[[self.tableView.visibleCells.pairs wbg_filter:^BOOL(Address * _Nonnull key, ZMJCell * _Nonnull obj) {
+        return key.row == indexPath.row && key.column == indexPath.column;
+    }] wbg_toArray:^id _Nonnull(Address * _Nonnull key, ZMJCell * _Nonnull obj) {
+        return obj;
+    }]];
+    [cells addObjectsFromArray:[[self.rowHeaderView.visibleCells.pairs wbg_filter:^BOOL(Address * _Nonnull key, ZMJCell * _Nonnull obj) {
+        return key.row == indexPath.row && key.column == indexPath.column;
+    }] wbg_toArray:^id _Nonnull(Address * _Nonnull key, ZMJCell * _Nonnull obj) {
+        return obj;
+    }]];
+    [cells addObjectsFromArray:[[self.columnHeaderView.visibleCells.pairs wbg_filter:^BOOL(Address * _Nonnull key, ZMJCell * _Nonnull obj) {
+        return key.row == indexPath.row && key.column == indexPath.column;
+    }] wbg_toArray:^id _Nonnull(Address * _Nonnull key, ZMJCell * _Nonnull obj) {
+        return obj;
+    }]];
+    [cells addObjectsFromArray:[[self.cornerView.visibleCells.pairs wbg_filter:^BOOL(Address * _Nonnull key, ZMJCell * _Nonnull obj) {
+        return key.row == indexPath.row && key.column == indexPath.column;
+    }] wbg_toArray:^id _Nonnull(Address * _Nonnull key, ZMJCell * _Nonnull obj) {
+        return obj;
+    }]];
+    return cells;
 }
 
-- (CGPoint)contentOffsetForScrollingToItemIndexPath:(NSIndexPath *)indexPath at:(ZMJScrollPosition)scrollPosition {
+- (CGRect)rectForItemAt:(NSIndexPath *)indexPath {
+    NSInteger column = indexPath.column, row = indexPath.row;
+    if (column < 0 || column >= self.numberOfColumns || row < 0 || row >= self.numberOfRows) {
+        return CGRectZero;
+    }
     
+    NSMutableArray<NSNumber *> *columnRecords = [NSMutableArray array];
+    [columnRecords addObjectsFromArray:self.columnHeaderView.columnRecords];
+    [columnRecords addObjectsFromArray:self.tableView.columnRecords];
+    
+    NSMutableArray<NSNumber *> *rowRecords = [NSMutableArray array];
+    [rowRecords addObjectsFromArray:self.columnHeaderView.rowRecords];
+    [rowRecords addObjectsFromArray:self.tableView.rowRecords];
+    
+    CGPoint origin;
+    CGSize  size;
+    CGPoint (^originForColumnAndRow)(NSInteger, NSInteger) = ^CGPoint(NSInteger column, NSInteger row) {
+        CGFloat x = columnRecords[column].floatValue + (column >= self.frozenColumns ? self.tableView.frame.origin.x : 0) + self.intercellSpacing.width;
+        CGFloat y = rowRecords[row].floatValue + (row >= self.frozenRows ? self.tableView.frame.origin.y : 0) + self.intercellSpacing.height;
+        return CGPointMake(x, y);
+    };
+    ZMJCellRange *mergedCell = [self mergedCellFor:[Location locationWithRow:row column:column]];
+    if (mergedCell) {
+        origin = originForColumnAndRow(mergedCell.from.column, mergedCell.from.row);
+        CGFloat width  = 0;
+        CGFloat height = 0;
+        for (NSInteger i = mergedCell.from.column; i <= mergedCell.to.column; i++) {
+            width += self.layoutProperties.columnWidthCache[i].floatValue;
+        }
+        for (NSInteger i = mergedCell.from.row; i <= mergedCell.to.row; i++) {
+            height += self.layoutProperties.rowHeightCache[i].floatValue;
+        }
+        size = CGSizeMake(width + self.intercellSpacing.width * (mergedCell.columnCount - 1),
+                          height + self.intercellSpacing.height * (mergedCell.rowCount - 1));
+    } else {
+        origin = originForColumnAndRow(column, row);
+        CGFloat width  = self.layoutProperties.columnWidthCache[column].floatValue;
+        CGFloat height = self.layoutProperties.rowHeightCache[row].floatValue;
+        size = CGSizeMake(width, height);
+    }
+    return CGRectMake(origin.x, origin.y, size.width, size.height);
 }
+
+- (ZMJCellRange *)mergedCellFor:(Location *)indexPath {
+    return self.layoutProperties.mergedCellLayouts[indexPath];
+}
+
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0
 - (void)safeAreaInsetsDidChange {
@@ -752,13 +818,5 @@
 - (UIScrollView *)scrollView {
     return self.overlayView;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

@@ -6,12 +6,8 @@
 //  Copyright © 2016年 LiMing. All rights reserved.
 //
 
-#import <WBGFundation/NSDictionary+WBGAdd.h>
-#import <WBGFundation/NSArray+WBGAddition.h>
-
-#import <YYCategories/NSString+YYAdd.h>
-#import <YYCategories/NSData+YYAdd.h>
-#import <YYCategories/NSDictionary+YYAdd.h>
+#import "NSDictionary+WBGAdd.h"
+#import "NSArray+WBGAddition.h"
 
 #define KeyType id
 
@@ -87,6 +83,15 @@
     return [self.class _wbg_toDate:[self valueForKey:key ofKind:nil default:def]
                            default:def];
 }
+- (NSString *)stringValueForKey:(NSString *)key default:(NSString *)def {
+    if (!key) return def;
+    id value = self[key];
+    if (!value || value == [NSNull null]) return def;
+    if ([value isKindOfClass:[NSString class]]) return value;
+    if ([value isKindOfClass:[NSNumber class]]) return ((NSNumber *)value).description;
+    return def;
+}
+
 
 - (id)blockValueForKey:(NSString *)key default:(id)def
 {
