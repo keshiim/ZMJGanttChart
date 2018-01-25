@@ -37,10 +37,7 @@
 @property (nonatomic, strong) ReuseQueue<Gridline *> *verticalGridlineReuseQueue;
 @property (nonatomic, strong) ReuseQueue<Borders *> *borderReuseQueue;
 
-@property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *highlightedIndexPaths;
-@property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *selectedIndexPaths;
 @property (nonatomic, strong) NSIndexPath          *pendingSelectionIndexPath;
-@property (nonatomic, strong) UITouch              *currentTouch;
 
 @property (nonatomic, assign) BOOL needsReload;
 

@@ -196,6 +196,11 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 
 @property (nonatomic, assign, readonly) UIScrollView *scrollView;
 
+/// For category
+@property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *highlightedIndexPaths;
+@property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *selectedIndexPaths;
+@property (nonatomic, strong) UITouch              *currentTouch;
+
 - (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
 
 - (void)registerNib:(UINib *)cellNib forCellWithReuseIdentifier:(NSString *)identifier;
