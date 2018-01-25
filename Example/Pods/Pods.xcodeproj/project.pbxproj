@@ -147,6 +147,8 @@
 		960D61E72018A760004D9626 /* SpreadsheetView+Touches.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61E52018A760004D9626 /* SpreadsheetView+Touches.m */; };
 		960D61EA2019B5C9004D9626 /* NSDictionary+WBGAdd.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61E82019B5C9004D9626 /* NSDictionary+WBGAdd.h */; };
 		960D61EB2019B5C9004D9626 /* NSDictionary+WBGAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61E92019B5C9004D9626 /* NSDictionary+WBGAdd.m */; };
+		960D61EE2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.h in Headers */ = {isa = PBXBuildFile; fileRef = 960D61EC2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.h */; };
+		960D61EF2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 960D61ED2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.m */; };
 		9693F61BA469B25DB506983BAF20098D /* Define.h in Headers */ = {isa = PBXBuildFile; fileRef = 602602D98D653DD705D15D39924471E6 /* Define.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96EA8C50F8B764CEC8A8963ECD14EBFC /* KWAfterEachNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D4231E2CE9493759EE9354A8DAC0314 /* KWAfterEachNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9754C75C21F39ED9880180C5A888588F /* KWBeforeAllNode.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF2FC14B970E9E26F66066A5EE39839 /* KWBeforeAllNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -431,6 +433,8 @@
 		960D61E52018A760004D9626 /* SpreadsheetView+Touches.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SpreadsheetView+Touches.m"; sourceTree = "<group>"; };
 		960D61E82019B5C9004D9626 /* NSDictionary+WBGAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+WBGAdd.h"; sourceTree = "<group>"; };
 		960D61E92019B5C9004D9626 /* NSDictionary+WBGAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+WBGAdd.m"; sourceTree = "<group>"; };
+		960D61EC2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpreadsheetView+UIViewHierarchy.h"; sourceTree = "<group>"; };
+		960D61ED2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SpreadsheetView+UIViewHierarchy.m"; sourceTree = "<group>"; };
 		969F25D914AF9E313506E0817AAA02AD /* KWMatcherFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWMatcherFactory.m; path = Classes/Core/KWMatcherFactory.m; sourceTree = "<group>"; };
 		975757BB5A74FCD47B2BB40E7D80E392 /* KWMessageSpying.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWMessageSpying.h; path = Classes/Core/KWMessageSpying.h; sourceTree = "<group>"; };
 		9795227F493D9349B527EB839486C8E6 /* KWRespondToSelectorMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWRespondToSelectorMatcher.m; path = Classes/Matchers/KWRespondToSelectorMatcher.m; sourceTree = "<group>"; };
@@ -624,6 +628,8 @@
 				960D61E12018908B004D9626 /* SpreadsheetView+CirclularScrolling.m */,
 				960D61E42018A760004D9626 /* SpreadsheetView+Touches.h */,
 				960D61E52018A760004D9626 /* SpreadsheetView+Touches.m */,
+				960D61EC2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.h */,
+				960D61ED2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1089,6 +1095,7 @@
 				960D61DB20187EE5004D9626 /* NSArray+WBGAddition.h in Headers */,
 				FFFB25128B56C0AF743DDAED970076CA /* ZMJCellRange.h in Headers */,
 				960D61E62018A760004D9626 /* SpreadsheetView+Touches.h in Headers */,
+				960D61EE2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.h in Headers */,
 				7E70AEE08993F8BF065645349F83BAE3 /* ZMJGanttChart-umbrella.h in Headers */,
 				CA53935BCA9B863C753933BC8517BE1E /* ZMJLayoutEngine.h in Headers */,
 				960D61CD20183189004D9626 /* SpreadsheetViewDataSource.h in Headers */,
@@ -1318,6 +1325,7 @@
 				0F67E0204E65229B5C3FE06EF3533CF6 /* ZMJCell.m in Sources */,
 				960D61D5201832D3004D9626 /* SpreadsheetView.m in Sources */,
 				B23974F2B5F03582955349C0BF24312D /* ZMJCellRange.m in Sources */,
+				960D61EF2019ECE1004D9626 /* SpreadsheetView+UIViewHierarchy.m in Sources */,
 				D4C23EDB74076343ED12857C904347F0 /* ZMJGanttChart-dummy.m in Sources */,
 				875F98D31494377F14AB729D702F9287 /* ZMJLayoutEngine.m in Sources */,
 				E3A2BF294072F443C37561D6BD7B8CAD /* ZMJScrollView.m in Sources */,

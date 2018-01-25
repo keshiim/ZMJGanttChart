@@ -12,6 +12,7 @@
 #import "Gridlines.h"
 #import "CircualrScrolling.h"
 #import "Address.h"
+#import "SpreadsheetView.h"
 
 @implementation ZMJLayoutProperties
 

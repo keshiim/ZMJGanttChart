@@ -207,8 +207,9 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 @property (nonatomic, strong) ZMJScrollView *rowHeaderView;
 @property (nonatomic, strong) ZMJScrollView *cornerView;
 @property (nonatomic, strong) ZMJScrollView *tableView;
-
+@property (nonatomic, strong) UIScrollView  *overlayView;
 @property (nonatomic, strong) ZMJLayoutProperties *layoutProperties;
+
 
 - (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
 

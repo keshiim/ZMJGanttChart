@@ -6,14 +6,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SpreadsheetView.h"
 #import "ZMJScrollView.h"
 #import "Define.h"
 
 @class ZMJCellRange;
 @class Location;
 @class ZMJScrollView;
-
+@class SpreadsheetView;
 #pragma mark - Class interface
 @interface ZMJLayoutProperties: NSObject
 @property (nonatomic, assign) NSInteger numberOfColumns;
