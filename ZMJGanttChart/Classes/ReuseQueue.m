@@ -50,7 +50,6 @@
 @interface ReusableCollection<__covariant Reusable>()
 @property (nonatomic, strong) NSMutableDictionary<Address *, id> *pairs;
 @property (nonatomic, strong) NSMutableOrderedSet<Address *>     *addresses;
-
 @property (nonatomic, strong) NSArray<id> *array;
 @end
 

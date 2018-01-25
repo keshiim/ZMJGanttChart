@@ -11,5 +11,5 @@
 @interface NSIndexPath (column)
 @property (nonatomic, assign) NSInteger column;
 
-+ (instancetype)initWithRow:(NSInteger)row column:(NSInteger)column;
++ (instancetype)indexPathWithRow:(NSInteger)row column:(NSInteger)column;
 @end

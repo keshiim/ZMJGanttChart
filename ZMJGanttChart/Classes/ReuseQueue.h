@@ -22,6 +22,8 @@ __VA_ARGS__; \
 
 @interface ReusableCollection<__covariant Reusable> : NSObject <NSFastEnumeration>
 @property (nonatomic, strong, readonly) NSArray<Reusable> *array;
+@property (nonatomic, strong, readonly) NSMutableDictionary<Address *, Reusable> *pairs;
+@property (nonatomic, strong, readonly) NSMutableOrderedSet<Address *>     *addresses;
 
 - (BOOL)contains:(Address *)member;
 - (void)insert:(Address *)newMember;

@@ -9,11 +9,13 @@
 #import "ZMJScrollView.h"
 #import "ReuseQueue.h"
 #import "NSArray+WBGAddition.h"
+#import "NSDictionary+WBGAdd.h"
 #import "ZMJLayoutEngine.h"
 #import "SpreadsheetView+Layout.h"
 #import "SpreadsheetView+CirclularScrolling.h"
 #import "SpreadsheetView+Touches.h"
 #import "NSIndexPath+column.h"
+#import "Address.h"
 
 @interface SpreadsheetView () <UIScrollViewDelegate>
 @property (nonatomic, strong) ZMJLayoutProperties *layoutProperties;
@@ -463,11 +465,97 @@
     column = column % self.numberOfColumns;
     
     Location *location = [Location locationWithRow:row column:column];
-    ZMJCellRange *cellRange = [self mergedCellFor:location];
+    ZMJCellRange *mergedCell = [self mergedCellFor:location];
+    if (mergedCell) {
+        return [NSIndexPath indexPathWithRow:mergedCell.from.row column:mergedCell.from.column];
+    }
+    return [NSIndexPath indexPathWithRow:location.row column:location.column];
 }
 
 - (NSIndexPath *)indexPathForItemAt:(CGPoint)location scrollView:(ZMJScrollView *)scrollView {
+    CGFloat insetX = scrollView.layoutAttributes.insets.x;
+    CGFloat insetY = scrollView.layoutAttributes.insets.y;
     
+    __weak typeof(self)weak_self = self;
+    BOOL(^isPointInColumn)(CGFloat x, NSInteger column) = ^BOOL(CGFloat x, NSInteger column) {
+        if (column >= scrollView.columnRecords.count) {
+            return NO;
+        }
+        CGFloat minX = scrollView.columnRecords[column].floatValue + weak_self.intercellSpacing.width;
+        CGFloat maxX = minX + weak_self.layoutProperties.columnWidthCache[(column + scrollView.layoutAttributes.startColumn) % weak_self.numberOfColumns].floatValue;
+        return x >= minX && x <= maxX;
+    };
+    
+    BOOL(^isPointInRow)(CGFloat y, NSInteger row) = ^BOOL(CGFloat y, NSInteger row) {
+        if (row >= scrollView.rowRecords.count) {
+            return NO;
+        }
+        CGFloat minY = scrollView.rowRecords[row].floatValue + weak_self.intercellSpacing.height;
+        CGFloat maxY = minY + weak_self.layoutProperties.rowHeightCache[(row + scrollView.layoutAttributes.startRow) % weak_self.numberOfRows].floatValue;
+        return y >= minY && y <= maxY;
+    };
+    
+    CGPoint point    = [self convertPoint:location toView:scrollView];
+    NSInteger column = [self findIndex:scrollView.columnRecords offset:point.x - insetX];
+    NSInteger row    = [self findIndex:scrollView.rowRecords offset:point.y - insetY];
+    BOOL pointInColumn = isPointInColumn(point.x - insetX, column);
+    BOOL pointInRow    = isPointInRow(point.y, row);
+    if (pointInColumn && pointInRow) {
+        return [NSIndexPath indexPathWithRow:row column:column];
+    } else if (pointInColumn && pointInRow == NO) {
+        if (isPointInRow(point.y - insetY, column)) {
+            return [NSIndexPath indexPathWithRow:row + 1 column:column];
+        }
+        return nil;
+    } else if (pointInColumn == NO && pointInRow) {
+        if (isPointInColumn(point.x - insetX, column + 1)) {
+            return [NSIndexPath indexPathWithRow:row column:column + 1];
+        }
+        return nil;
+    } else if (pointInColumn == NO && pointInRow == NO) {
+        if (isPointInColumn(point.x - insetX, column + 1) && isPointInRow(point.y - insetY, row + 1)) {
+            return [NSIndexPath indexPathWithRow:row + 1 column:column + 1];
+        }
+        return nil;
+    }
+    return nil;
+}
+
+- (ZMJCell *)cellForItemAt:(NSIndexPath *)indexPath {
+    ZMJCell *cell = nil;
+    if ((cell = [[self.tableView.visibleCells.pairs wbg_filter:^BOOL(Address * _Nonnull key, ZMJCell* _Nonnull obj) {
+        return key.row == indexPath.row && key.column == indexPath.column;
+    }] wbg_toArray:^id _Nonnull(Address * _Nonnull key, ZMJCell* _Nonnull obj) {
+        return obj;
+    }].firstObject)) {
+        return cell;
+    }
+    
+    if ((cell = [[self.rowHeaderView.visibleCells.pairs wbg_filter:^BOOL(Address * _Nonnull key, ZMJCell * _Nonnull obj) {
+        return key.row == indexPath.row && key.column == indexPath.column;
+    }] wbg_toArray:^id _Nonnull(Address * _Nonnull key, ZMJCell * _Nonnull obj) {
+        return obj;
+    }].firstObject)) {
+        return cell;
+    }
+    
+    if ((cell = [[self.columnHeaderView.visibleCells.pairs wbg_filter:^BOOL(Address * _Nonnull key, ZMJCell* _Nonnull obj) {
+        return key.row == indexPath.row && key.column == indexPath.column;
+    }] wbg_toArray:^id _Nonnull(Address * _Nonnull key, ZMJCell* _Nonnull obj) {
+        return obj;
+    }].firstObject)) {
+        return cell;
+    }
+    
+    if ((cell = [[self.cornerView.visibleCells.pairs wbg_filter:^BOOL(Address * _Nonnull key, ZMJCell * _Nonnull obj) {
+        return key.row == indexPath.row && key.column == indexPath.column;
+    }] wbg_toArray:^id _Nonnull(Address * _Nonnull key, ZMJCell * _Nonnull obj) {
+        return obj;
+    }].firstObject)) {
+        return cell;
+    }
+    
+    return nil;
 }
 
 - (ZMJCellRange *)mergedCellFor:(Location *)indexPath {

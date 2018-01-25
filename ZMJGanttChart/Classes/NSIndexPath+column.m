@@ -14,7 +14,7 @@
     return self.section;
 }
 
-+ (instancetype)initWithRow:(NSInteger)row column:(NSInteger)column
++ (instancetype)indexPathWithRow:(NSInteger)row column:(NSInteger)column
 {
     return [NSIndexPath indexPathForRow:row inSection:column];
 }
