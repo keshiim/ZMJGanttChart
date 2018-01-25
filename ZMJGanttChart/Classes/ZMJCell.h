@@ -28,6 +28,8 @@
 
 - (NSComparisonResult)compare:(ZMJCell *)aValue;
 - (void)preppareForReuse;
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 @end
 
 @interface BlankCell: ZMJCell

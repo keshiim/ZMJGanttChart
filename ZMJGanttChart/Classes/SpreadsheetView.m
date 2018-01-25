@@ -35,8 +35,8 @@
 @property (nonatomic, strong) ReuseQueue<Gridline *> *verticalGridlineReuseQueue;
 @property (nonatomic, strong) ReuseQueue<Borders *> *borderReuseQueue;
 
-@property (nonatomic, strong) NSSet<NSIndexPath *> *highlightedIndexPaths;
-@property (nonatomic, strong) NSSet<NSIndexPath *> *selectedIndexPaths;
+@property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *highlightedIndexPaths;
+@property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *selectedIndexPaths;
 @property (nonatomic, strong) NSIndexPath          *pendingSelectionIndexPath;
 @property (nonatomic, strong) UITouch              *currentTouch;
 
@@ -114,8 +114,8 @@
     self.verticalGridlineReuseQueue   = [ReuseQueue new];
     self.borderReuseQueue             = [ReuseQueue new];
     
-    self.highlightedIndexPaths = [NSSet new];
-    self.selectedIndexPaths    = [NSSet new];
+    self.highlightedIndexPaths = [NSMutableOrderedSet orderedSet];
+    self.selectedIndexPaths    = [NSMutableOrderedSet orderedSet];
 
     self.needsReload = YES;
     ////////////////////////////////////////////////////////
@@ -372,10 +372,102 @@
         contentOffset.y = MAX(contentOffset.y - self.tableView.frame.size.height + height + self.intercellSpacing.height * 2, 0);
     }
     
+    CGFloat distanceFromRightEdge = self.tableView.contentSize.width - contentOffset.x;
+    if (distanceFromRightEdge < self.tableView.frame.size.width) {
+        contentOffset.x -= self.tableView.frame.size.width - distanceFromRightEdge;
+    }
+    CGFloat distanceFromBottomEdge = self.tableView.contentSize.height - contentOffset.y;
+    if (distanceFromBottomEdge < self.tableView.frame.size.height) {
+        contentOffset.y -= self.tableView.frame.size.height - distanceFromBottomEdge;
+    }
+    
+    if (horizontalGroupCount > 1) {
+        [NSExpression expressionWithFormat:@"attempt to use a scroll position with multiple horizontal positioning styles"];
+    }
+    if (verticalGroupCount > 1) {
+        [NSExpression expressionWithFormat:@"attempt to use a scroll position with multiple vertical positioning styles"];
+    }
+    if (contentOffset.x < 0) {
+        contentOffset.x = 0;
+    }
+    if (contentOffset.y < 0) {
+        contentOffset.y = 0;
+    }
+    return contentOffset;
+}
+
+- (void)selectItemIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(ZMJScrollPosition)scrollPosition {
+    if (!indexPath) {
+        [self deselectAllItems:animated];
+        return;
+    }
+    if (!self.allowsSelection) {
+        return;
+    }
+    if (!self.allowsMultipleSelection) { //single select
+        [self.selectedIndexPaths removeObject:indexPath];
+        [self deselectAllItems:animated];
+    }
+    
+    //mutable select
+    [self.selectedIndexPaths addObject:indexPath];
+    if (scrollPosition != 0) {
+        [self scrollToItemIndexPath:indexPath at:scrollPosition animated:animated];
+        if (animated) {
+            self.pendingSelectionIndexPath = indexPath;
+            return;
+        }
+    }
+    [[self cellsForItemAt:indexPath] enumerateObjectsUsingBlock:^(ZMJCell * _Nonnull cell, NSUInteger idx, BOOL * _Nonnull stop) {
+        [cell setSelected:YES animated:animated]; // set selected State
+    }];
+}
+
+- (void)deselectItemIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated {
+    [[self cellsForItemAt:indexPath] enumerateObjectsUsingBlock:^(ZMJCell * _Nonnull cell, NSUInteger idx, BOOL * _Nonnull stop) {
+        [cell setSelected:NO animated:animated];
+    }];
+    [self.selectedIndexPaths removeObject:indexPath];
+}
+
+- (void)deselectAllItems:(BOOL)animated {
+    [self.selectedIndexPaths enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self deselectItemIndexPath:indexPath animated:animated];
+    }];
+}
+
+- (NSIndexPath *)indexPathForItemAt:(CGPoint)point {
+    NSInteger row =0, column = 0;
+    
+    NSIndexPath *indexPath;
+    if (CGRectContainsPoint([self.tableView convertRect:self.tableView.bounds toView:self], point) &&
+        (indexPath = [self indexPathForItemAt:point scrollView:self.tableView]))
+    {
+        row = indexPath.row + self.frozenRows;
+        column = indexPath.column + self.frozenColumns;
+    } else if (CGRectContainsPoint([self.rowHeaderView convertRect:self.rowHeaderView.bounds toView:self], point) &&
+               (indexPath = [self indexPathForItemAt:point scrollView:self.rowHeaderView]))
+    {
+        row = indexPath.row;
+        column = indexPath.column + self.frozenColumns;
+    } else if (CGRectContainsPoint([self.columnHeaderView convertRect:self.columnHeaderView.bounds toView:self], point) &&
+               (indexPath = [self indexPathForItemAt:point scrollView:self.columnHeaderView]))
+    {
+        row = indexPath.row + self.frozenRows;
+        column = indexPath.column;
+    } else {
+        return nil;
+    }
+    
+    row = row % self.numberOfRows;
+    column = column % self.numberOfColumns;
+    
+    Location *location = [Location locationWithRow:row column:column];
+    ZMJCellRange *cellRange = [self mergedCellFor:location];
 }
 
 - (NSIndexPath *)indexPathForItemAt:(CGPoint)location scrollView:(ZMJScrollView *)scrollView {
-    return nil;
+    
 }
 
 - (ZMJCellRange *)mergedCellFor:(Location *)indexPath {
@@ -383,10 +475,6 @@
 }
 
 - (CGPoint)contentOffsetForScrollingToItemIndexPath:(NSIndexPath *)indexPath at:(ZMJScrollPosition)scrollPosition {
-    
-}
-
-- (void)deselectAllItems:(BOOL)animated {
     
 }
 
@@ -491,13 +579,13 @@
 }
 
 - (NSIndexPath *)indexPathForSelectedItem {
-    return _indexPathForSelectedItem = [self.selectedIndexPaths.allObjects sortedArrayUsingComparator:^NSComparisonResult(NSIndexPath*  _Nonnull obj1, NSIndexPath*  _Nonnull obj2) {
+    return _indexPathForSelectedItem = [self.selectedIndexPaths.array sortedArrayUsingComparator:^NSComparisonResult(NSIndexPath*  _Nonnull obj1, NSIndexPath*  _Nonnull obj2) {
         return [obj1 compare:obj2];
     }].firstObject;
 }
 
 - (NSArray<NSIndexPath *> *)indexPathsForSelectedItems {
-    return _indexPathsForSelectedItems = [self.selectedIndexPaths.allObjects sortedArrayUsingComparator:^NSComparisonResult(NSIndexPath*  _Nonnull obj1, NSIndexPath*  _Nonnull obj2) {
+    return _indexPathsForSelectedItems = [self.selectedIndexPaths.array sortedArrayUsingComparator:^NSComparisonResult(NSIndexPath*  _Nonnull obj1, NSIndexPath*  _Nonnull obj2) {
         return [obj1 compare:obj2];
     }];
 }
