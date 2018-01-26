@@ -15,6 +15,12 @@
     self.columnHeaderView.delegate = nil;
     self.tableView.delegate        = nil;
     
+    void (^defer)(void) = ^(void) {
+        self.rowHeaderView.delegate    = self;
+        self.columnHeaderView.delegate = self;
+        self.tableView.delegate        = self;
+    };
+    
     if (self.tableView.contentOffset.x < 0 && !self.stickyColumnHeader) {
         CGFloat offset = self.tableView.contentOffset.x * -1;
         CGRect frame = self.cornerView.frame;
@@ -58,11 +64,7 @@
     
     [self setNeedsLayout];
     
-    {//defer todo
-        self.rowHeaderView.delegate = self;
-        self.columnHeaderView.delegate = self;
-        self.tableView.delegate = self;
-    }
+    defer();
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {

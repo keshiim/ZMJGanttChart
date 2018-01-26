@@ -9,6 +9,7 @@
 #import "SpreadsheetView+CirclularScrolling.h"
 #import "ZMJLayoutEngine.h"
 #import "NSArray+WBGAddition.h"
+#import "NSArray+BinarySearch.h"
 
 @implementation SpreadsheetView (Layout)
 /// Override
@@ -250,8 +251,143 @@
     void (^defer)(void) = ^(void) {
         scrollView.contentSize = scrollView.state.contentSize;
     };
+    [scrollView.columnRecords removeAllObjects];
+    [scrollView.rowRecords removeAllObjects];
     
+    NSInteger startColumn = scrollView.layoutAttributes.startColumn;
+    NSInteger columnCount = scrollView.layoutAttributes.columnCount;
+    CGFloat width = 0;
+    for (NSInteger column = startColumn; column < columnCount; column++) {
+        [scrollView.columnRecords addObject:@(width)];
+        NSInteger index = column % self.numberOfColumns;
+        if (!(self.circularScrollingOptions.tableStyle & TableStyle_columnHeaderNotRepeated) ||
+            index >= startColumn) {
+            width += self.layoutProperties.columnWidthCache[index].floatValue + self.intercellSpacing.width;
+        }
+    }
+    
+    NSInteger startRow = scrollView.layoutAttributes.startRow;
+    NSInteger rowCount = scrollView.layoutAttributes.rowCount;
+    CGFloat height = 0;
+    for (NSInteger row = startRow; row < rowCount; row++) {
+        [scrollView.rowRecords addObject:@(height)];
+        NSInteger index = row % self.numberOfRows;
+        if (!(self.circularScrollingOptions.tableStyle & TableStyle_rowHeaderNotRepeated) ||
+            index >= startRow) {
+            height += self.layoutProperties.rowHeightCache[index].floatValue + self.intercellSpacing.height;
+        }
+    }
+    
+    State state = scrollView.state;
+    state.contentSize = CGSizeMake(width + self.intercellSpacing.width, height + self.intercellSpacing.height);
+    scrollView.state = state;
     defer();
+}
+
+- (void)resetScrollViewFrame {
+    void (^defer)(void) = ^(void) {
+        self.cornerView.frame       = self.cornerView.state.frame;
+        self.columnHeaderView.frame = self.columnHeaderView.state.frame;
+        self.rowHeaderView.frame    = self.rowHeaderView.state.frame;
+        self.tableView.frame        = self.tableView.state.frame;
+    };
+    UIEdgeInsets contentInset;
+
+    if (@available(iOS 11.0, *)) {
+#ifdef __IPHONE_11_0
+        contentInset = self.rootView.adjustedContentInset;
+#endif
+    } else {
+        contentInset = self.rootView.contentInset;
+    }
+    CGFloat horizontalInset = contentInset.left + contentInset.right;
+    CGFloat verticalInset   = contentInset.top + contentInset.bottom;
+    
+    State state = self.cornerView.state;
+    state.frame = CGRectMake(0, 0, self.cornerView.state.contentSize.width, self.cornerView.state.contentSize.height);
+    self.cornerView.state = state;
+    
+    state = self.columnHeaderView.state;
+    state.frame = CGRectMake(0, 0, self.columnHeaderView.state.contentSize.width, self.frame.size.height);
+    self.columnHeaderView.state = state;
+    
+    state = self.rowHeaderView.state;
+    state.frame = CGRectMake(0, 0, self.frame.size.width, self.rowHeaderView.state.contentSize.height);
+    self.rowHeaderView.state = state;
+    
+    state = self.tableView.state;
+    state.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    self.tableView.state = state;
+    
+    if (self.frozenColumns > 0) {
+        State state = self.tableView.state;
+        state.frame.origin.x = self.columnHeaderView.state.frame.size.width - self.intercellSpacing.width;
+        state.frame.size.width = (self.frame.size.width - horizontalInset) - (self.columnHeaderView.state.frame.size.width - self.intercellSpacing.width);
+        self.tableView.state = state;
+        
+        if (self.circularScrollingOptions.headerStyle != HeaderStyle_rowHeaderStartsFirstColumn) {
+            State rhv_state = self.rowHeaderView.state;
+            rhv_state.frame.origin.x = self.tableView.state.frame.origin.x;
+            rhv_state.frame.size.width = self.tableView.state.frame.size.width;
+        }
+    } else {
+        State state = self.tableView.state;
+        state.frame.size.width = self.frame.size.width - horizontalInset;
+    }
+    if (self.frozenRows > 0) {
+        State state = self.tableView.state;
+        state.frame.origin.y = self.rowHeaderView.state.frame.size.height - self.intercellSpacing.height;
+        state.frame.size.height = (self.frame.size.height - verticalInset) - (self.rowHeaderView.state.frame.size.height - self.intercellSpacing.height);
+        self.tableView.state = state;
+        
+        if (self.circularScrollingOptions.headerStyle != HeaderStyle_columnHeaderStartsFirstRow) {
+            State chv_state = self.columnHeaderView.state;
+            chv_state.frame.origin.y = self.tableView.state.frame.origin.y;
+            chv_state.frame.size.height = self.tableView.state.frame.size.height;
+            self.columnHeaderView.state = chv_state;
+        }
+    } else {
+        State state = self.tableView.state;
+        state.frame.size.height = self.frame.size.height - verticalInset;
+    }
+    
+    [self resetOverlayViewContentSize:contentInset];
+    defer();
+}
+
+- (void)resetOverlayViewContentSize:(UIEdgeInsets)contentInset {
+    CGFloat width = contentInset.left + contentInset.right + self.tableView.state.frame.origin.x + self.tableView.state.contentSize.width;
+    CGFloat hight = contentInset.top + contentInset.bottom + self.tableView.state.frame.origin.y + self.tableView.state.contentSize.height;
+    
+    self.overlayView.contentSize = CGSizeMake(width, hight);
+    CGPoint contentOffset = self.overlayView.contentOffset;
+    contentOffset.x = self.tableView.state.contentOffset.x - contentInset.left;
+    contentOffset.y = self.tableView.state.contentOffset.y - contentInset.top;
+    self.overlayView.contentOffset = contentOffset;
+}
+
+- (void)resetScrollViewArrangement {
+    [self.tableView removeFromSuperview];
+    [self.columnHeaderView removeFromSuperview];
+    [self.rowHeaderView removeFromSuperview];
+    [self.cornerView removeFromSuperview];
+    
+    if (self.circularScrollingOptions.headerStyle == HeaderStyle_columnHeaderStartsFirstRow) {
+        [self.rootView addSubview:self.tableView];
+        [self.rootView addSubview:self.rowHeaderView];
+        [self.rootView addSubview:self.columnHeaderView];
+        [self.rootView addSubview:self.cornerView];
+    } else {
+        [self.rootView addSubview:self.tableView];
+        [self.rootView addSubview:self.columnHeaderView];
+        [self.rootView addSubview:self.rowHeaderView];
+        [self.rootView addSubview:self.cornerView];
+    }
+}
+
+- (NSInteger)findIndex:(NSArray<NSNumber *> *)records offset:(CGFloat)offset {
+    NSInteger index = [records insertionIndexOfObject:@(offset)];
+    return index == 0 ? 0 : index - 1;
 }
 
 #pragma mark - Private method
