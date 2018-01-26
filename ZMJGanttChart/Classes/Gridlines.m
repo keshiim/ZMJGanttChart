@@ -49,6 +49,57 @@
 }
 @end
 
+@implementation ZMJGridLayout
+
+- (instancetype)initWithGridWidth:(CGFloat)gridWidth gridColor:(UIColor *)gridColor origin:(CGPoint)origin length:(CGFloat)length edge:(RectEdge)edge priority:(CGFloat)priority {
+    self = [super init];
+    if (self) {
+        _gridWidth = gridWidth;
+        _gridColor = gridColor;
+        _origin    = origin;
+        _length    = length;
+        _edge      = edge;
+        _priority  = priority;
+    }
+    return self;
+}
+
++ (instancetype)gridLayoutWithGridWidth:(CGFloat)gridWidth gridColor:(UIColor *)gridColor origin:(CGPoint)origin length:(CGFloat)length edge:(RectEdge)edge priority:(CGFloat)priority {
+    return [[ZMJGridLayout alloc] initWithGridWidth:gridWidth
+                                          gridColor:gridColor
+                                             origin:origin
+                                             length:length
+                                               edge:edge
+                                           priority:priority];
+}
+
+- (id)copyWithZone:(nullable NSZone *)zone {
+    ZMJGridLayout *copy = [ZMJGridLayout allocWithZone:zone];
+    copy.gridWidth = self.gridWidth;
+    copy.gridColor = self.gridColor.copy;
+    copy.origin    = self.origin;
+    copy.length    = self.length;
+    copy.edge      = self.edge;
+    copy.priority  = self.priority;
+    return copy;
+}
+
+- (NSUInteger)hashValue {
+    return 32768 * _gridWidth + _length;
+}
+
+- (BOOL)isEqual:(ZMJGridLayout *)object {
+    return
+    self.gridWidth == object.gridWidth              &&
+    self.gridColor.hash == object.gridColor.hash    &&
+    CGPointEqualToPoint(self.origin, object.origin) &&
+    self.length == object.length                    &&
+    RectEdgeEqualToRectEdge(self.edge, object.edge) &&
+    self.priority == object.priority;
+}
+
+@end
+
 @interface Gridline ()
 @property (nonatomic, strong) UIColor *color;
 @end

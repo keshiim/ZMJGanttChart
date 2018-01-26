@@ -36,6 +36,19 @@
 + (instancetype)borderStyleNone;
 @end
 
+@interface ZMJGridLayout : NSObject  <NSCopying>
+@property (nonatomic, assign) CGFloat gridWidth;
+@property (nonatomic, copy  ) UIColor*gridColor;
+@property (nonatomic, assign) CGPoint origin;
+@property (nonatomic, assign) CGFloat length;
+@property (nonatomic, assign) RectEdge edge;
+@property (nonatomic, assign) CGFloat priority;
+
+- (instancetype)initWithGridWidth:(CGFloat)gridWidth gridColor:(UIColor *)gridColor origin:(CGPoint)origin length:(CGFloat)length edge:(RectEdge)edge priority:(CGFloat)priority;
+
++ (instancetype)gridLayoutWithGridWidth:(CGFloat)gridWidth gridColor:(UIColor *)gridColor origin:(CGPoint)origin length:(CGFloat)length edge:(RectEdge)edge priority:(CGFloat)priority;
+@end
+
 
 @interface Gridline : CALayer
 

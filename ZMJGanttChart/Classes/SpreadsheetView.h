@@ -196,6 +196,8 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 @property (nonatomic, assign, readonly) NSInteger frozenRows;
 @property (nonatomic, assign, readonly) NSArray<ZMJCellRange *> *mergedCells;
 
+@property (nonatomic, strong) NSString *blankCellReuseIdentifier;
+
 @property (nonatomic, assign, readonly) UIScrollView *scrollView;
 
 - (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
@@ -219,6 +221,8 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 - (NSArray<ZMJCell *> *)cellsForItemAt:(NSIndexPath *)indexPath;
 
 - (CGRect)rectForItemAt:(NSIndexPath *)indexPath;
+
+- (ZMJCellRange *)mergedCellFor:(Location *)indexPath;
 
 @end
 

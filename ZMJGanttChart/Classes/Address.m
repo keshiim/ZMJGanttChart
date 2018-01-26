@@ -11,14 +11,21 @@
 
 - (instancetype)init
 {
+    return [[self.class alloc] initWithRow:0 column:0 rowIndex:0 columnIndex:0];
+}
+
+- (instancetype)initWithRow:(NSInteger)row column:(NSInteger)column rowIndex:(NSInteger)rowIndex columnIndex:(NSInteger)columnIndex {
     self = [super init];
     if (self) {
-        _row = 0;
-        _column = 0;
-        _rowIndex = 0;
-        _columnIndex = 0;
+        _row = row;
+        _column = column;
+        _rowIndex = rowIndex;
+        _columnIndex = columnIndex;
     }
     return self;
+}
++ (instancetype)addressWithRow:(NSInteger)row column:(NSInteger)column rowIndex:(NSInteger)rowIndex columnIndex:(NSInteger)columnIndex {
+    return [[self alloc] initWithRow:row column:column rowIndex:rowIndex columnIndex:columnIndex];
 }
 
 - (id)copyWithZone:(nullable NSZone *)zone {

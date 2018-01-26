@@ -22,6 +22,7 @@
 @property (nonatomic, strong) Gridlines *grids;
 
 @property (nonatomic, strong) Borders *borders;
+@property (nonatomic, assign) BOOL hasBorder;
 
 @property (nonatomic, strong) NSString *reuseIdentifier;
 @property (nonatomic, strong) NSIndexPath *indexPath;

@@ -28,5 +28,9 @@
 + (instancetype)borderStyleNone;
 @end
 
+@interface Borders ()
+@property (nonatomic, assign) BOOL hasBorders;
+@end
+
 @interface Border: UIView
 @end

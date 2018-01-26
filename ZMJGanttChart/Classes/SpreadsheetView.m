@@ -19,7 +19,6 @@
 @property (nonatomic, strong) NSMutableDictionary<NSString *, Class  > *cellClasses;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, UINib *> *cellNibs;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, ReuseQueue<ZMJCell *> *> *cellReuseQueues;
-@property (nonatomic, strong) NSString *blankCellReuseIdentifier;
 
 @property (nonatomic, strong) ReuseQueue<Gridline *> *horizontalGridlineReuseQueue;
 @property (nonatomic, strong) ReuseQueue<Gridline *> *verticalGridlineReuseQueue;

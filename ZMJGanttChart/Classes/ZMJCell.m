@@ -10,7 +10,6 @@
 @interface ZMJCell () {
     Borders *_borders;
 }
-@property (nonatomic, assign) BOOL hasBorder;
 
 @property (nonatomic, strong) UIView *contentView;
 @end
