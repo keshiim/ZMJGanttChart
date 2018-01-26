@@ -249,7 +249,7 @@
         }
     }
     
-    [NSExpression expressionWithFormat:@"could not dequeue a view with identifier cell - must register a nib or a class for the identifier"];
+    [NSException exceptionWithName:@"" reason:@"could not dequeue a view with identifier cell - must register a nib or a class for the identifier" userInfo:nil];
     return nil;
 }
 
@@ -284,7 +284,7 @@
     NSInteger row    = indexPath.row;
     
     if (column >= self.numberOfColumns || row >= self.numberOfRows) {
-        [NSExpression expressionWithFormat:@"attempt to scroll to invalid index path: {column = %ld, row = %ld}", (long)column, (long)row];
+        [NSException exceptionWithName:@"" reason:[NSString stringWithFormat:@"attempt to scroll to invalid index path: {column = %ld, row = %ld}", (long)column, (long)row] userInfo:nil];
     }
     
     NSMutableArray<NSNumber *> *columnRecords = [NSMutableArray new];
@@ -368,10 +368,10 @@
     }
     
     if (horizontalGroupCount > 1) {
-        [NSExpression expressionWithFormat:@"attempt to use a scroll position with multiple horizontal positioning styles"];
+        [NSException exceptionWithName:@"" reason:@"attempt to use a scroll position with multiple horizontal positioning styles" userInfo:nil];
     }
     if (verticalGroupCount > 1) {
-        [NSExpression expressionWithFormat:@"attempt to use a scroll position with multiple vertical positioning styles"];
+        [NSException exceptionWithName:@"" reason:@"attempt to use a scroll position with multiple vertical positioning styles" userInfo:nil];
     }
     if (contentOffset.x < 0) {
         contentOffset.x = 0;

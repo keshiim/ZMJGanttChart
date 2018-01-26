@@ -57,7 +57,7 @@
 ///
 /// - Parameter spreadsheetView: The spreadsheet view requesting this information.
 /// - Returns: An array of the cell ranges indicating the range of merged cells.
-- (ZMJCellRange *)mergedCells:(SpreadsheetView *)spreadsheetView;
+- (NSArray<ZMJCellRange *> *)mergedCells:(SpreadsheetView *)spreadsheetView;
 
 /// Asks your data source object for the number of columns to be frozen as a fixed column header in the spreadsheetView.
 ///

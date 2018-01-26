@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Location : NSObject
+@interface Location : NSObject <NSCopying>
 @property (nonatomic, assign) NSInteger row;
 @property (nonatomic, assign) NSInteger column;
 

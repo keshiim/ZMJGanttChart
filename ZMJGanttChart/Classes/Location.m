@@ -38,4 +38,11 @@
     return self.row == object.row && self.column == object.column;
 }
 
+- (id)copyWithZone:(nullable NSZone *)zone {
+    Location *copy = [Location allocWithZone:zone];
+    copy.row     = self.row;
+    copy.column  = self.column;
+    return copy;
+}
+
 @end
