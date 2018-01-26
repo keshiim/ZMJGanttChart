@@ -15,7 +15,7 @@
 #import "NSIndexPath+column.h"
 #import "Address.h"
 
-@interface SpreadsheetView () <UIScrollViewDelegate>
+@interface SpreadsheetView ()
 @property (nonatomic, strong) NSMutableDictionary<NSString *, Class  > *cellClasses;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, UINib *> *cellNibs;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, ReuseQueue<ZMJCell *> *> *cellReuseQueues;
@@ -24,8 +24,6 @@
 @property (nonatomic, strong) ReuseQueue<Gridline *> *horizontalGridlineReuseQueue;
 @property (nonatomic, strong) ReuseQueue<Gridline *> *verticalGridlineReuseQueue;
 @property (nonatomic, strong) ReuseQueue<Borders *> *borderReuseQueue;
-
-@property (nonatomic, strong) NSIndexPath          *pendingSelectionIndexPath;
 
 @property (nonatomic, assign) BOOL needsReload;
 

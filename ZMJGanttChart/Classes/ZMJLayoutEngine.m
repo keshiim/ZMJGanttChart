@@ -149,6 +149,10 @@
     return self;
 }
 
++ (instancetype)spreadsheetView:(SpreadsheetView *)spreadsheetView scrollView:(ZMJScrollView *)scrollView {
+    return [[self alloc] initWithSpreadsheetView:spreadsheetView scrollView:scrollView];
+}
+
 - (void)layout {
     if (_startColumn == _columnCount || _startRow == _rowCount) {
         return;

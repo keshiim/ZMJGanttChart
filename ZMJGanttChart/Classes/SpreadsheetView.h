@@ -198,20 +198,6 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 
 @property (nonatomic, assign, readonly) UIScrollView *scrollView;
 
-/// For category
-@property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *highlightedIndexPaths;
-@property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *selectedIndexPaths;
-@property (nonatomic, strong) UITouch              *currentTouch;
-
-@property (nonatomic, strong) ZMJScrollView *columnHeaderView;
-@property (nonatomic, strong) ZMJScrollView *rowHeaderView;
-@property (nonatomic, strong) ZMJScrollView *cornerView;
-@property (nonatomic, strong) ZMJScrollView *tableView;
-@property (nonatomic, strong) UIScrollView  *overlayView;
-@property (nonatomic, strong) UIScrollView  *rootView;
-@property (nonatomic, strong) ZMJLayoutProperties *layoutProperties;
-
-
 - (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
 
 - (void)registerNib:(UINib *)cellNib forCellWithReuseIdentifier:(NSString *)identifier;
@@ -234,4 +220,22 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 
 - (CGRect)rectForItemAt:(NSIndexPath *)indexPath;
 
+@end
+
+@interface SpreadsheetView (ForCategory) <UIScrollViewDelegate>
+/// For category
+@property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *highlightedIndexPaths;
+@property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *selectedIndexPaths;
+@property (nonatomic, strong) UITouch              *currentTouch;
+
+@property (nonatomic, strong) ZMJScrollView *columnHeaderView;
+@property (nonatomic, strong) ZMJScrollView *rowHeaderView;
+@property (nonatomic, strong) ZMJScrollView *cornerView;
+@property (nonatomic, strong) ZMJScrollView *tableView;
+@property (nonatomic, strong) UIScrollView  *overlayView;
+@property (nonatomic, strong) UIScrollView  *rootView;
+@property (nonatomic, strong) ZMJLayoutProperties *layoutProperties;
+@property (nonatomic, strong) NSIndexPath          *pendingSelectionIndexPath;
+
+- (void)reloadDataIfNeeded;
 @end
