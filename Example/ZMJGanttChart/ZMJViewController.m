@@ -215,9 +215,48 @@
     return result.copy;
 }
 
+- (ZMJCell *)spreadsheetView:(SpreadsheetView *)spreadsheetView cellForItemAt:(NSIndexPath *)indexPath {
+    NSInteger column = indexPath.column;
+    NSInteger row    = indexPath.row;
+    if (column == 0 && row == 0) {
+        ZMJHeaderCell *cell = (ZMJHeaderCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJHeaderCell description] forIndexPath:indexPath];
+        cell.label.text = @"Task";
+        cell.gridlines.left = [GridStyle grid];
+        cell.gridlines.right = [GridStyle borderStyleNone];
+        return cell;
+    }
+    
+}
+
 /// Delegate
 - (void)spreadsheetView:(SpreadsheetView *)spreadsheetView didSelectItemAt:(NSIndexPath *)indexPath {
     NSLog(@"Selected: (row: %ld, column: %ld", (long)indexPath.row, (long)indexPath.column);
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

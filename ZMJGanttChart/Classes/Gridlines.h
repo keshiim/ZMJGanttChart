@@ -34,6 +34,7 @@
 
 - (instancetype)initWithStyle:(GridStyle_Enum)style_enum width:(CGFloat)widith color:(UIColor *)color;
 + (instancetype)borderStyleNone;
++ (instancetype)style:(GridStyle_Enum)style_enum width:(CGFloat)widith color:(UIColor *)color;
 @end
 
 

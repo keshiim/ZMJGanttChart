@@ -44,6 +44,10 @@
     return [[self alloc] initWithStyle:GridStyle_none width:0 color:nil];
 }
 
++ (instancetype)style:(GridStyle_Enum)style_enum width:(CGFloat)widith color:(UIColor *)color {
+    return [[self alloc] initWithStyle:GridStyle_none width:widith color:color];
+}
+
 - (BOOL)isEqual:(GridStyle *)object {
     return self.styleEnum == object.styleEnum && self.width == object.width && [self.color isEqual:object.color];
 }
