@@ -48,7 +48,7 @@
 
     // Only return invocation if the receiver is a concrete spec that has overridden -buildExampleGroups.
     if ([self methodForSelector:buildExampleGroups] == [KWSpec methodForSelector:buildExampleGroups])
-        return nil;
+        return @[];
 
     KWExampleSuite *exampleSuite = [[KWExampleSuiteBuilder sharedExampleSuiteBuilder] buildExampleSuite:^{
         [self buildExampleGroups];
@@ -81,20 +81,47 @@
     return invocation;
 }
 
+#pragma mark - Message forwarding
+
+// Inside `SPEC_BEGIN`/`SPEC_END`, `self` references the spec class object but
+// ultimately needs to instead behave like an _instance_ of `KWSpec`. The current
+// example has a reference to the running test case via its delegate, and so
+// forwarding messages there enables messages sent to `self` from within an
+// example to behave just like the test case instance.
+//
+// This is useful, for example, because the `XCTAssert*` macros require a `self`
+// that is a kind of `XCTestCase`.
++ (id)forwardingTargetForSelector:(SEL)aSelector {
+    KWExample *example = [[KWExampleSuiteBuilder sharedExampleSuiteBuilder] currentExample];
+
+    if ([example respondsToSelector:aSelector]) {
+        return example;
+    } else {
+        return [super forwardingTargetForSelector:aSelector];
+    }
+}
+
++ (BOOL)respondsToSelector:(SEL)aSelector {
+    if ([super respondsToSelector:aSelector]) {
+        return YES;
+    }
+
+    KWExample *example = [[KWExampleSuiteBuilder sharedExampleSuiteBuilder] currentExample];
+    return [example respondsToSelector:aSelector];
+}
+
 #pragma mark - Running Specs
 
 - (void)runExample {
     self.currentExample = self.invocation.kw_example;
 
-    @autoreleasepool {
-        @try {
-            [self.currentExample runWithDelegate:self];
-        } @catch (NSException *exception) {
-            [self recordFailureWithDescription:exception.description inFile:@"" atLine:0 expected:NO];
-        }
-
-        self.invocation.kw_example = nil;
+    @try {
+        [self.currentExample runWithDelegate:self];
+    } @catch (NSException *exception) {
+        [self recordFailureWithDescription:exception.description inFile:@"" atLine:0 expected:NO];
     }
+    
+    self.invocation.kw_example = nil;
 }
 
 #pragma mark - KWExampleGroupDelegate methods

@@ -17,6 +17,11 @@
 @end
 
 @implementation ZMJCellRange
+
++ (instancetype)cellRangeFrom:(Location *)from to:(Location *)to {
+    return [[self alloc] initFromLocation:from toLocation:to];
+}
+
 - (instancetype)initFromRow:(NSInteger)fromRow fromColumn:(NSInteger)fromColumn toRow:(NSInteger)toRow toColumn:(NSInteger)toColumn {
     return [self initFromLocation:[Location locationWithRow:fromRow column:fromColumn]
                        toLocation:[Location locationWithRow:toRow column:toColumn]];

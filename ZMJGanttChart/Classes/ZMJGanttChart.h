@@ -5,8 +5,8 @@
 //  Created by Jason on 2018/1/29.
 //
 
-#ifndef ZMJGanttChat_h
-#define ZMJGanttChat_h
+#ifndef ZMJGanttChart_h
+#define ZMJGanttChart_h
 
 #import "Define.h"
 
@@ -35,4 +35,4 @@
 #import "SpreadsheetView+UIScrollView.h"
 #import "SpreadsheetView+UIScrollViewDelegate.h"
 
-#endif /* ZMJGanttChat_h */
+#endif /* ZMJGanttChart_h */

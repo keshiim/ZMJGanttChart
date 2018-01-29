@@ -10,6 +10,7 @@
 #import "ZMJLayoutEngine.h"
 #import "NSArray+WBGAddition.h"
 #import "NSArray+BinarySearch.h"
+#import "ZMJCellRange.h"
 
 @implementation SpreadsheetView (Layout)
 /// Override

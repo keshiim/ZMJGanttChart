@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "KWMatcher.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
 typedef BOOL (^KWUserDefinedMatcherBlock)();
+#pragma clang diagnostic pop
 
 @interface KWUserDefinedMatcher : KWMatcher
 
@@ -28,12 +31,7 @@ typedef BOOL (^KWUserDefinedMatcherBlock)();
 typedef NSString * (^KWUserDefinedMatcherMessageBlock)(id);
 
 @interface KWUserDefinedMatcherBuilder : NSObject
-{
-    KWUserDefinedMatcher *matcher;
-    KWUserDefinedMatcherMessageBlock failureMessageForShouldBlock;
-    KWUserDefinedMatcherMessageBlock failureMessageForShouldNotBlock;
-    NSString *description;
-}
+
 @property (nonatomic, copy, readonly) NSString *key;
 
 + (id)builder;

@@ -18,6 +18,8 @@
 
 @property (nonatomic, assign) CGSize size;
 
++ (instancetype)cellRangeFrom:(Location *)from to:(Location *)to;
+
 - (instancetype)initFromRow:(NSInteger)fromRow fromColumn:(NSInteger)fromColumn toRow:(NSInteger)toRow toColumn:(NSInteger)toColumn;
 - (instancetype)initFromIndex:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath;
 

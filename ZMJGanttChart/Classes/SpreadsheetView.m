@@ -14,6 +14,8 @@
 #import "SpreadsheetView+Touches.h"
 #import "NSIndexPath+column.h"
 #import "Address.h"
+#import "Location.h"
+#import "ZMJCellRange.h"
 
 @interface SpreadsheetView ()
 @property (nonatomic, strong) NSMutableDictionary<NSString *, Class  > *cellClasses;

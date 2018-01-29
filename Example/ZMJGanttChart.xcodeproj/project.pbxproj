@@ -22,6 +22,7 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		967FFB07201F040C00461EB9 /* ZMJCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 967FFB06201F040C00461EB9 /* ZMJCells.m */; };
 		99866CC807B6E511EBE3BA9E /* Pods_ZMJGanttChart_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A7DEB2C2FCB2A24E91C988 /* Pods_ZMJGanttChart_Example.framework */; };
 		BEEE3E345855E70D10A353CE /* Pods_ZMJGanttChart_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B79741F1B5C02E894C8AA94B /* Pods_ZMJGanttChart_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,8 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8D19974282C9AB4D64D3C5FC /* ZMJGanttChart.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ZMJGanttChart.podspec; path = ../ZMJGanttChart.podspec; sourceTree = "<group>"; };
 		94ABAF77DDE72AF07EC0C8C4 /* Pods-ZMJGanttChart_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJGanttChart_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJGanttChart_Example/Pods-ZMJGanttChart_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		967FFB05201F040C00461EB9 /* ZMJCells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMJCells.h; sourceTree = "<group>"; };
+		967FFB06201F040C00461EB9 /* ZMJCells.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJCells.m; sourceTree = "<group>"; };
 		AC7E0EBE57F47EB601DE2537 /* Pods-ZMJGanttChart_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJGanttChart_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJGanttChart_Example/Pods-ZMJGanttChart_Example.release.xcconfig"; sourceTree = "<group>"; };
 		B79741F1B5C02E894C8AA94B /* Pods_ZMJGanttChart_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJGanttChart_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44F6E50A73897D18E1E81B1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* ZMJViewController.h */,
 				6003F5A6195388D20070C39A /* ZMJViewController.m */,
+				967FFB05201F040C00461EB9 /* ZMJCells.h */,
+				967FFB06201F040C00461EB9 /* ZMJCells.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -407,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* ZMJAppDelegate.m in Sources */,
+				967FFB07201F040C00461EB9 /* ZMJCells.m in Sources */,
 				6003F5A7195388D20070C39A /* ZMJViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);

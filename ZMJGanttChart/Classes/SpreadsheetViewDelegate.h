@@ -7,7 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "SpreadsheetView.h"
+
+@class SpreadsheetView;
 
 /// The `SpreadsheetViewDelegate` protocol defines methods that allow you to manage the selection and
 /// highlighting of cells in a spreadsheet view and to perform actions on those cells.

@@ -35,6 +35,7 @@
 
 #pragma mark - Keywords
 
+#ifndef KIWI_DISABLE_MATCHERS
 // Kiwi macros used in specs for verifying expectations.
 #define should attachToVerifier:KW_ADD_MATCH_VERIFIER(KWExpectationTypeShould)
 #define shouldNot attachToVerifier:KW_ADD_MATCH_VERIFIER(KWExpectationTypeShouldNot)
@@ -61,7 +62,8 @@
 #define fail(message, ...) [[[KWExampleSuiteBuilder sharedExampleSuiteBuilder] currentExample] reportFailure:[KWFailure failureWithCallSite:KW_THIS_CALLSITE format:message, ##__VA_ARGS__]]
 
 // used for message patterns to allow matching any value
-#define any() [KWAny any]
+#define kw_any() [KWAny any]
+#endif
 
 // If a gcc compatible compiler is available, use the statement and
 // declarations in expression extension to provide a convenient catch-all macro
@@ -89,8 +91,16 @@
     + (NSString *)file { return @__FILE__; } \
     \
     + (void)buildExampleGroups { \
+        [super buildExampleGroups]; \
+        \
+        id _kw_test_case_class = self; \
+        { \
+            /* The shadow `self` must be declared inside a new scope to avoid compiler warnings. */ \
+            /* The receiving class object delegates unrecognized selectors to the current example. */ \
+            __unused name *self = _kw_test_case_class;
 
 #define SPEC_END \
+        } \
     } \
     \
     @end

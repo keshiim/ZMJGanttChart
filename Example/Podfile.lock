@@ -1,5 +1,5 @@
 PODS:
-  - Kiwi (2.4.0)
+  - Kiwi (3.0.0)
   - ZMJGanttChart (0.1.0)
 
 DEPENDENCIES:
@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
+  Kiwi: fbeafef0f00e4d8f7dcb3420a4930afe70af77f7
   ZMJGanttChart: a0c865ee5f69d72f8d73c65d3f9192831415bba8
 
 PODFILE CHECKSUM: 520150da56c95746ebc7a0d955638473e7a7a2e7
