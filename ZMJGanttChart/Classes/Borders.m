@@ -56,7 +56,6 @@
 @end
 
 @interface Border ()
-@property (nonatomic, strong) Borders *borders;
 @end
 
 @implementation Border

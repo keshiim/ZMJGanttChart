@@ -18,7 +18,6 @@
 @interface SpreadsheetView ()
 @property (nonatomic, strong) NSMutableDictionary<NSString *, Class  > *cellClasses;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, UINib *> *cellNibs;
-@property (nonatomic, strong) NSMutableDictionary<NSString *, ReuseQueue<ZMJCell *> *> *cellReuseQueues;
 
 @property (nonatomic, assign) BOOL needsReload;
 

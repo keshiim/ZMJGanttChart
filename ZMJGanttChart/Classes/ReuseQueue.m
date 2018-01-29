@@ -49,7 +49,6 @@
 
 @interface ReusableCollection<__covariant Reusable>()
 @property (nonatomic, strong) NSMutableDictionary<Address *, id> *pairs;
-@property (nonatomic, strong) NSMutableOrderedSet<Address *>     *addresses;
 @property (nonatomic, strong) NSArray<id> *array;
 @end
 
@@ -91,6 +90,10 @@
 }
 - (void)setObject:(id)obj forKeyedSubscript:(Address *)key {
     self.pairs[key] = obj;
+}
+
+- (void)removeObjectForKey:(Address *)aKey {
+    [self.pairs removeObjectForKey:aKey];
 }
 
 #pragma mark - NSFastEnumeration

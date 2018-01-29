@@ -33,4 +33,5 @@
 @end
 
 @interface Border: UIView
+@property (nonatomic, strong) Borders *borders;
 @end

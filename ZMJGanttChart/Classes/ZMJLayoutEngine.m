@@ -575,20 +575,155 @@
 }
 
 - (void)renderVerticalGridlines {
-    
+    [self.verticalGridLayouts enumerateKeysAndObjectsUsingBlock:^(Address * _Nonnull address, ZMJGridLayout * _Nonnull gridLayout, BOOL * _Nonnull stop) {
+        CGRect frame = CGRectZero;
+        frame.origin = gridLayout.origin;
+        Direct *left = gridLayout.edge.left;
+        if (left != NULL) {
+            frame.origin.x -= self.intercellSpacing.width - (self.intercellSpacing.width - gridLayout.gridWidth) / 2;
+            frame.origin.y -= left->top + (self.intercellSpacing.height - left->top) / 2;
+            frame.size.height = gridLayout.length + left->top + (self.intercellSpacing.height - left->top) / 2 + left->bottom + (self.intercellSpacing.width - left->bottom) / 2;
+        }
+        Direct *right = gridLayout.edge.right;
+        if (right != NULL) {
+            frame.origin.x -= (gridLayout.gridWidth - self.intercellSpacing.width) / 2;
+            frame.origin.y -= right->top + (self.intercellSpacing.height - right->top) / 2;
+            frame.size.height = gridLayout.length + right->top + (self.intercellSpacing.height - right->top) / 2 + right->bottom + (self.intercellSpacing.height - right->bottom) / 2;
+        }
+        frame.size.height = gridLayout.gridWidth;
+        
+        if ([self.scrollView.visibleVerticalGridlines contains:address]) {
+            Gridline *gridline = [self.scrollView.visibleVerticalGridlines objectForKeyedSubscript:address];
+            if (gridline) {
+                gridline.frame = frame;
+                gridline.color = gridLayout.gridColor;
+                gridline.zPosition = gridLayout.priority;
+            }
+        } else {
+            Gridline *gridline = [self.spreadsheetView.verticalGridlineReuseQueue dequeueOrCreate];
+            gridline.frame = frame;
+            gridline.color = gridLayout.gridColor;
+            gridline.zPosition = gridLayout.priority;
+            
+            [self.scrollView.layer addSublayer:gridline];
+            [self.scrollView.visibleVerticalGridlines setObject:gridline forKeyedSubscript:address];
+        }
+        [self.visibleVerticalGridAddresses addObject:address];
+    }];
 }
 
 - (void)renderBorders {
-    
-    
+    [self.visibleBorderAddresses enumerateObjectsUsingBlock:^(Address * _Nonnull address, NSUInteger idx, BOOL * _Nonnull stop) {
+        ZMJCell *cell = [self.scrollView.visibleCells objectForKeyedSubscript:address];
+        if (cell) {
+            if ([self.scrollView.visibleBorders contains:address]) {
+                Border *border = [self.scrollView.visibleBorders objectForKeyedSubscript:address];
+                if (border) {
+                    border.borders = cell.borders;
+                    border.frame = cell.frame;
+                    [border setNeedsDisplay];
+                }
+            } else {
+                Border *border = [self.spreadsheetView.borderReuseQueue dequeueOrCreate];
+                border.borders = cell.borders;
+                border.frame   = cell.frame;
+                [self.scrollView addSubview:border];
+                [self.scrollView.visibleBorders setObject:border forKeyedSubscript:address];
+            }
+        }
+    }];
 }
 
 - (void)extractGridStyle:(GridStyle *)style outWidth:(CGFloat *)width outColor:(UIColor **)color outPriority:(CGFloat *)priority {
-    
+    switch (style.styleEnum) {
+        case GridStyle_default:
+        {
+            switch (self.defaultGridStyle.styleEnum) {
+                case GridStyle_solid:
+                {
+                    *width = self.defaultGridStyle.width;
+                    *color = self.defaultGridStyle.color;
+                    *priority = 0;
+                }
+                    break;
+                default:
+                {
+                    *width = 0;
+                    *color = [UIColor clearColor];
+                    *priority = 0;
+                }
+                    break;
+            }
+        }
+            break;
+        case GridStyle_solid:
+        {
+            *width = style.width;
+            *color = style.color;
+            *priority = 200;
+        }
+            break;
+        case GridStyle_none:
+        {
+            *width = 0;
+            *color = [UIColor clearColor];
+            *priority = 100;
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)returnReusableResouces {
+    [self.scrollView.visibleCells substract:self.visibleCellAddresses];
+    __weak typeof(self)weak_self = self;
+    [self.scrollView.visibleCells.addresses enumerateObjectsUsingBlock:^(Address * _Nonnull address, NSUInteger idx, BOOL * _Nonnull stop) {
+        ZMJCell *cell = [weak_self.scrollView.visibleCells objectForKeyedSubscript:address];
+        if (cell) {
+            [cell removeFromSuperview];
+            if (cell.reuseIdentifier && [weak_self.spreadsheetView.cellReuseQueues objectForKey:cell.reuseIdentifier]) {
+                ReuseQueue *reuseQueue = [weak_self.spreadsheetView.cellReuseQueues objectForKey:cell.reuseIdentifier];
+                [reuseQueue enqueue:cell];
+            }
+            [weak_self.scrollView.visibleCells removeObjectForKey:address];
+        }
+    }];
     
+    self.scrollView.visibleCells.addresses = self.visibleCellAddresses;
+    
+    [self.scrollView.visibleVerticalGridlines substract:self.visibleVerticalGridAddresses];
+    [self.scrollView.visibleVerticalGridlines.addresses enumerateObjectsUsingBlock:^(Address * _Nonnull address, NSUInteger idx, BOOL * _Nonnull stop) {
+        Gridline * gridline = [weak_self.scrollView.visibleVerticalGridlines objectForKeyedSubscript:address];
+        if (gridline) {
+            [gridline removeFromSuperlayer];
+            [weak_self.spreadsheetView.verticalGridlineReuseQueue enqueue:gridline];
+            [weak_self.scrollView.visibleVerticalGridlines removeObjectForKey:address];
+        }
+    }];
+    self.scrollView.visibleVerticalGridlines.addresses = self.visibleVerticalGridAddresses;
+    
+    [self.scrollView.visibleHorizontalGridlines substract:self.visibleHorizontalGridAddresses];
+    [self.scrollView.visibleHorizontalGridlines.addresses enumerateObjectsUsingBlock:^(Address * _Nonnull address, NSUInteger idx, BOOL * _Nonnull stop) {
+        Gridline *gridline = [weak_self.scrollView.visibleHorizontalGridlines objectForKeyedSubscript:address];
+        if (gridline) {
+            [gridline removeFromSuperlayer];
+            [weak_self.spreadsheetView.horizontalGridlineReuseQueue enqueue:gridline];
+            [weak_self.scrollView.visibleHorizontalGridlines removeObjectForKey:address];
+        }
+    }];
+    self.scrollView.visibleHorizontalGridlines.addresses = self.visibleHorizontalGridAddresses;
+    
+    [self.scrollView.visibleBorders substract:self.visibleBorderAddresses];
+    [self.scrollView.visibleBorders.addresses enumerateObjectsUsingBlock:^(Address * _Nonnull address, NSUInteger idx, BOOL * _Nonnull stop) {
+        Border *border = [weak_self.scrollView.visibleBorders objectForKeyedSubscript:address];
+        if (border) {
+            [border removeFromSuperview];
+            [weak_self.spreadsheetView.borderReuseQueue enqueue:border];
+            [weak_self.scrollView.visibleBorders removeObjectForKey:address];
+        }
+    }];
+    self.scrollView.visibleBorders.addresses =  self.visibleBorderAddresses;
 }
 
 #pragma mark - getters
