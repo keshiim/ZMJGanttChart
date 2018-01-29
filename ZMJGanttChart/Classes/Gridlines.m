@@ -100,9 +100,6 @@
 
 @end
 
-@interface Gridline ()
-@property (nonatomic, strong) UIColor *color;
-@end
 
 @implementation Gridline
 

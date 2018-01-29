@@ -537,7 +537,41 @@
 }
 
 - (void)renderHorizontalGridlines {
-    
+    [self.horizontalGridLayouts enumerateKeysAndObjectsUsingBlock:^(Address * _Nonnull address, ZMJGridLayout * _Nonnull gridLayout, BOOL * _Nonnull stop) {
+        CGRect frame = CGRectZero;
+        frame.origin = gridLayout.origin;
+        Direct *top = gridLayout.edge.top;
+        if (top != NULL) {
+            frame.origin.x -= top->left + (self.intercellSpacing.width - top->left) / 2;
+            frame.origin.y -= self.intercellSpacing.height - (self.intercellSpacing.height - gridLayout.gridWidth) / 2;
+            frame.size.width = gridLayout.length + top->left + (self.intercellSpacing.width - top->left) / 2 + top->right + (self.intercellSpacing.width - top->right) / 2;
+        }
+        Direct *bottom = gridLayout.edge.bottom;
+        if (bottom != NULL) {
+            frame.origin.x -= bottom->left + (self.intercellSpacing.width - bottom->left) / 2;
+            frame.origin.y -= (gridLayout.gridWidth - self.intercellSpacing.height) / 2;
+            frame.size.width = gridLayout.length + bottom->left + (self.intercellSpacing.width - bottom->left) / 2 + bottom->right + (self.intercellSpacing.width - bottom->right) / 2;
+        }
+        frame.size.height = gridLayout.gridWidth;
+        
+        if ([self.scrollView.visibleHorizontalGridlines contains:address]) {
+            Gridline * gridline = [self.scrollView.visibleHorizontalGridlines objectForKeyedSubscript:address];
+            if (gridline) {
+                gridline.frame = frame;
+                gridline.color = gridLayout.gridColor;
+                gridline.zPosition = gridLayout.priority;
+            }
+        } else {
+            Gridline *gridline = [self.spreadsheetView.horizontalGridlineReuseQueue dequeueOrCreate];
+            gridline.frame = frame;
+            gridline.color = gridLayout.gridColor;
+            gridline.zPosition = gridLayout.priority;
+            
+            [self.scrollView.layer addSublayer:gridline];
+            [self.scrollView.visibleHorizontalGridlines setObject:gridline forKeyedSubscript:address];
+        }
+        [self.visibleHorizontalGridAddresses addObject:address];
+    }];
 }
 
 - (void)renderVerticalGridlines {

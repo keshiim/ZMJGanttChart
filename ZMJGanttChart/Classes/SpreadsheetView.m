@@ -20,10 +20,6 @@
 @property (nonatomic, strong) NSMutableDictionary<NSString *, UINib *> *cellNibs;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, ReuseQueue<ZMJCell *> *> *cellReuseQueues;
 
-@property (nonatomic, strong) ReuseQueue<Gridline *> *horizontalGridlineReuseQueue;
-@property (nonatomic, strong) ReuseQueue<Gridline *> *verticalGridlineReuseQueue;
-@property (nonatomic, strong) ReuseQueue<Borders *> *borderReuseQueue;
-
 @property (nonatomic, assign) BOOL needsReload;
 
 @property (nonatomic, strong) NSArray<ZMJCell *> *visibleCells;

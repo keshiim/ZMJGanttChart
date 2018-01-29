@@ -199,6 +199,9 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 @property (nonatomic, strong) NSString *blankCellReuseIdentifier;
 
 @property (nonatomic, assign, readonly) UIScrollView *scrollView;
+@property (nonatomic, strong) ReuseQueue<Gridline *> *horizontalGridlineReuseQueue;
+@property (nonatomic, strong) ReuseQueue<Gridline *> *verticalGridlineReuseQueue;
+@property (nonatomic, strong) ReuseQueue<Borders *>  *borderReuseQueue;
 
 - (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
 

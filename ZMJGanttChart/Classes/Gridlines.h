@@ -36,6 +36,7 @@
 + (instancetype)borderStyleNone;
 @end
 
+
 @interface ZMJGridLayout : NSObject  <NSCopying>
 @property (nonatomic, assign) CGFloat gridWidth;
 @property (nonatomic, copy  ) UIColor*gridColor;
@@ -51,5 +52,5 @@
 
 
 @interface Gridline : CALayer
-
+@property (nonatomic, strong) UIColor *color;
 @end
