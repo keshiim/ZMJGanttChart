@@ -13,20 +13,34 @@
 @end
 
 @implementation ZMJScrollView
-
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
-        _columnRecords = [NSMutableArray new];
-        _rowRecords    = [NSMutableArray new];
-        
-        _visibleCells               = [ReusableCollection new];
-        _visibleVerticalGridlines   = [ReusableCollection new];
-        _visibleHorizontalGridlines = [ReusableCollection new];
-        _visibleBorders             = [ReusableCollection new];
+        [self setup];
     }
     return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)setup {
+    _columnRecords = [NSMutableArray new];
+    _rowRecords    = [NSMutableArray new];
+    
+    _visibleCells               = [ReusableCollection new];
+    _visibleVerticalGridlines   = [ReusableCollection new];
+    _visibleHorizontalGridlines = [ReusableCollection new];
+    _visibleBorders             = [ReusableCollection new];
+    
+    _state = (State){CGRectZero, CGSizeZero, CGPointZero};
 }
 
 - (BOOL)hasDisplayedContent {

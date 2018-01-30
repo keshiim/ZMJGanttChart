@@ -55,9 +55,12 @@
         self.rowHeaderView.frame = frame;
     }
     
+    NSLog(@"tableview.contentoffset=%@", NSStringFromCGPoint(self.tableView.contentOffset));
+    
     CGPoint offset = self.rowHeaderView.contentOffset;
     offset.x = self.tableView.contentOffset.x;
     self.rowHeaderView.contentOffset = offset;
+    
     offset = self.columnHeaderView.contentOffset;
     offset.y = self.tableView.contentOffset.y;
     self.columnHeaderView.contentOffset = offset;

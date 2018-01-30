@@ -131,15 +131,19 @@
     [super addSubview:self.overlayView];
     
     __weak typeof(self)weak_self = self;
-    [@[self.tableView, self.columnHeaderView, self.rowHeaderView, self.cornerView, self.overlayView] enumerateObjectsUsingBlock:^(UIScrollView* _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [@[self.tableView, self.columnHeaderView, self.rowHeaderView, self.cornerView, self.overlayView] enumerateObjectsUsingBlock:^(UIScrollView* _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
         //FIXME: HERE💥
-        //[weak_self addGestureRecognizer:obj.panGestureRecognizer];
-        if (IOS_VERSION_11_OR_LATER && [obj respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
+        [weak_self addGestureRecognizer:scrollView.panGestureRecognizer];
+        if (IOS_VERSION_11_OR_LATER && [scrollView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
             if (@available(iOS 11.0, *)) {
-                obj.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+                scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
             }
         }
     }];
+}
+
+- (UIPanGestureRecognizer *)panGestureRecognizer {
+    return _panGestureRecognizer;
 }
 
 - (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
@@ -234,21 +238,21 @@
 
 - (void)resetTouchHandlers:(NSArray<ZMJScrollView *> *)scrollViews {
     __weak typeof(self)weak_self = self;
-    [scrollViews enumerateObjectsUsingBlock:^(ZMJScrollView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [scrollViews enumerateObjectsUsingBlock:^(ZMJScrollView * _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
         if (self.dataSource) {
-            obj.touchesBegan = ^(NSSet<UITouch *> *touches, UIEvent *event){
+            scrollView.touchesBegan = ^(NSSet<UITouch *> *touches, UIEvent *event){
                 [weak_self touchesBegan:touches event:event];
             };
-            obj.touchesEnded = ^(NSSet<UITouch *> *touches, UIEvent *event) {
+            scrollView.touchesEnded = ^(NSSet<UITouch *> *touches, UIEvent *event) {
                 [weak_self touchesEnded:touches event:event];
             };
-            obj.touchesCancelled = ^(NSSet<UITouch *> *touches, UIEvent *event) {
+            scrollView.touchesCancelled = ^(NSSet<UITouch *> *touches, UIEvent *event) {
                 [weak_self touchesCancelled:touches event:event];
             };
         } else {
-            obj.touchesBegan     = nil;
-            obj.touchesEnded     = nil;
-            obj.touchesCancelled = nil;
+            scrollView.touchesBegan     = nil;
+            scrollView.touchesEnded     = nil;
+            scrollView.touchesCancelled = nil;
         }
     }];
 }
