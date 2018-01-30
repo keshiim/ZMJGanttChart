@@ -296,7 +296,7 @@
 
 /// Delegate
 - (void)spreadsheetView:(SpreadsheetView *)spreadsheetView didSelectItemAt:(NSIndexPath *)indexPath {
-    NSLog(@"Selected: (row: %ld, column: %ld", (long)indexPath.row, (long)indexPath.column);
+    NSLog(@"Selected: (row: %ld, column: %ld)", (long)indexPath.row, (long)indexPath.column);
 }
 
 @end

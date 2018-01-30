@@ -24,6 +24,7 @@
 @property (nonatomic, assign) BOOL needsReload;
 
 @property (nonatomic, strong) NSArray<ZMJCell *> *visibleCells;
+@property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
 @end
 
 @implementation SpreadsheetView
@@ -131,7 +132,7 @@
     
     __weak typeof(self)weak_self = self;
     [@[self.tableView, self.columnHeaderView, self.rowHeaderView, self.cornerView, self.overlayView] enumerateObjectsUsingBlock:^(UIScrollView* _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [weak_self addGestureRecognizer:obj.panGestureRecognizer];
+        //[weak_self addGestureRecognizer:obj.panGestureRecognizer];
         if (IOS_VERSION_11_OR_LATER && [obj respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
             if (@available(iOS 11.0, *)) {
                 obj.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
