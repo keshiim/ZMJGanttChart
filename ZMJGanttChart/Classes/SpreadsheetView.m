@@ -142,10 +142,6 @@
     }];
 }
 
-- (UIPanGestureRecognizer *)panGestureRecognizer {
-    return _panGestureRecognizer;
-}
-
 - (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
     self.cellClasses[identifier] = cellClass;
 }

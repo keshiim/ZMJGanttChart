@@ -69,11 +69,10 @@
 
 - (BOOL)isKindOfClass:(Class)aClass {
     if (@available(iOS 11.0, *)) {
-        [super isKindOfClass:aClass];
+        return [super isKindOfClass:aClass];
     } else {
         return [self.rootView isKindOfClass:aClass];
     }
-    return [self.rootView isKindOfClass:aClass];
 }
 
 - (id)forwardingTargetForSelector:(SEL)aSelector {
