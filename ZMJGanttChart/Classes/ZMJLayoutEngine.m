@@ -253,7 +253,7 @@
                 NSInteger fromColumn = mergedCell.from.column;
                 NSInteger endColumn  = self.columnRecords.count - 1;
                 
-                CGFloat offsetWidth = self.columnRecords.count - 1;
+                CGFloat offsetWidth = self.columnRecords[endColumn].floatValue;
                 for (NSInteger c = endColumn; c < column; c++) {
                     offsetWidth += self.columnWidthCache[c].floatValue + self.intercellSpacing.width;
                 }
@@ -382,10 +382,8 @@
         [self.visibleCellAddresses addObject:address];
         
         CGSize cellSize = CGSizeMake(columnWidth, rowHeight);
-        [self layoutCell:address frame:CGRectMake(self.cellOrigin.x,
-                                                  self.cellOrigin.y,
-                                                  cellSize.width,
-                                                  cellSize.height)];
+        
+        [self layoutCell:address frame:(CGRect){self.cellOrigin, cellSize}];
         CGPoint cellOrigin = self.cellOrigin;
         cellOrigin.x += columnWidth + self.intercellSpacing.width;
         self.cellOrigin = cellOrigin;
@@ -546,107 +544,111 @@
 }
 
 - (void)renderMergedCells {
+    __weak typeof(self)weak_self = self;
     [self.mergedCellAddress.array enumerateObjectsUsingBlock:^(Address * _Nonnull address, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSValue *frameValue = self.mergedCellRects[address];
+        NSValue *frameValue = weak_self.mergedCellRects[address];
         if (frameValue) {
-            [self layoutCell:address frame:frameValue.CGRectValue];
+            [weak_self layoutCell:address frame:frameValue.CGRectValue];
         }
     }];
 }
 
 - (void)renderHorizontalGridlines {
+    __weak typeof(self)weak_self = self;
     [self.horizontalGridLayouts enumerateKeysAndObjectsUsingBlock:^(Address * _Nonnull address, ZMJGridLayout * _Nonnull gridLayout, BOOL * _Nonnull stop) {
         CGRect frame = CGRectZero;
         frame.origin = gridLayout.origin;
         Direct top = gridLayout.edge.top;
         if (top.notNull == YES) {
-            frame.origin.x -= top.left + (self.intercellSpacing.width - top.left) / 2;
-            frame.origin.y -= self.intercellSpacing.height - (self.intercellSpacing.height - gridLayout.gridWidth) / 2;
-            frame.size.width = gridLayout.length + top.left + (self.intercellSpacing.width - top.left) / 2 + top.right + (self.intercellSpacing.width - top.right) / 2;
+            frame.origin.x -= top.left + (weak_self.intercellSpacing.width - top.left) / 2;
+            frame.origin.y -= weak_self.intercellSpacing.height - (weak_self.intercellSpacing.height - gridLayout.gridWidth) / 2;
+            frame.size.width = gridLayout.length + top.left + (weak_self.intercellSpacing.width - top.left) / 2 + top.right + (weak_self.intercellSpacing.width - top.right) / 2;
         }
         Direct bottom = gridLayout.edge.bottom;
         if (bottom.notNull == YES) {
-            frame.origin.x -= bottom.left + (self.intercellSpacing.width - bottom.left) / 2;
-            frame.origin.y -= (gridLayout.gridWidth - self.intercellSpacing.height) / 2;
-            frame.size.width = gridLayout.length + bottom.left + (self.intercellSpacing.width - bottom.left) / 2 + bottom.right + (self.intercellSpacing.width - bottom.right) / 2;
+            frame.origin.x -= bottom.left + (weak_self.intercellSpacing.width - bottom.left) / 2;
+            frame.origin.y -= (gridLayout.gridWidth - weak_self.intercellSpacing.height) / 2;
+            frame.size.width = gridLayout.length + bottom.left + (weak_self.intercellSpacing.width - bottom.left) / 2 + bottom.right + (weak_self.intercellSpacing.width - bottom.right) / 2;
         }
         frame.size.height = gridLayout.gridWidth;
         
-        if ([self.scrollView.visibleHorizontalGridlines contains:address]) {
-            Gridline * gridline = [self.scrollView.visibleHorizontalGridlines objectForKeyedSubscript:address];
+        if ([weak_self.scrollView.visibleHorizontalGridlines contains:address]) {
+            Gridline * gridline = [weak_self.scrollView.visibleHorizontalGridlines objectForKeyedSubscript:address];
             if (gridline) {
                 gridline.frame = frame;
                 gridline.color = gridLayout.gridColor;
                 gridline.zPosition = gridLayout.priority;
             }
         } else {
-            Gridline *gridline = [self.spreadsheetView.horizontalGridlineReuseQueue dequeueOrCreate:[Gridline class]];
+            Gridline *gridline = [weak_self.spreadsheetView.horizontalGridlineReuseQueue dequeueOrCreate:[Gridline class]];
             gridline.frame = frame;
             gridline.color = gridLayout.gridColor;
             gridline.zPosition = gridLayout.priority;
             
-            [self.scrollView.layer addSublayer:gridline];
-            [self.scrollView.visibleHorizontalGridlines setObject:gridline forKeyedSubscript:address];
+            [weak_self.scrollView.layer addSublayer:gridline];
+            [weak_self.scrollView.visibleHorizontalGridlines setObject:gridline forKeyedSubscript:address];
         }
-        [self.visibleHorizontalGridAddresses addObject:address];
+        [weak_self.visibleHorizontalGridAddresses addObject:address];
     }];
 }
 
 - (void)renderVerticalGridlines {
+    __weak typeof(self)weak_self = self;
     [self.verticalGridLayouts enumerateKeysAndObjectsUsingBlock:^(Address * _Nonnull address, ZMJGridLayout * _Nonnull gridLayout, BOOL * _Nonnull stop) {
         CGRect frame = CGRectZero;
         frame.origin = gridLayout.origin;
         Direct left = gridLayout.edge.left;
         if (left.notNull == YES) {
-            frame.origin.x -= self.intercellSpacing.width - (self.intercellSpacing.width - gridLayout.gridWidth) / 2;
-            frame.origin.y -= left.top + (self.intercellSpacing.height - left.top) / 2;
-            frame.size.height = gridLayout.length + left.top + (self.intercellSpacing.height - left.top) / 2 + left.bottom + (self.intercellSpacing.width - left.bottom) / 2;
+            frame.origin.x -= weak_self.intercellSpacing.width - (weak_self.intercellSpacing.width - gridLayout.gridWidth) / 2;
+            frame.origin.y -= left.top + (weak_self.intercellSpacing.height - left.top) / 2;
+            frame.size.height = gridLayout.length + left.top + (weak_self.intercellSpacing.height - left.top) / 2 + left.bottom + (weak_self.intercellSpacing.width - left.bottom) / 2;
         }
         Direct right = gridLayout.edge.right;
         if (right.notNull == YES) {
-            frame.origin.x -= (gridLayout.gridWidth - self.intercellSpacing.width) / 2;
-            frame.origin.y -= right.top + (self.intercellSpacing.height - right.top) / 2;
-            frame.size.height = gridLayout.length + right.top + (self.intercellSpacing.height - right.top) / 2 + right.bottom + (self.intercellSpacing.height - right.bottom) / 2;
+            frame.origin.x -= (gridLayout.gridWidth - weak_self.intercellSpacing.width) / 2;
+            frame.origin.y -= right.top + (weak_self.intercellSpacing.height - right.top) / 2;
+            frame.size.height = gridLayout.length + right.top + (weak_self.intercellSpacing.height - right.top) / 2 + right.bottom + (weak_self.intercellSpacing.height - right.bottom) / 2;
         }
-        frame.size.height = gridLayout.gridWidth;
+        frame.size.width = gridLayout.gridWidth;
         
-        if ([self.scrollView.visibleVerticalGridlines contains:address]) {
-            Gridline *gridline = [self.scrollView.visibleVerticalGridlines objectForKeyedSubscript:address];
+        if ([weak_self.scrollView.visibleVerticalGridlines contains:address]) {
+            Gridline *gridline = [weak_self.scrollView.visibleVerticalGridlines objectForKeyedSubscript:address];
             if (gridline) {
                 gridline.frame = frame;
                 gridline.color = gridLayout.gridColor;
                 gridline.zPosition = gridLayout.priority;
             }
         } else {
-            Gridline *gridline = [self.spreadsheetView.verticalGridlineReuseQueue dequeueOrCreate:[Gridline class]];
+            Gridline *gridline = [weak_self.spreadsheetView.verticalGridlineReuseQueue dequeueOrCreate:[Gridline class]];
             gridline.frame = frame;
             gridline.color = gridLayout.gridColor;
             gridline.zPosition = gridLayout.priority;
             
-            [self.scrollView.layer addSublayer:gridline];
-            [self.scrollView.visibleVerticalGridlines setObject:gridline forKeyedSubscript:address];
+            [weak_self.scrollView.layer addSublayer:gridline];
+            [weak_self.scrollView.visibleVerticalGridlines setObject:gridline forKeyedSubscript:address];
         }
-        [self.visibleVerticalGridAddresses addObject:address];
+        [weak_self.visibleVerticalGridAddresses addObject:address];
     }];
 }
 
 - (void)renderBorders {
+    __weak typeof(self)weak_self = self;
     [self.visibleBorderAddresses enumerateObjectsUsingBlock:^(Address * _Nonnull address, NSUInteger idx, BOOL * _Nonnull stop) {
-        ZMJCell *cell = [self.scrollView.visibleCells objectForKeyedSubscript:address];
+        ZMJCell *cell = [weak_self.scrollView.visibleCells objectForKeyedSubscript:address];
         if (cell) {
-            if ([self.scrollView.visibleBorders contains:address]) {
-                Border *border = [self.scrollView.visibleBorders objectForKeyedSubscript:address];
+            if ([weak_self.scrollView.visibleBorders contains:address]) {
+                Border *border = [weak_self.scrollView.visibleBorders objectForKeyedSubscript:address];
                 if (border) {
                     border.borders = cell.borders;
                     border.frame = cell.frame;
                     [border setNeedsDisplay];
                 }
             } else {
-                Border *border = [self.spreadsheetView.borderReuseQueue dequeueOrCreate:[Border class]];
+                Border *border = [weak_self.spreadsheetView.borderReuseQueue dequeueOrCreate:[Border class]];
                 border.borders = cell.borders;
                 border.frame   = cell.frame;
-                [self.scrollView addSubview:border];
-                [self.scrollView.visibleBorders setObject:border forKeyedSubscript:address];
+                [weak_self.scrollView addSubview:border];
+                [weak_self.scrollView.visibleBorders setObject:border forKeyedSubscript:address];
             }
         }
     }];

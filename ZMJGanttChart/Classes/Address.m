@@ -47,4 +47,17 @@
     return [object isKindOfClass:self.class] && self.rowIndex == object.rowIndex && self.columnIndex == object.columnIndex;
 }
 
+- (NSString *)debugDescription {
+    return [NSString stringWithFormat:@"%@:row=%ld,column=%ld,rowIndex=%ld,columnIndex=%ld",
+            NSStringFromClass(self.class),
+            (long)_row,
+            (long)_column,
+            (long)_rowIndex,
+            (long)_columnIndex];
+}
+
+- (NSString *)description {
+    return [self debugDescription];
+}
+
 @end

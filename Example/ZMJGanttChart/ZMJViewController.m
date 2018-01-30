@@ -147,13 +147,21 @@
             SpreadsheetView *ssv = [SpreadsheetView new];
             ssv.dataSource = self;
             ssv.delegate   = self;
-            ssv.frame = self.view.bounds;
             ssv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
             [self.view addSubview:ssv];
             ssv;
         });
     }
     return _spreadsheetView;
+}
+
+- (void)viewWillLayoutSubviews {
+    if (@available(iOS 11.0, *)) {
+        self.spreadsheetView.frame = self.view.safeAreaLayoutGuide.layoutFrame;
+    } else {
+        // Fallback on earlier versions
+        self.spreadsheetView.frame = self.view.bounds;
+    }
 }
 
 //MARK: DataSource

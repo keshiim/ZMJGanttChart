@@ -57,11 +57,11 @@
     self.to.row >= cellRange.to.row;
 }
 
-- (NSUInteger)hashValue {
-    return self.from.hashValue;
+- (NSUInteger)hash {
+    return self.from.hash;
 }
 - (BOOL)isEqual:(ZMJCellRange *)object {
-    return self.from == object.from;
+    return [object isKindOfClass:self.class] && [self.from isEqual:object.from];
 }
 
 - (NSString *)description {
