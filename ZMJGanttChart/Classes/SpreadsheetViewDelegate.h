@@ -14,6 +14,7 @@
 /// highlighting of cells in a spreadsheet view and to perform actions on those cells.
 /// The methods of this protocol are all optional.
 @protocol SpreadsheetViewDelegate <NSObject>
+@optional
 /// Asks the delegate if the cell should be highlighted during tracking.
 /// - Note: As touch events arrive, the spreadsheet view highlights cells in anticipation of the user selecting them.
 ///   As it processes those touch events, the collection view calls this method to ask your delegate if a given cell should be highlighted.

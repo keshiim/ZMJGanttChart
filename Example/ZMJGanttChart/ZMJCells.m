@@ -114,7 +114,7 @@
 }
 @end
 
-@implementation ZMJChatBarCell : ZMJCell
+@implementation ZMJChartBarCell : ZMJCell
 - (UILabel *)label {
     if (!_label) {
         _label = [UILabel new];

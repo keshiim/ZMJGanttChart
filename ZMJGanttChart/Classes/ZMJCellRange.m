@@ -65,11 +65,11 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"R%ldC%ld:R%ldC%ld", (long)self.from.row, (long)self.from.copy, (long)self.to.row, (long)self.to.column];
+    return [self debugDescription];
 }
 
 - (NSString *)debugDescription {
-    return self.description;
+    return [NSString stringWithFormat:@"R%ldC%ld:R%ldC%ld", (long)self.from.row, (long)self.from.column, (long)self.to.row, (long)self.to.column];;
 }
 
 @end

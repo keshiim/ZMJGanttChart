@@ -37,12 +37,12 @@
     return result;
 }
 
-- (id)dequeueOrCreate {
+- (id)dequeueOrCreate:(Class)clazz {
     id result = nil;
-    if ((result = self.reusableObjects.firstObject)) {
+    if ((result = self.reusableObjects.firstObject) && [result isKindOfClass:clazz]) {
         [self.reusableObjects removeObjectAtIndex:0];
     }
-    return result ?: [NSObject new];
+    return result ?: [clazz new];
 }
 
 @end

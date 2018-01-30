@@ -7,8 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSArray (BinarySearch)
+@interface NSArray<__covariant ObjectType> (BinarySearch)
 
-- (NSInteger)insertionIndexOfObject:(id)element;
+- (NSInteger)insertionIndexOfObject:(ObjectType)element;
 
 @end

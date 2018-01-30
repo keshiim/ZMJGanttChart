@@ -77,26 +77,6 @@
     self.stickyColumnHeader = NO;
     
     self.layoutProperties = [ZMJLayoutProperties new];
-    
-    self.rootView    = [UIScrollView new];
-    self.overlayView = [UIScrollView new];
-    
-    self.columnHeaderView = [ZMJScrollView new];
-    self.rowHeaderView    = [ZMJScrollView new];
-    self.cornerView       = [ZMJScrollView new];
-    self.tableView        = [ZMJScrollView new];
-    
-    self.cellClasses = [NSMutableDictionary new];
-    self.cellNibs    = [NSMutableDictionary new];
-    self.cellReuseQueues          = [NSMutableDictionary new];
-    self.blankCellReuseIdentifier = [NSUUID UUID].UUIDString;
-    
-    self.horizontalGridlineReuseQueue = [ReuseQueue new];
-    self.verticalGridlineReuseQueue   = [ReuseQueue new];
-    self.borderReuseQueue             = [ReuseQueue new];
-    
-    self.highlightedIndexPaths = [NSMutableOrderedSet orderedSet];
-    self.selectedIndexPaths    = [NSMutableOrderedSet orderedSet];
 
     self.needsReload = YES;
     ////////////////////////////////////////////////////////
@@ -149,8 +129,9 @@
     [self.rootView addSubview:self.cornerView];
     [super addSubview:self.overlayView];
     
+    __weak typeof(self)weak_self = self;
     [@[self.tableView, self.columnHeaderView, self.rowHeaderView, self.cornerView, self.overlayView] enumerateObjectsUsingBlock:^(UIScrollView* _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self addGestureRecognizer:obj.panGestureRecognizer];
+        [weak_self addGestureRecognizer:obj.panGestureRecognizer];
         if (IOS_VERSION_11_OR_LATER && [obj respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
             if (@available(iOS 11.0, *)) {
                 obj.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -225,7 +206,7 @@
         self.cellReuseQueues[identifier] = reuseQueue;
     }
     
-    if (self.blankCellReuseIdentifier) {
+    if ([identifier isEqualToString:self.blankCellReuseIdentifier]) {
         ZMJCell *cell = [BlankCell new];
         cell.reuseIdentifier = self.blankCellReuseIdentifier;
         return cell;
@@ -796,6 +777,108 @@
 
 - (UIScrollView *)scrollView {
     return self.overlayView;
+}
+
+- (UIScrollView *)rootView {
+    if (!_rootView) {
+        _rootView = [UIScrollView new];
+    }
+    return _rootView;
+}
+
+- (UIScrollView *)overlayView {
+    if (!_overlayView) {
+        _overlayView = [UIScrollView new];
+    }
+    return _overlayView;
+}
+
+- (ZMJScrollView *)columnHeaderView {
+    if (!_columnHeaderView) {
+        _columnHeaderView = [ZMJScrollView new];
+    }
+    return _columnHeaderView;
+}
+- (ZMJScrollView *)rowHeaderView {
+    if (!_rowHeaderView) {
+        _rowHeaderView = [ZMJScrollView new];
+    }
+    return _rowHeaderView;
+}
+- (ZMJScrollView *)cornerView {
+    if (!_cornerView) {
+        _cornerView = [ZMJScrollView new];
+    }
+    return _cornerView;
+}
+- (ZMJScrollView *)tableView {
+    if (!_tableView) {
+        _tableView = [ZMJScrollView new];
+    }
+    return _tableView;
+}
+
+- (NSMutableDictionary<NSString *, Class  > *)cellClasses {
+    if (!_cellClasses) {
+        _cellClasses = [NSMutableDictionary new];
+    }
+    return _cellClasses;
+}
+
+- (NSMutableDictionary<NSString *, UINib *> *)cellNibs {
+    if (!_cellNibs) {
+        _cellNibs = [NSMutableDictionary dictionary];
+    }
+    return _cellNibs;
+}
+
+- (NSMutableDictionary<NSString *, ReuseQueue<ZMJCell *> *> *)cellReuseQueues {
+    if (!_cellReuseQueues) {
+        _cellReuseQueues = [NSMutableDictionary dictionary];
+    }
+    return _cellReuseQueues;
+}
+
+- (NSString *)blankCellReuseIdentifier {
+    if (!_blankCellReuseIdentifier) {
+        _blankCellReuseIdentifier = [NSUUID UUID].UUIDString;
+    }
+    return _blankCellReuseIdentifier;
+}
+
+- (ReuseQueue<Gridline *> *)horizontalGridlineReuseQueue {
+    if (!_horizontalGridlineReuseQueue) {
+        _horizontalGridlineReuseQueue = [ReuseQueue new];
+    }
+    return _horizontalGridlineReuseQueue;
+}
+
+- (ReuseQueue<Gridline *> *)verticalGridlineReuseQueue {
+    if (!_verticalGridlineReuseQueue) {
+        _verticalGridlineReuseQueue = [ReuseQueue new];
+    }
+    return _verticalGridlineReuseQueue;
+}
+
+- (ReuseQueue<Border *>  *)borderReuseQueue {
+    if (!_borderReuseQueue) {
+        _borderReuseQueue = [ReuseQueue new];
+    }
+    return _borderReuseQueue;
+}
+
+- (NSMutableOrderedSet<NSIndexPath *> *)highlightedIndexPaths {
+    if (!_highlightedIndexPaths) {
+        _highlightedIndexPaths = [NSMutableOrderedSet orderedSet];
+    }
+    return _highlightedIndexPaths;
+}
+
+- (NSMutableOrderedSet<NSIndexPath *> *)selectedIndexPaths {
+    if (!_selectedIndexPaths) {
+        _selectedIndexPaths = [NSMutableOrderedSet orderedSet];
+    }
+    return _selectedIndexPaths;
 }
 
 @end

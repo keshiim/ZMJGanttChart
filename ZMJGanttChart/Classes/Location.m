@@ -30,19 +30,29 @@
     return [[self alloc] initWithIndexPath:indexPath];
 }
 
-- (NSUInteger)hashValue {
+- (NSUInteger)hash {
     return 32768 * _row * _column;
 }
 
 - (BOOL)isEqual:(Location *)object {
-    return self.row == object.row && self.column == object.column;
+    return [object isKindOfClass:self.class] && self.row == object.row && self.column == object.column;
 }
 
 - (id)copyWithZone:(nullable NSZone *)zone {
     Location *copy = [Location allocWithZone:zone];
-    copy.row     = self.row;
-    copy.column  = self.column;
+    if (copy) {
+        copy.row     = self.row;
+        copy.column  = self.column;
+    }
     return copy;
+}
+
+- (NSString *)description {
+    return [self debugDescription];
+}
+
+- (NSString *)debugDescription {
+    return [NSString stringWithFormat:@"row:%ld | column:%ld", (long)_row, (long)_column];
 }
 
 @end

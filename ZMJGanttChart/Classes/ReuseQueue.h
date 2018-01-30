@@ -17,7 +17,7 @@ __VA_ARGS__; \
 @interface ReuseQueue<__covariant Reusable> : NSObject
 - (void)enqueue:(Reusable)reusableObject;
 - (Reusable)dequeue;
-- (Reusable)dequeueOrCreate;
+- (Reusable)dequeueOrCreate:(Class)clazz;
 @end
 
 @interface ReusableCollection<__covariant Reusable> : NSObject <NSFastEnumeration>

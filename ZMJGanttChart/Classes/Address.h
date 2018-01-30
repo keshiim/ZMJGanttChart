@@ -13,8 +13,6 @@
 @property (nonatomic, assign) NSInteger rowIndex;
 @property (nonatomic, assign) NSInteger columnIndex;
 
-- (NSUInteger)hashValue;
-
 - (instancetype)initWithRow:(NSInteger)row column:(NSInteger)column rowIndex:(NSInteger)rowIndex columnIndex:(NSInteger)columnIndex;
 + (instancetype)addressWithRow:(NSInteger)row column:(NSInteger)column rowIndex:(NSInteger)rowIndex columnIndex:(NSInteger)columnIndex;
 @end

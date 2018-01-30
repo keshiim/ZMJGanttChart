@@ -113,25 +113,11 @@
                     [UIColor colorWithRed:1.000 green:0.718 blue:0.298 alpha:1],
                     [UIColor colorWithRed:0.180 green:0.671 blue:0.796 alpha:1],
                     ];
-    self.spreadsheetView = ({
-        SpreadsheetView *ssv = [SpreadsheetView new];
-        if (@available(iOS 11.0, *)) {
-            ssv.frame = self.view.safeAreaLayoutGuide.layoutFrame;
-        } else {
-            ssv.frame = self.view.bounds;
-        }
-        ssv.autoresizingMask = UIViewAutoresizingFlexibleWidth |UIViewAutoresizingFlexibleHeight;
-        [self.view addSubview:ssv];
-        ssv;
-    });
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.spreadsheetView.dataSource = self;
-    self.spreadsheetView.delegate = self;
     
     CGFloat hairline = 1 / [UIScreen mainScreen].scale;
     self.spreadsheetView.intercellSpacing = CGSizeMake(hairline, hairline);
@@ -140,7 +126,7 @@
     [self.spreadsheetView registerClass:[ZMJHeaderCell class] forCellWithReuseIdentifier:[ZMJHeaderCell description]];
     [self.spreadsheetView registerClass:[ZMJTextCell class] forCellWithReuseIdentifier:[ZMJTextCell description]];
     [self.spreadsheetView registerClass:[ZMJTaskCell class] forCellWithReuseIdentifier:[ZMJTaskCell description]];
-    [self.spreadsheetView registerClass:[ZMJChatBarCell class] forCellWithReuseIdentifier:[ZMJChatBarCell description]];
+    [self.spreadsheetView registerClass:[ZMJChartBarCell class] forCellWithReuseIdentifier:[ZMJChartBarCell description]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -153,6 +139,21 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (SpreadsheetView *)spreadsheetView {
+    if (!_spreadsheetView) {
+        _spreadsheetView = ({
+            SpreadsheetView *ssv = [SpreadsheetView new];
+            ssv.dataSource = self;
+            ssv.delegate   = self;
+            ssv.frame = self.view.bounds;
+            ssv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            [self.view addSubview:ssv];
+            ssv;
+        });
+    }
+    return _spreadsheetView;
 }
 
 //MARK: DataSource
@@ -175,7 +176,7 @@
 }
 
 - (CGFloat)spreadsheetView:(SpreadsheetView *)spreadsheetView heightForRow:(NSInteger)row {
-    if (row <= 0 && row >= 1) {
+    if (row >= 0 && row <= 1) {
         return 28.f;
     } else {
         return 34.f;
@@ -221,11 +222,76 @@
     if (column == 0 && row == 0) {
         ZMJHeaderCell *cell = (ZMJHeaderCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJHeaderCell description] forIndexPath:indexPath];
         cell.label.text = @"Task";
-        cell.gridlines.left = [GridStyle grid];
+        cell.gridlines.left = [GridStyle style:GridStyle_default width:0 color:nil];
         cell.gridlines.right = [GridStyle borderStyleNone];
         return cell;
     }
-    
+    else if (column == 1 && row == 0) {
+        ZMJHeaderCell *cell = (ZMJHeaderCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJHeaderCell description] forIndexPath:indexPath];
+        cell.label.text = @"Start";
+        cell.gridlines.left  = [GridStyle style:GridStyle_solid width:1/[UIScreen mainScreen].scale color:cell.backgroundColor];
+        cell.gridlines.right = cell.gridlines.left;
+        return cell;
+    }
+    else if (column == 2 && row == 0) {
+        ZMJHeaderCell *cell = (ZMJHeaderCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJHeaderCell description] forIndexPath:indexPath];
+        cell.label.text = @"Duration";
+        cell.label.textColor = [UIColor grayColor];
+        cell.gridlines.left  = [GridStyle borderStyleNone];
+        cell.gridlines.right = [GridStyle style:GridStyle_default width:0 color:nil];
+        return cell;
+    }
+    else if (column >= 3 && column < (3 + 7 * self.weaks.count) && row == 0) {
+        ZMJHeaderCell *cell = (ZMJHeaderCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJHeaderCell description] forIndexPath:indexPath];
+        cell.label.text = self.weaks[(indexPath.column - 3) / 7];
+        cell.gridlines.left  = [GridStyle style:GridStyle_default width:0 color:nil];
+        cell.gridlines.right = [GridStyle style:GridStyle_default width:0 color:nil];
+        return cell;
+    }
+    else if (column >= 3 && column < (3 + 7 * self.weaks.count) && row == 1) {
+        ZMJHeaderCell *cell = (ZMJHeaderCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJHeaderCell description] forIndexPath:indexPath];
+        cell.label.text = [NSString stringWithFormat:@"%02ld Apr", indexPath.column + 2];
+        cell.gridlines.left  = [GridStyle style:GridStyle_default width:0 color:nil];
+        cell.gridlines.right = [GridStyle style:GridStyle_default width:0 color:nil];
+        return cell;
+    }
+    else if (column == 0 && row >= 2 && row < (2 + self.tasks.count)) {
+        ZMJTaskCell *cell = (ZMJTaskCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJTaskCell description] forIndexPath:indexPath];
+        cell.label.text = self.tasks[indexPath.row - 2][0];
+        cell.gridlines.left  = [GridStyle style:GridStyle_default width:0 color:nil];
+        cell.gridlines.right = [GridStyle style:GridStyle_default width:0 color:nil];
+        return cell;
+    }
+    else if (column == 1 && row >= 2 && row < (2 + self.tasks.count)) {
+        ZMJTaskCell *cell = (ZMJTaskCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJTaskCell description] forIndexPath:indexPath];
+        cell.label.text = [NSString stringWithFormat:@"April %02ld", (long)self.tasks[indexPath.row - 2][1].integerValue];
+        cell.gridlines.left  = [GridStyle borderStyleNone];
+        cell.gridlines.right = [GridStyle borderStyleNone];
+        return cell;
+    }
+    else if (column == 2 && row >= 2 && row < (2 + self.tasks.count)) {
+        ZMJTaskCell *cell = (ZMJTaskCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJTaskCell description] forIndexPath:indexPath];
+        cell.label.text = self.tasks[indexPath.row - 2][2];
+        cell.gridlines.left  = [GridStyle borderStyleNone];
+        cell.gridlines.right = [GridStyle borderStyleNone];
+        return cell;
+    }
+    else if (column >= 3 && column < (3 + 7 * self.weaks.count) && row >= 2 && row < (2 + self.tasks.count)) {
+        ZMJChartBarCell *cell = (ZMJChartBarCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJChartBarCell description] forIndexPath:indexPath];
+        NSInteger start = self.tasks[indexPath.row - 2][1].integerValue;
+        if (start == indexPath.column - 2) {
+            cell.label.text = self.tasks[indexPath.row - 2][0];
+            NSInteger colorIndex = self.tasks[indexPath.row - 2][3].integerValue;
+            cell.color = self.colors[colorIndex];
+        } else {
+            cell.label.text = @"";
+            cell.color = [UIColor clearColor];
+        }
+        return cell;
+    }
+    else {
+        return nil;
+    }
 }
 
 /// Delegate

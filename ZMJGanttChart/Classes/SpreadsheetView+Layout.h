@@ -22,4 +22,5 @@
 - (void)resetOverlayViewContentSize:(UIEdgeInsets)contentInset;
 - (void)resetScrollViewArrangement;
 - (NSInteger)findIndex:(NSArray<NSNumber *> *)records offset:(CGFloat)offset;
+
 @end

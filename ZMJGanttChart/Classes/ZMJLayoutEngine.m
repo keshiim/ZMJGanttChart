@@ -201,6 +201,7 @@
     NSInteger startColumnIndex = [self.spreadsheetView findIndex:self.columnRecords offset:self.visibleRect.origin.x - self.insets.x];
     CGPoint cellOrigin = self.cellOrigin;
     cellOrigin.x = self.insets.x + self.columnRecords[startColumnIndex].floatValue + self.intercellSpacing.width;
+    self.cellOrigin = cellOrigin;
     
     __block NSInteger columnIndex = startColumnIndex + self.startColumn;
     while (columnIndex < self.columnCount) {
@@ -214,6 +215,7 @@
             self.startColumn > 0 &&
             column < self.frozenColumns)
         {
+            defer();
             continue;
         }
         
@@ -233,6 +235,7 @@
                 for (NSInteger row = mergedCell.from.row; row <= mergedCell.to.row; row++) {
                     cellHeight += self.rowHeightCache[row].floatValue + self.intercellSpacing.height;
                 }
+                mergedCell.size = CGSizeMake(cellWidth, cellHeight);
             }
             
             columnStep += (mergedCell.columnCount - (column - mergedCell.from.column)) - 1;
@@ -271,14 +274,17 @@
                     CGPoint cellOrigin = self.cellOrigin;
                     cellOrigin.x += cellWidth;
                     self.cellOrigin = cellOrigin;
+                    defer();
                     return NO;
                 }
                 if (self.cellOrigin.y > CGRectGetMaxY(self.visibleRect)) {
+                    defer();
                     return YES;
                 }
                 CGPoint cellOrigin = self.cellOrigin;
                 cellOrigin.x += cellWidth;
                 self.cellOrigin = cellOrigin;
+                defer();
                 continue;
             }
             CGFloat offsetHeight = 0;
@@ -306,21 +312,25 @@
                 CGPoint cellOrigin = self.cellOrigin;
                 cellOrigin.x += cellWidth;
                 self.cellOrigin = cellOrigin;
+                defer();
                 continue;
             }
             if (self.cellOrigin.x > CGRectGetMaxX(self.visibleRect)) {
                 CGPoint cellOrigin = self.cellOrigin;
                 cellOrigin.x += cellWidth;
                 self.cellOrigin = cellOrigin;
+                defer();
                 return NO;
             }
             if (self.cellOrigin.y - offsetHeight + cellHeight - self.intercellSpacing.height <= CGRectGetMinY(self.visibleRect)) {
                 CGPoint cellOrigin = self.cellOrigin;
                 cellOrigin.x += cellWidth;
                 self.cellOrigin = cellOrigin;
+                defer();
                 continue;
             }
             if (self.cellOrigin.y - offsetHeight > CGRectGetMaxY(self.visibleRect)) {
+                defer();
                 return YES;
             }
             
@@ -333,6 +343,7 @@
             CGPoint cellOrigin = self.cellOrigin;
             cellOrigin.x += cellWidth;
             self.cellOrigin = cellOrigin;
+            defer();
             continue;
         }
         
@@ -342,21 +353,28 @@
             CGPoint cellOrigin = self.cellOrigin;
             cellOrigin.x += columnWidth + self.intercellSpacing.width;
             self.cellOrigin = cellOrigin;
+            
+            defer();
             continue;
         }
         if (self.cellOrigin.x > CGRectGetMaxX(self.visibleRect)) {
             CGPoint cellOrigin = self.cellOrigin;
             cellOrigin.x += columnWidth + self.intercellSpacing.width;
             self.cellOrigin = cellOrigin;
+            
+            defer();
             return NO;
         }
         if (self.cellOrigin.y + rowHeight <= CGRectGetMinY(self.visibleRect)) {
             CGPoint cellOrigin = self.cellOrigin;
             cellOrigin.x += columnWidth + self.intercellSpacing.width;
             self.cellOrigin = cellOrigin;
+            
+            defer();
             continue;
         }
         if (self.cellOrigin.y > CGRectGetMaxY(self.visibleRect)) {
+            defer();
             return YES;
         }
         
@@ -540,17 +558,17 @@
     [self.horizontalGridLayouts enumerateKeysAndObjectsUsingBlock:^(Address * _Nonnull address, ZMJGridLayout * _Nonnull gridLayout, BOOL * _Nonnull stop) {
         CGRect frame = CGRectZero;
         frame.origin = gridLayout.origin;
-        Direct *top = gridLayout.edge.top;
-        if (top != NULL) {
-            frame.origin.x -= top->left + (self.intercellSpacing.width - top->left) / 2;
+        Direct top = gridLayout.edge.top;
+        if (top.notNull == YES) {
+            frame.origin.x -= top.left + (self.intercellSpacing.width - top.left) / 2;
             frame.origin.y -= self.intercellSpacing.height - (self.intercellSpacing.height - gridLayout.gridWidth) / 2;
-            frame.size.width = gridLayout.length + top->left + (self.intercellSpacing.width - top->left) / 2 + top->right + (self.intercellSpacing.width - top->right) / 2;
+            frame.size.width = gridLayout.length + top.left + (self.intercellSpacing.width - top.left) / 2 + top.right + (self.intercellSpacing.width - top.right) / 2;
         }
-        Direct *bottom = gridLayout.edge.bottom;
-        if (bottom != NULL) {
-            frame.origin.x -= bottom->left + (self.intercellSpacing.width - bottom->left) / 2;
+        Direct bottom = gridLayout.edge.bottom;
+        if (bottom.notNull == YES) {
+            frame.origin.x -= bottom.left + (self.intercellSpacing.width - bottom.left) / 2;
             frame.origin.y -= (gridLayout.gridWidth - self.intercellSpacing.height) / 2;
-            frame.size.width = gridLayout.length + bottom->left + (self.intercellSpacing.width - bottom->left) / 2 + bottom->right + (self.intercellSpacing.width - bottom->right) / 2;
+            frame.size.width = gridLayout.length + bottom.left + (self.intercellSpacing.width - bottom.left) / 2 + bottom.right + (self.intercellSpacing.width - bottom.right) / 2;
         }
         frame.size.height = gridLayout.gridWidth;
         
@@ -562,7 +580,7 @@
                 gridline.zPosition = gridLayout.priority;
             }
         } else {
-            Gridline *gridline = [self.spreadsheetView.horizontalGridlineReuseQueue dequeueOrCreate];
+            Gridline *gridline = [self.spreadsheetView.horizontalGridlineReuseQueue dequeueOrCreate:[Gridline class]];
             gridline.frame = frame;
             gridline.color = gridLayout.gridColor;
             gridline.zPosition = gridLayout.priority;
@@ -578,17 +596,17 @@
     [self.verticalGridLayouts enumerateKeysAndObjectsUsingBlock:^(Address * _Nonnull address, ZMJGridLayout * _Nonnull gridLayout, BOOL * _Nonnull stop) {
         CGRect frame = CGRectZero;
         frame.origin = gridLayout.origin;
-        Direct *left = gridLayout.edge.left;
-        if (left != NULL) {
+        Direct left = gridLayout.edge.left;
+        if (left.notNull == YES) {
             frame.origin.x -= self.intercellSpacing.width - (self.intercellSpacing.width - gridLayout.gridWidth) / 2;
-            frame.origin.y -= left->top + (self.intercellSpacing.height - left->top) / 2;
-            frame.size.height = gridLayout.length + left->top + (self.intercellSpacing.height - left->top) / 2 + left->bottom + (self.intercellSpacing.width - left->bottom) / 2;
+            frame.origin.y -= left.top + (self.intercellSpacing.height - left.top) / 2;
+            frame.size.height = gridLayout.length + left.top + (self.intercellSpacing.height - left.top) / 2 + left.bottom + (self.intercellSpacing.width - left.bottom) / 2;
         }
-        Direct *right = gridLayout.edge.right;
-        if (right != NULL) {
+        Direct right = gridLayout.edge.right;
+        if (right.notNull == YES) {
             frame.origin.x -= (gridLayout.gridWidth - self.intercellSpacing.width) / 2;
-            frame.origin.y -= right->top + (self.intercellSpacing.height - right->top) / 2;
-            frame.size.height = gridLayout.length + right->top + (self.intercellSpacing.height - right->top) / 2 + right->bottom + (self.intercellSpacing.height - right->bottom) / 2;
+            frame.origin.y -= right.top + (self.intercellSpacing.height - right.top) / 2;
+            frame.size.height = gridLayout.length + right.top + (self.intercellSpacing.height - right.top) / 2 + right.bottom + (self.intercellSpacing.height - right.bottom) / 2;
         }
         frame.size.height = gridLayout.gridWidth;
         
@@ -600,7 +618,7 @@
                 gridline.zPosition = gridLayout.priority;
             }
         } else {
-            Gridline *gridline = [self.spreadsheetView.verticalGridlineReuseQueue dequeueOrCreate];
+            Gridline *gridline = [self.spreadsheetView.verticalGridlineReuseQueue dequeueOrCreate:[Gridline class]];
             gridline.frame = frame;
             gridline.color = gridLayout.gridColor;
             gridline.zPosition = gridLayout.priority;
@@ -624,7 +642,7 @@
                     [border setNeedsDisplay];
                 }
             } else {
-                Border *border = [self.spreadsheetView.borderReuseQueue dequeueOrCreate];
+                Border *border = [self.spreadsheetView.borderReuseQueue dequeueOrCreate:[Border class]];
                 border.borders = cell.borders;
                 border.frame   = cell.frame;
                 [self.scrollView addSubview:border];

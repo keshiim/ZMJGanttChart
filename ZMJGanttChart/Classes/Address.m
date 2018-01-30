@@ -29,20 +29,22 @@
 }
 
 - (id)copyWithZone:(nullable NSZone *)zone {
-    Address *copy = [Address allocWithZone:zone];
-    copy.row = self.row;
-    copy.column = self.column;
-    copy.rowIndex = self.rowIndex;
-    copy.columnIndex = self.columnIndex;
+    Address *copy = [[Address allocWithZone:zone] init];
+    if (copy) {
+        copy.row = self.row;
+        copy.column = self.column;
+        copy.rowIndex = self.rowIndex;
+        copy.columnIndex = self.columnIndex;
+    }
     return copy;
 }
 
-- (NSUInteger)hashValue {
+- (NSUInteger)hash {
     return 32768 * _rowIndex + _columnIndex;
 }
 
 - (BOOL)isEqual:(Address *)object {
-    return self.rowIndex == object.rowIndex && self.columnIndex == object.columnIndex;
+    return [object isKindOfClass:self.class] && self.rowIndex == object.rowIndex && self.columnIndex == object.columnIndex;
 }
 
 @end

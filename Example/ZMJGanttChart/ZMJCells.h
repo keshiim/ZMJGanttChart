@@ -21,7 +21,7 @@
 @property (nonatomic, strong) UILabel *label;
 @end
 
-@interface ZMJChatBarCell : ZMJCell
+@interface ZMJChartBarCell : ZMJCell
 @property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) UIView  *colorBarView;
 @property (nonatomic, strong) UIColor *color;

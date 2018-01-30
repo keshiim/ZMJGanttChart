@@ -45,7 +45,7 @@
 }
 
 + (instancetype)style:(GridStyle_Enum)style_enum width:(CGFloat)widith color:(UIColor *)color {
-    return [[self alloc] initWithStyle:GridStyle_none width:widith color:color];
+    return [[self alloc] initWithStyle:style_enum width:widith color:color];
 }
 
 - (BOOL)isEqual:(GridStyle *)object {
@@ -78,22 +78,25 @@
 }
 
 - (id)copyWithZone:(nullable NSZone *)zone {
-    ZMJGridLayout *copy = [ZMJGridLayout allocWithZone:zone];
-    copy.gridWidth = self.gridWidth;
-    copy.gridColor = self.gridColor.copy;
-    copy.origin    = self.origin;
-    copy.length    = self.length;
-    copy.edge      = self.edge;
-    copy.priority  = self.priority;
+    ZMJGridLayout *copy = [[ZMJGridLayout allocWithZone:zone] init];
+    if (copy) {
+        copy.gridWidth = self.gridWidth;
+        copy.gridColor = [self.gridColor copyWithZone:zone];
+        copy.origin    = self.origin;
+        copy.length    = self.length;
+        copy.edge      = self.edge;
+        copy.priority  = self.priority;
+    }
     return copy;
 }
 
-- (NSUInteger)hashValue {
+- (NSUInteger)hash {
     return 32768 * _gridWidth + _length;
 }
 
 - (BOOL)isEqual:(ZMJGridLayout *)object {
     return
+    [object isKindOfClass:self.class]               &&
     self.gridWidth == object.gridWidth              &&
     self.gridColor.hash == object.gridColor.hash    &&
     CGPointEqualToPoint(self.origin, object.origin) &&

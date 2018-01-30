@@ -50,18 +50,20 @@ typedef struct ZMJDirect {
     CGFloat right;
     CGFloat top;
     CGFloat bottom;
+    BOOL notNull;
 } Direct;
 
 #define DirectZero ((Direct){0, 0, 0, 0})
 
 typedef struct ZMJRectEdge {
     //top || bottom
-    Direct *top;
-    Direct *bottom;
+    Direct top;
+    Direct bottom;
     
     //left || right
-    Direct *left;
-    Direct *right;
+    Direct left;
+    Direct right;
+    BOOL notNull;
 } RectEdge;
 
 /**
@@ -84,13 +86,16 @@ static inline RectEdge
 RectEdgeMake(UIPopoverArrowDirection direction, CGFloat top, CGFloat left, CGFloat bottom, CGFloat right)
 {
     RectEdge edge;
+    BOOL notnull = NO;
     if (direction & UIPopoverArrowDirectionUp) {
         Direct d_top;
         d_top.top   = top;
         d_top.left  = left;
         d_top.bottom= bottom;
         d_top.right = right;
-        edge.top = &d_top;
+        d_top.notNull = YES;
+        edge.top = d_top;
+        notnull = YES;
     }
     if (direction & UIPopoverArrowDirectionLeft) {
         Direct d_left;
@@ -98,7 +103,9 @@ RectEdgeMake(UIPopoverArrowDirection direction, CGFloat top, CGFloat left, CGFlo
         d_left.left  = left;
         d_left.bottom= bottom;
         d_left.right = right;
-        edge.left = &d_left;
+        d_left.notNull = YES;
+        edge.left = d_left;
+        notnull = YES;
     }
     if (direction & UIPopoverArrowDirectionRight) {
         Direct d_right;
@@ -106,7 +113,9 @@ RectEdgeMake(UIPopoverArrowDirection direction, CGFloat top, CGFloat left, CGFlo
         d_right.left  = left;
         d_right.bottom= bottom;
         d_right.right = right;
-        edge.top = &d_right;
+        d_right.notNull = YES;
+        edge.top = d_right;
+        notnull = YES;
     }
     if (direction & UIPopoverArrowDirectionDown) {
         Direct d_bottom;
@@ -114,8 +123,11 @@ RectEdgeMake(UIPopoverArrowDirection direction, CGFloat top, CGFloat left, CGFlo
         d_bottom.left  = left;
         d_bottom.bottom= bottom;
         d_bottom.right = right;
-        edge.top = &d_bottom;
+        d_bottom.notNull = YES;
+        edge.top = d_bottom;
+        notnull = YES;
     }
+    edge.notNull = notnull;
     return edge;
 }
 
@@ -123,25 +135,25 @@ static inline BOOL
 RectEdgeEqualToRectEdge(RectEdge rectEdge1, RectEdge rectEdge2)
 {
     return
-    rectEdge1.top->top == rectEdge2.top->top &&
-    rectEdge1.top->left == rectEdge2.top->left &&
-    rectEdge1.top->right == rectEdge2.top->right &&
-    rectEdge1.top->bottom == rectEdge2.top->bottom &&
+    rectEdge1.top.top == rectEdge2.top.top &&
+    rectEdge1.top.left == rectEdge2.top.left &&
+    rectEdge1.top.right == rectEdge2.top.right &&
+    rectEdge1.top.bottom == rectEdge2.top.bottom &&
     
-    rectEdge1.bottom->top == rectEdge2.bottom->top &&
-    rectEdge1.bottom->left == rectEdge2.bottom->left &&
-    rectEdge1.bottom->right == rectEdge2.bottom->right &&
-    rectEdge1.bottom->bottom == rectEdge2.bottom->bottom &&
+    rectEdge1.bottom.top == rectEdge2.bottom.top &&
+    rectEdge1.bottom.left == rectEdge2.bottom.left &&
+    rectEdge1.bottom.right == rectEdge2.bottom.right &&
+    rectEdge1.bottom.bottom == rectEdge2.bottom.bottom &&
     
-    rectEdge1.left->top == rectEdge2.left->top &&
-    rectEdge1.left->left == rectEdge2.left->left &&
-    rectEdge1.left->right == rectEdge2.left->right &&
-    rectEdge1.left->bottom == rectEdge2.left->bottom &&
+    rectEdge1.left.top == rectEdge2.left.top &&
+    rectEdge1.left.left == rectEdge2.left.left &&
+    rectEdge1.left.right == rectEdge2.left.right &&
+    rectEdge1.left.bottom == rectEdge2.left.bottom &&
     
-    rectEdge1.right->top == rectEdge2.right->top &&
-    rectEdge1.right->left == rectEdge2.right->left &&
-    rectEdge1.right->right == rectEdge2.right->right &&
-    rectEdge1.right->bottom == rectEdge2.right->bottom;
+    rectEdge1.right.top == rectEdge2.right.top &&
+    rectEdge1.right.left == rectEdge2.right.left &&
+    rectEdge1.right.right == rectEdge2.right.right &&
+    rectEdge1.right.bottom == rectEdge2.right.bottom;
 }
 
 typedef struct ZMJLayoutAttributes {

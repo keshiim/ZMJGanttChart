@@ -228,9 +228,7 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 
 - (ZMJCellRange *)mergedCellFor:(Location *)indexPath;
 
-@end
 
-@interface SpreadsheetView (ForCategory) <UIScrollViewDelegate>
 /// For category
 @property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *highlightedIndexPaths;
 @property (nonatomic, strong) NSMutableOrderedSet<NSIndexPath *> *selectedIndexPaths;
@@ -245,5 +243,8 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 @property (nonatomic, strong) ZMJLayoutProperties *layoutProperties;
 @property (nonatomic, strong) NSIndexPath          *pendingSelectionIndexPath;
 
+@end
+
+@interface SpreadsheetView (ForCategory) <UIScrollViewDelegate>
 - (void)reloadDataIfNeeded;
 @end

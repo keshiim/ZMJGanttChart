@@ -13,10 +13,8 @@
 #import "ZMJCellRange.h"
 
 @implementation SpreadsheetView (Layout)
-/// Override
-- (void)layoutSubViews {
+- (void)layoutSubviews {
     [super layoutSubviews];
-    
     self.tableView.delegate         = nil;
     self.columnHeaderView.delegate  = nil;
     self.rowHeaderView.delegate     = nil;
@@ -169,7 +167,7 @@
     }
 
     NSArray<ZMJCellRange *> *mergedCells = [self.dataSource mergedCells:self];
-    NSDictionary<Location *, ZMJCellRange *> * (^mergedCellLayouts)(void) = ^NSDictionary<Location *, ZMJCellRange *> *(void) {
+    NSDictionary<Location *, ZMJCellRange *> *mergedCellLayouts = ^NSDictionary<Location *, ZMJCellRange *> *(void) {
         NSMutableDictionary<Location *, ZMJCellRange *> *layouts = [NSMutableDictionary dictionary];
         
         for (ZMJCellRange *mergedCell in mergedCells) {
@@ -195,14 +193,16 @@
                             [NSException exceptionWithName:@"" reason:@"cannot merge cells in a range that overlap existing merged cells" userInfo:nil];
                         }
                     }
+                    if (mergedCell == nil) {
+                        NSLog(@"%@", location);
+                    }
                     mergedCell.size = CGSizeZero;
                     layouts[location] = mergedCell;
                 }
             }
         }
-        
         return layouts.copy;
-    };
+    }();
     
     NSMutableArray<NSNumber *> *columnWidthCache = [NSMutableArray array];
     CGFloat frozenColumnWidth = 0;
@@ -245,7 +245,7 @@
                                                columnWidthCache:columnWidthCache
                                                  rowHeightCache:rowHeightCache
                                                     mergedCells:mergedCells
-                                              mergedCellLayouts:mergedCellLayouts()];
+                                              mergedCellLayouts:mergedCellLayouts];
 }
 
 - (void)resetContentSize:(ZMJScrollView *)scrollView {
