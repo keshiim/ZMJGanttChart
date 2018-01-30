@@ -250,7 +250,7 @@
     }
     else if (column >= 3 && column < (3 + 7 * self.weaks.count) && row == 1) {
         ZMJHeaderCell *cell = (ZMJHeaderCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJHeaderCell description] forIndexPath:indexPath];
-        cell.label.text = [NSString stringWithFormat:@"%02ld Apr", indexPath.column + 2];
+        cell.label.text = [NSString stringWithFormat:@"%02ld Apr", indexPath.column - 2];
         cell.gridlines.left  = [GridStyle style:GridStyle_default width:0 color:nil];
         cell.gridlines.right = [GridStyle style:GridStyle_default width:0 color:nil];
         return cell;

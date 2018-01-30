@@ -286,11 +286,12 @@
 }
 
 - (void)resetScrollViewFrame {
+    __weak typeof(self)weak_self = self;
     void (^defer)(void) = ^(void) {
-        self.cornerView.frame       = self.cornerView.state.frame;
-        self.columnHeaderView.frame = self.columnHeaderView.state.frame;
-        self.rowHeaderView.frame    = self.rowHeaderView.state.frame;
-        self.tableView.frame        = self.tableView.state.frame;
+        weak_self.cornerView.frame       = weak_self.cornerView.state.frame;
+        weak_self.columnHeaderView.frame = weak_self.columnHeaderView.state.frame;
+        weak_self.rowHeaderView.frame    = weak_self.rowHeaderView.state.frame;
+        weak_self.tableView.frame        = weak_self.tableView.state.frame;
     };
     UIEdgeInsets contentInset;
 
@@ -330,6 +331,7 @@
             State rhv_state = self.rowHeaderView.state;
             rhv_state.frame.origin.x = self.tableView.state.frame.origin.x;
             rhv_state.frame.size.width = self.tableView.state.frame.size.width;
+            self.rowHeaderView.state = rhv_state;
         }
     } else {
         State state = self.tableView.state;
