@@ -15,6 +15,7 @@
 @implementation SpreadsheetView (Layout)
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
     self.tableView.delegate         = nil;
     self.columnHeaderView.delegate  = nil;
     self.rowHeaderView.delegate     = nil;
@@ -43,27 +44,27 @@
     state.contentSize = self.tableView.contentSize;
     state.contentOffset = self.tableView.contentOffset;
     self.tableView.state = state;
-    
+    __weak typeof(self)weak_self = self;
     void(^defer)(void) = ^(void){
-        self.cornerView.contentSize = self.cornerView.state.contentSize;
-        self.columnHeaderView.contentSize = self.columnHeaderView.state.contentSize;
-        self.rowHeaderView.contentSize = self.rowHeaderView.state.contentSize;
-        self.tableView.contentSize = self.tableView.state.contentSize;
+        weak_self.cornerView.contentSize       = weak_self.cornerView.state.contentSize;
+        weak_self.columnHeaderView.contentSize = weak_self.columnHeaderView.state.contentSize;
+        weak_self.rowHeaderView.contentSize    = weak_self.rowHeaderView.state.contentSize;
+        weak_self.tableView.contentSize        = weak_self.tableView.state.contentSize;
         
-        self.cornerView.contentOffset = self.cornerView.state.contentOffset;
-        self.columnHeaderView.contentOffset = self.columnHeaderView.state.contentOffset;
-        self.rowHeaderView.contentOffset = self.rowHeaderView.state.contentOffset;
-        self.tableView.contentOffset = self.tableView.state.contentOffset;
+        weak_self.cornerView.contentOffset       = weak_self.cornerView.state.contentOffset;
+        weak_self.columnHeaderView.contentOffset = weak_self.columnHeaderView.state.contentOffset;
+        weak_self.rowHeaderView.contentOffset    = weak_self.rowHeaderView.state.contentOffset;
+        weak_self.tableView.contentOffset        = weak_self.tableView.state.contentOffset;
         
-        self.tableView.delegate = self;
-        self.columnHeaderView.delegate = self;
-        self.rowHeaderView.delegate = self;
-        self.cornerView.delegate = self;
+        weak_self.tableView.delegate        = weak_self;
+        weak_self.columnHeaderView.delegate = weak_self;
+        weak_self.rowHeaderView.delegate    = weak_self;
+        weak_self.cornerView.delegate       = weak_self;
     };
     
     [self reloadDataIfNeeded];
     
-    if (self.numberOfColumns <= 0 && self.numberOfRows <= 0) {
+    if (self.numberOfColumns <= 0 || self.numberOfRows <= 0) {
         defer();
         return;
     }
@@ -180,8 +181,8 @@
                     if (column >= numberOfColumns || row >= numberOfRows) {
                         [NSException exceptionWithName:@"" reason:@"the range of `mergedCell` cannot exceed the total column or row count" userInfo:nil];
                     }
-                    Location *location = [Location locationWithRow:row column:column];
                     
+                    Location *location = [Location locationWithRow:row column:column];
                     ZMJCellRange *existingMergedCell = layouts[location];
                     if (existingMergedCell) {
                         if ([existingMergedCell containsCellRange:mergedCell]) {
@@ -192,9 +193,6 @@
                         } else {
                             [NSException exceptionWithName:@"" reason:@"cannot merge cells in a range that overlap existing merged cells" userInfo:nil];
                         }
-                    }
-                    if (mergedCell == nil) {
-                        NSLog(@"%@", location);
                     }
                     mergedCell.size = CGSizeZero;
                     layouts[location] = mergedCell;

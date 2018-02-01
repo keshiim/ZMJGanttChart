@@ -34,5 +34,4 @@
 #import "SpreadsheetView+UISnapshotting.h"
 #import "SpreadsheetView+UIScrollView.h"
 #import "SpreadsheetView+UIScrollViewDelegate.h"
-
 #endif /* ZMJGanttChart_h */

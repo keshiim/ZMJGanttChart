@@ -281,7 +281,7 @@
 		050B7CDC5E390394AC30D3E1DF09BE4B /* KWBeSubclassOfClassMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWBeSubclassOfClassMatcher.m; path = Classes/Matchers/KWBeSubclassOfClassMatcher.m; sourceTree = "<group>"; };
 		073E77697D1E93BC5620B612DE6D41B2 /* NSArray+WBGAddition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSArray+WBGAddition.h"; sourceTree = "<group>"; };
 		095C8A38BDE9C4EF61C93CBCE75A67D6 /* KWStringContainsMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWStringContainsMatcher.m; path = Classes/Matchers/KWStringContainsMatcher.m; sourceTree = "<group>"; };
-		09C71902C196B538D9F48DAF49E4466B /* Pods-ZMJGanttChart_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ZMJGanttChart_Example.modulemap"; sourceTree = "<group>"; };
+		09C71902C196B538D9F48DAF49E4466B /* Pods-ZMJGanttChart_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ZMJGanttChart_Example.modulemap"; sourceTree = "<group>"; };
 		0AAA3DD97A78B40A2B3D63426E974A89 /* KWExampleDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWExampleDelegate.h; path = Classes/Core/KWExampleDelegate.h; sourceTree = "<group>"; };
 		0ABDDED7148F11E1B4E940FE21CF59CD /* KWStringPrefixMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWStringPrefixMatcher.h; path = Classes/Matchers/KWStringPrefixMatcher.h; sourceTree = "<group>"; };
 		0BE93FF869EC6DC7BC3B3444F0B9045B /* KWBlockRaiseMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWBlockRaiseMatcher.h; path = Classes/Matchers/KWBlockRaiseMatcher.h; sourceTree = "<group>"; };
@@ -312,7 +312,7 @@
 		2722C35E265EF7E65833DB0D37771610 /* KWMatchers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWMatchers.h; path = Classes/Core/KWMatchers.h; sourceTree = "<group>"; };
 		2A538C88D668DA5728D12DB097837B70 /* KWBlockRaiseMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWBlockRaiseMatcher.m; path = Classes/Matchers/KWBlockRaiseMatcher.m; sourceTree = "<group>"; };
 		2A7BDC39485C4DAB2E2627BFA6AA088A /* KWAfterAllNode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWAfterAllNode.h; path = Classes/Nodes/KWAfterAllNode.h; sourceTree = "<group>"; };
-		2B449D9D4B718584A1B0F82BDF464716 /* ZMJGanttChart.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = ZMJGanttChart.modulemap; sourceTree = "<group>"; };
+		2B449D9D4B718584A1B0F82BDF464716 /* ZMJGanttChart.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = ZMJGanttChart.modulemap; sourceTree = "<group>"; };
 		2D74362E265C63F87F669047FEBAE00F /* KWMessagePattern.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWMessagePattern.h; path = Classes/Core/KWMessagePattern.h; sourceTree = "<group>"; };
 		2DB9A9FDBAB935C52E408E37231BC5A2 /* NSObject+KiwiStubAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+KiwiStubAdditions.m"; path = "Classes/Stubbing/NSObject+KiwiStubAdditions.m"; sourceTree = "<group>"; };
 		2DFC8CBCDA865143AFB6B1BF7DC631BF /* SpreadsheetView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SpreadsheetView.m; sourceTree = "<group>"; };
@@ -340,7 +340,7 @@
 		3F248170B411C65C679BD0B1D714F2AC /* KWBeZeroMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWBeZeroMatcher.h; path = Classes/Matchers/KWBeZeroMatcher.h; sourceTree = "<group>"; };
 		3F57FF44A05A12D46A78670FB82766BD /* KWCallSite.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWCallSite.h; path = Classes/Core/KWCallSite.h; sourceTree = "<group>"; };
 		3FBDD60AB5EC0183A198A13D9A5D7BCE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		3FFD8DCF6B4F80C9219099A9814CCFEF /* ZMJGanttChart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ZMJGanttChart.framework; path = ZMJGanttChart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FFD8DCF6B4F80C9219099A9814CCFEF /* ZMJGanttChart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZMJGanttChart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E61BF5A659196B0F27DCB3AC905E1B /* KWMessageTracker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWMessageTracker.m; path = Classes/Core/KWMessageTracker.m; sourceTree = "<group>"; };
 		40F56F8FB5C1AFD362BB4477D9A6D308 /* KWBeEmptyMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWBeEmptyMatcher.m; path = Classes/Matchers/KWBeEmptyMatcher.m; sourceTree = "<group>"; };
 		41AF344084978221A1781E275041EAE7 /* KWContextNode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWContextNode.h; path = Classes/Nodes/KWContextNode.h; sourceTree = "<group>"; };
@@ -352,7 +352,7 @@
 		450E10B5C95F8C95E23F36D2BE483838 /* KWBeforeEachNode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWBeforeEachNode.h; path = Classes/Nodes/KWBeforeEachNode.h; sourceTree = "<group>"; };
 		46338A8474258A08B3F544E29B260F6B /* ZMJScrollView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ZMJScrollView.h; sourceTree = "<group>"; };
 		469D2EBFA686608D9ADBE1879D8A0E2C /* KWChangeMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWChangeMatcher.m; path = Classes/Matchers/KWChangeMatcher.m; sourceTree = "<group>"; };
-		46EF4D778611D3629E907B8D3B017239 /* Kiwi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Kiwi.framework; path = Kiwi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46EF4D778611D3629E907B8D3B017239 /* Kiwi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kiwi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4768A4BAE585C9F57317158E2ABEFE21 /* KWGenericMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWGenericMatcher.h; path = Classes/Matchers/KWGenericMatcher.h; sourceTree = "<group>"; };
 		484AE291DC94E50E8691D12DB98F2B1C /* KWBeMemberOfClassMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWBeMemberOfClassMatcher.h; path = Classes/Matchers/KWBeMemberOfClassMatcher.h; sourceTree = "<group>"; };
 		48693F5D174F75EDFEB1BC836C59DDE9 /* KWAny.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWAny.h; path = Classes/Core/KWAny.h; sourceTree = "<group>"; };
@@ -367,7 +367,7 @@
 		4D7103EC781967E9D7B1A3103937401E /* NSDictionary+WBGAdd.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+WBGAdd.m"; sourceTree = "<group>"; };
 		4EA02FC09018FD308F8DB061BEE31057 /* KWNull.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWNull.h; path = Classes/Core/KWNull.h; sourceTree = "<group>"; };
 		4F475B35AA9722BD609A5C22341828C3 /* KWContainMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWContainMatcher.h; path = Classes/Matchers/KWContainMatcher.h; sourceTree = "<group>"; };
-		50595045D150A2BCEB1478CAB2C09CC3 /* Pods-ZMJGanttChart_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ZMJGanttChart_Tests.modulemap"; sourceTree = "<group>"; };
+		50595045D150A2BCEB1478CAB2C09CC3 /* Pods-ZMJGanttChart_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ZMJGanttChart_Tests.modulemap"; sourceTree = "<group>"; };
 		5098CF8CC705187AC8CB54CC00872EFF /* ZMJLayoutEngine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ZMJLayoutEngine.h; sourceTree = "<group>"; };
 		50B4048BDF636FA6D56ADDF002B00A9E /* NSObject+KiwiMockAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+KiwiMockAdditions.h"; path = "Classes/Mocking/NSObject+KiwiMockAdditions.h"; sourceTree = "<group>"; };
 		51FA55D08BCEEAA69CE625C7728FC87C /* KWSpec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWSpec.h; path = Classes/Core/KWSpec.h; sourceTree = "<group>"; };
@@ -387,7 +387,7 @@
 		5EE1C7572296E11B9BC8D8782F81FD67 /* NSMethodSignature+KiwiAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSMethodSignature+KiwiAdditions.m"; path = "Classes/Core/NSMethodSignature+KiwiAdditions.m"; sourceTree = "<group>"; };
 		5EF8D8EC774C4821335EBCA2E0418D0B /* KWMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWMatcher.h; path = Classes/Core/KWMatcher.h; sourceTree = "<group>"; };
 		5FF685D6235F0532291A7C613C63B284 /* SpreadsheetView+Layout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SpreadsheetView+Layout.h"; sourceTree = "<group>"; };
-		60F21CB9AC982D159F19041876D4DB58 /* Pods_ZMJGanttChart_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ZMJGanttChart_Example.framework; path = "Pods-ZMJGanttChart_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60F21CB9AC982D159F19041876D4DB58 /* Pods_ZMJGanttChart_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJGanttChart_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61DCB9EC9CAAD6B1922686E56BDE4D8C /* SpreadsheetView+UIViewHierarchy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SpreadsheetView+UIViewHierarchy.h"; sourceTree = "<group>"; };
 		639A84288BCADD46102C1DFB507DBBA9 /* KWEqualMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWEqualMatcher.h; path = Classes/Matchers/KWEqualMatcher.h; sourceTree = "<group>"; };
 		63ABCD397FD698C7131D70DFC00130A3 /* KWSharedExample.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWSharedExample.h; path = "Classes/Shared Examples/KWSharedExample.h"; sourceTree = "<group>"; };
@@ -435,7 +435,7 @@
 		92CB4DAA6F1320AF267D53DC9EF5705E /* KWBeMemberOfClassMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWBeMemberOfClassMatcher.m; path = Classes/Matchers/KWBeMemberOfClassMatcher.m; sourceTree = "<group>"; };
 		9350C4FF0CEB340D202429DEA60BEFDB /* KWBackgroundTask.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWBackgroundTask.h; path = Classes/Core/KWBackgroundTask.h; sourceTree = "<group>"; };
 		939D3A503C9738D3E8345733C360E347 /* SpreadsheetViewDataSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SpreadsheetViewDataSource.h; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		947134276A6AD51AC99F236BEE243DDC /* KWItNode.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWItNode.m; path = Classes/Nodes/KWItNode.m; sourceTree = "<group>"; };
 		94F5893F2A96661E37B6B6047F1D673D /* Pods-ZMJGanttChart_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZMJGanttChart_Example.release.xcconfig"; sourceTree = "<group>"; };
 		95BF71FA9EABFDBF14D69972D2797205 /* KWContainStringMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWContainStringMatcher.h; path = Classes/Matchers/KWContainStringMatcher.h; sourceTree = "<group>"; };
@@ -472,7 +472,7 @@
 		B34B27475531F8331AF265F182DE4D79 /* KWSharedExampleRegistry.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWSharedExampleRegistry.m; path = "Classes/Shared Examples/KWSharedExampleRegistry.m"; sourceTree = "<group>"; };
 		B384D64AEB0F15FDE886A1FC6E62B515 /* KiwiBlockMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KiwiBlockMacros.h; path = Classes/Core/KiwiBlockMacros.h; sourceTree = "<group>"; };
 		B455A8D4EC8B63266DE934D36803D048 /* NSIndexPath+column.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+column.m"; sourceTree = "<group>"; };
-		B502404CC51B47337BF3162982CBFAA7 /* Kiwi.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Kiwi.modulemap; sourceTree = "<group>"; };
+		B502404CC51B47337BF3162982CBFAA7 /* Kiwi.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Kiwi.modulemap; sourceTree = "<group>"; };
 		B50530F8D56B486D1E8CFFBEF98FA9B1 /* SpreadsheetView+UISnapshotting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SpreadsheetView+UISnapshotting.h"; sourceTree = "<group>"; };
 		B624AFA2DAD63E5ADAB9090C7CC5BFDB /* NSArray+BinarySearch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BinarySearch.m"; sourceTree = "<group>"; };
 		B70898EC492E7E60E27D0A885CDA461C /* ZMJLayoutEngine.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ZMJLayoutEngine.m; sourceTree = "<group>"; };
@@ -493,7 +493,7 @@
 		C783BE8753E7BA9B73154BD01905701C /* Pods-ZMJGanttChart_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ZMJGanttChart_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		C78B55D74EE10A962E91C19A907935F8 /* Pods-ZMJGanttChart_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZMJGanttChart_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		C8552FCAACF784FD3A1BD19F439A3D7B /* KWBeWithinMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWBeWithinMatcher.m; path = Classes/Matchers/KWBeWithinMatcher.m; sourceTree = "<group>"; };
-		CB581A155421EB0F3A986050BEE631E3 /* Pods_ZMJGanttChart_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ZMJGanttChart_Tests.framework; path = "Pods-ZMJGanttChart_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB581A155421EB0F3A986050BEE631E3 /* Pods_ZMJGanttChart_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJGanttChart_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC034D134799F0DAE2295124760D3A6C /* KWObjCUtilities.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = KWObjCUtilities.m; path = Classes/Core/KWObjCUtilities.m; sourceTree = "<group>"; };
 		CC8C30C21FC38FD27D42EA88F91C7F3F /* Kiwi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Kiwi.h; path = Classes/Core/Kiwi.h; sourceTree = "<group>"; };
 		CDCDF9AD1FCE939C3765F7D4FF0406D1 /* KWGenericMatchingAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWGenericMatchingAdditions.h; path = Classes/Matchers/KWGenericMatchingAdditions.h; sourceTree = "<group>"; };
@@ -807,7 +807,6 @@
 				2F71636B288C046517E2B91AC324AC64 /* NSValue+KiwiAdditions.m */,
 				458BA51FEE04C3231B91A96226A7644C /* Support Files */,
 			);
-			name = Kiwi;
 			path = Kiwi;
 			sourceTree = "<group>";
 		};
@@ -880,7 +879,6 @@
 			children = (
 				903764548835A2A5F862CB0E0590E11F /* Classes */,
 			);
-			name = ZMJGanttChart;
 			path = ZMJGanttChart;
 			sourceTree = "<group>";
 		};
@@ -957,7 +955,6 @@
 				46338A8474258A08B3F544E29B260F6B /* ZMJScrollView.h */,
 				31F4123F7CA387EBEC4C074F30F67AE1 /* ZMJScrollView.m */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};

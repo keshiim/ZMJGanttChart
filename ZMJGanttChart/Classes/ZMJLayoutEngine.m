@@ -197,43 +197,44 @@
 }
 
 #pragma mark - Private Method
+#define CGPOINT_SETX(point, x_value) { \
+CGPoint tempPoint = point;         \
+tempPoint.x = (x_value);           \
+point = tempPoint;                 \
+}
 - (BOOL)enumerateColumns:(NSInteger)row rowIndex:(NSInteger)rowIndex {
     NSInteger startColumnIndex = [self.spreadsheetView findIndex:self.columnRecords offset:self.visibleRect.origin.x - self.insets.x];
-    CGPoint cellOrigin = self.cellOrigin;
-    cellOrigin.x = self.insets.x + self.columnRecords[startColumnIndex].floatValue + self.intercellSpacing.width;
-    self.cellOrigin = cellOrigin;
+    CGPOINT_SETX(self.cellOrigin, self.insets.x + self.columnRecords[startColumnIndex].floatValue + self.intercellSpacing.width);
     
     __block NSInteger columnIndex = startColumnIndex + self.startColumn;
+    
     while (columnIndex < self.columnCount) {
-        NSInteger columnStep = 1;
-        void (^defer)(void) = ^(void) {
+        __block NSInteger columnStep = 1;
+        void(^defer)() = ^(void){
             columnIndex += columnStep;
         };
         
         NSInteger column = columnIndex % self.numberOfColumns;
-        if ((self.circularScrollingOptions.tableStyle & TableStyle_columnHeaderNotRepeated) &&
-            self.startColumn > 0 &&
-            column < self.frozenColumns)
-        {
+        if ((self.circularScrollingOptions.tableStyle & TableStyle_columnHeaderNotRepeated) && self.startColumn > 0 && column < self.frozenColumns) {
             defer();
             continue;
         }
         
         CGFloat columnWidth = self.columnWidthCache[column].floatValue;
+        
         ZMJCellRange *mergedCell = [self.spreadsheetView mergedCellFor:[Location locationWithRow:row column:column]];
         if (mergedCell) {
-            CGFloat cellWidth = 0;
+            CGFloat cellWidth  = 0;
             CGFloat cellHeight = 0;
-            CGSize cellSize = mergedCell.size;
-            if (!CGSizeEqualToSize(cellSize, CGSizeZero)) {
-                cellWidth = cellSize.width;
-                cellHeight= cellSize.height;
+            if (!CGSizeEqualToSize(CGSizeZero, mergedCell.size)) {
+                cellWidth  = mergedCell.size.width;
+                cellHeight = mergedCell.size.height;
             } else {
-                for (NSInteger column = mergedCell.from.column; column <=  mergedCell.to.column; column++) {
+                for (NSInteger col = mergedCell.from.column; col <= mergedCell.to.column; ++col) {
                     cellWidth += self.columnWidthCache[column].floatValue + self.intercellSpacing.width;
                 }
-                for (NSInteger row = mergedCell.from.row; row <= mergedCell.to.row; row++) {
-                    cellHeight += self.rowHeightCache[row].floatValue + self.intercellSpacing.height;
+                for (NSInteger r = mergedCell.from.row; r <= mergedCell.to.row; ++r) {
+                    cellHeight += self.rowHeightCache[r].floatValue + self.intercellSpacing.height;
                 }
                 mergedCell.size = CGSizeMake(cellWidth, cellHeight);
             }
@@ -246,34 +247,30 @@
             
             if (column < self.columnRecords.count) {
                 CGFloat offsetWidth = self.columnRecords[column - self.startColumn].floatValue - self.columnRecords[mergedCell.from.column - self.startColumn].floatValue;
-                CGPoint cellOrigin = self.cellOrigin;
-                cellOrigin.x -= offsetWidth;
-                self.cellOrigin = cellOrigin;
+                CGPOINT_SETX(self.cellOrigin, self.cellOrigin.x - offsetWidth);
             } else {
                 NSInteger fromColumn = mergedCell.from.column;
                 NSInteger endColumn  = self.columnRecords.count - 1;
                 
                 CGFloat offsetWidth = self.columnRecords[endColumn].floatValue;
-                for (NSInteger c = endColumn; c < column; c++) {
-                    offsetWidth += self.columnWidthCache[c].floatValue + self.intercellSpacing.width;
+                for (NSInteger col = endColumn; col < column; ++col) {
+                    offsetWidth += self.columnWidthCache[column].floatValue + self.intercellSpacing.width;
                 }
                 if (fromColumn < self.columnRecords.count) {
                     offsetWidth -= self.columnRecords[mergedCell.from.column].floatValue;
                 } else {
                     offsetWidth -= self.columnRecords[endColumn].floatValue;
-                    for (NSInteger c = endColumn; c < fromColumn; c++) {
-                        offsetWidth -= self.columnWidthCache[c].floatValue + self.intercellSpacing.width;
+                    for (NSInteger col = endColumn; col < fromColumn; ++col) {
+                        offsetWidth -= self.columnWidthCache[column].floatValue + self.intercellSpacing.width;
                     }
                 }
-                CGPoint cellOrigin = self.cellOrigin;
-                cellOrigin.x -= offsetWidth;
-                self.cellOrigin = cellOrigin;
+                
+                CGPOINT_SETX(self.cellOrigin, self.cellOrigin.x - offsetWidth);
             }
+            
             if ([self.visibleCellAddresses containsObject:address]) {
                 if (self.cellOrigin.x > CGRectGetMaxX(self.visibleRect)) {
-                    CGPoint cellOrigin = self.cellOrigin;
-                    cellOrigin.x += cellWidth;
-                    self.cellOrigin = cellOrigin;
+                    CGPOINT_SETX(self.cellOrigin, self.cellOrigin.x + cellWidth);
                     defer();
                     return NO;
                 }
@@ -281,12 +278,12 @@
                     defer();
                     return YES;
                 }
-                CGPoint cellOrigin = self.cellOrigin;
-                cellOrigin.x += cellWidth;
-                self.cellOrigin = cellOrigin;
+                CGPOINT_SETX(self.cellOrigin, self.cellOrigin.x + cellWidth);
+                
                 defer();
                 continue;
             }
+            
             CGFloat offsetHeight = 0;
             if (row < self.rowRecords.count) {
                 offsetHeight = self.rowRecords[row - self.startRow].floatValue - self.rowRecords[mergedCell.from.row - self.startRow].floatValue;
@@ -295,37 +292,34 @@
                 NSInteger endRow  = self.rowRecords.count - 1;
                 
                 offsetHeight = self.rowRecords[endRow].floatValue;
-                for (NSInteger r = endRow; r < row; r++) {
-                    offsetHeight += self.rowHeightCache[r].floatValue + self.intercellSpacing.height;
+                for (NSInteger r = endRow; r < row; ++r) {
+                    offsetHeight += self.rowHeightCache[row].floatValue + self.intercellSpacing.height;
                 }
                 if (fromRow < self.rowRecords.count) {
                     offsetHeight -= self.rowRecords[fromRow].floatValue;
                 } else {
-                    offsetHeight -= self.rowHeightCache[endRow].floatValue;
-                    for (NSInteger r = endRow; r < fromRow; r++) {
-                        offsetHeight -= self.rowHeightCache[r].floatValue + self.intercellSpacing.height;
+                    offsetHeight -= self.rowRecords[endRow].floatValue;
+                    for (NSInteger r = endRow; r < fromRow; ++r) {
+                        offsetHeight -= self.rowHeightCache[row].floatValue + self.intercellSpacing.height;
                     }
                 }
             }
             
             if (self.cellOrigin.x + cellWidth - self.intercellSpacing.width <= CGRectGetMinX(self.visibleRect)) {
-                CGPoint cellOrigin = self.cellOrigin;
-                cellOrigin.x += cellWidth;
-                self.cellOrigin = cellOrigin;
+                CGPOINT_SETX(self.cellOrigin, self.cellOrigin.x + cellWidth);
+                
                 defer();
                 continue;
             }
             if (self.cellOrigin.x > CGRectGetMaxX(self.visibleRect)) {
-                CGPoint cellOrigin = self.cellOrigin;
-                cellOrigin.x += cellWidth;
-                self.cellOrigin = cellOrigin;
+                CGPOINT_SETX(self.cellOrigin, self.cellOrigin.x + cellWidth);
+                
                 defer();
                 return NO;
             }
-            if (self.cellOrigin.y - offsetHeight + cellHeight - self.intercellSpacing.height <= CGRectGetMinY(self.visibleRect)) {
-                CGPoint cellOrigin = self.cellOrigin;
-                cellOrigin.x += cellWidth;
-                self.cellOrigin = cellOrigin;
+            if ((self.cellOrigin.y - offsetHeight + cellHeight - self.intercellSpacing.height) <= CGRectGetMinY(self.visibleRect)) {
+                CGPOINT_SETX(self.cellOrigin, self.cellOrigin.x + cellWidth);
+                
                 defer();
                 continue;
             }
@@ -340,9 +334,7 @@
                                                                                 self.cellOrigin.y - offsetHeight,
                                                                                 cellWidth - self.intercellSpacing.width,
                                                                                 cellHeight - self.intercellSpacing.height)];
-            CGPoint cellOrigin = self.cellOrigin;
-            cellOrigin.x += cellWidth;
-            self.cellOrigin = cellOrigin;
+            CGPOINT_SETX(self.cellOrigin, self.cellOrigin.x + cellWidth);
             defer();
             continue;
         }
@@ -350,26 +342,17 @@
         CGFloat rowHeight = self.rowHeightCache[row].floatValue;
         
         if (self.cellOrigin.x + columnWidth <= CGRectGetMinX(self.visibleRect)) {
-            CGPoint cellOrigin = self.cellOrigin;
-            cellOrigin.x += columnWidth + self.intercellSpacing.width;
-            self.cellOrigin = cellOrigin;
-            
+            CGPOINT_SETX(self.cellOrigin, self.cellOrigin.x + columnWidth + self.intercellSpacing.width);
             defer();
             continue;
         }
         if (self.cellOrigin.x > CGRectGetMaxX(self.visibleRect)) {
-            CGPoint cellOrigin = self.cellOrigin;
-            cellOrigin.x += columnWidth + self.intercellSpacing.width;
-            self.cellOrigin = cellOrigin;
-            
+            CGPOINT_SETX(self.cellOrigin, self.cellOrigin.x + columnWidth + self.intercellSpacing.width);
             defer();
             return NO;
         }
         if (self.cellOrigin.y + rowHeight <= CGRectGetMinY(self.visibleRect)) {
-            CGPoint cellOrigin = self.cellOrigin;
-            cellOrigin.x += columnWidth + self.intercellSpacing.width;
-            self.cellOrigin = cellOrigin;
-            
+            CGPOINT_SETX(self.cellOrigin, self.cellOrigin.x + columnWidth + self.intercellSpacing.width);
             defer();
             continue;
         }
@@ -382,14 +365,13 @@
         [self.visibleCellAddresses addObject:address];
         
         CGSize cellSize = CGSizeMake(columnWidth, rowHeight);
-        
         [self layoutCell:address frame:(CGRect){self.cellOrigin, cellSize}];
-        CGPoint cellOrigin = self.cellOrigin;
-        cellOrigin.x += columnWidth + self.intercellSpacing.width;
-        self.cellOrigin = cellOrigin;
+        
+        CGPOINT_SETX(self.cellOrigin, self.cellOrigin.x + columnWidth + self.intercellSpacing.width);
         
         defer();
     }
+    
     return NO;
 }
 

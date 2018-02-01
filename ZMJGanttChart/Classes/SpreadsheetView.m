@@ -160,10 +160,10 @@
     self.rowHeaderView.layoutAttributes    = [self layoutAttributeForRowHeaderView];
     self.tableView.layoutAttributes        = [self layoutAttributeForTableView];
     
-    [self.cornerView resetReusableObjects];
+    [self.cornerView       resetReusableObjects];
     [self.columnHeaderView resetReusableObjects];
-    [self.rowHeaderView resetReusableObjects];
-    [self.tableView resetReusableObjects];
+    [self.rowHeaderView    resetReusableObjects];
+    [self.tableView        resetReusableObjects];
     
     [self resetContentSize:self.cornerView];
     [self resetContentSize:self.columnHeaderView];

@@ -15,10 +15,11 @@
     self.columnHeaderView.delegate = nil;
     self.tableView.delegate        = nil;
     
+    __weak typeof(self)weak_self = self;
     void (^defer)(void) = ^(void) {
-        self.rowHeaderView.delegate    = self;
-        self.columnHeaderView.delegate = self;
-        self.tableView.delegate        = self;
+        weak_self.rowHeaderView.delegate    = weak_self;
+        weak_self.columnHeaderView.delegate = weak_self;
+        weak_self.tableView.delegate        = weak_self;
     };
     
     if (self.tableView.contentOffset.x < 0 && !self.stickyColumnHeader) {
@@ -54,8 +55,6 @@
         frame.origin.y = 0;
         self.rowHeaderView.frame = frame;
     }
-    
-    NSLog(@"tableview.contentoffset=%@", NSStringFromCGPoint(self.tableView.contentOffset));
     
     CGPoint offset = self.rowHeaderView.contentOffset;
     offset.x = self.tableView.contentOffset.x;
