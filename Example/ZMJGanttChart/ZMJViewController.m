@@ -109,9 +109,9 @@
                    @[@"Air condition check", @"3", @"7", @"1"],
                    @[@"Furniture installation", @"11", @"8", @"1"]
                    ];
-    self.colors = @[[UIColor colorWithRed:0.314 green:0.698 blue:0.337 alpha:1],
-                    [UIColor colorWithRed:1.000 green:0.718 blue:0.298 alpha:1],
-                    [UIColor colorWithRed:0.180 green:0.671 blue:0.796 alpha:1],
+    self.colors = @[[[UIColor redColor] colorWithAlphaComponent:.8],
+                    [[UIColor greenColor] colorWithAlphaComponent:.5],
+                    [[UIColor brownColor] colorWithAlphaComponent:.7],
                     ];
 }
 

@@ -9,3 +9,7 @@ target 'ZMJGanttChart_Example' do
     pod 'Kiwi'
   end
 end
+
+target 'ZMJClassData' do
+    pod 'ZMJGanttChart', :path => '../'
+end

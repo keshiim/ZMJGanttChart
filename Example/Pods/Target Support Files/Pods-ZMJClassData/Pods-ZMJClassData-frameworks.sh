@@ -98,10 +98,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/ZMJGanttChart-iOS9.3/ZMJGanttChart.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ZMJGanttChart-iOS11.2/ZMJGanttChart.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/ZMJGanttChart-iOS9.3/ZMJGanttChart.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ZMJGanttChart-iOS11.2/ZMJGanttChart.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
