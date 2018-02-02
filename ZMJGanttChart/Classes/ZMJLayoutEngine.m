@@ -447,7 +447,7 @@ point = tempPoint;                 \
                                                                                gridColor:topColor
                                                                                   origin:frame.origin
                                                                                   length:frame.size.width
-                                                                                    edge:RectEdgeMake(UIPopoverArrowDirectionUp, 0, leftWidth, 0, rightWidth)
+                                                                                    edge:RectEdgeMake(RectEdgeDirectionUp, 0, leftWidth, 0, rightWidth)
                                                                                 priority:topPriority];
         }
     } else {
@@ -455,7 +455,7 @@ point = tempPoint;                 \
                                                                               gridColor:topColor
                                                                                  origin:frame.origin
                                                                                  length:frame.size.width
-                                                                                   edge:RectEdgeMake(UIPopoverArrowDirectionUp, 0, leftWidth, 0, rightWidth)
+                                                                                   edge:RectEdgeMake(RectEdgeDirectionUp, 0, leftWidth, 0, rightWidth)
                                                                                priority:topPriority];
     }
     
@@ -470,7 +470,7 @@ point = tempPoint;                 \
                                                                                         gridColor:bottomColor
                                                                                            origin:CGPointMake(frame.origin.x, CGRectGetMaxY(frame))
                                                                                            length:frame.size.width
-                                                                                             edge:RectEdgeMake(UIPopoverArrowDirectionDown, 0, leftWidth, 0, rightWidth)
+                                                                                             edge:RectEdgeMake(RectEdgeDirectionDown, 0, leftWidth, 0, rightWidth)
                                                                                          priority:bottomPriority];
         }
     } else {
@@ -478,7 +478,7 @@ point = tempPoint;                 \
                                                                                     gridColor:bottomColor
                                                                                        origin:CGPointMake(frame.origin.x, CGRectGetMaxY(frame))
                                                                                        length:frame.size.width
-                                                                                         edge:RectEdgeMake(UIPopoverArrowDirectionDown, 0, leftWidth, 0, rightWidth)
+                                                                                         edge:RectEdgeMake(RectEdgeDirectionDown, 0, leftWidth, 0, rightWidth)
                                                                                      priority:bottomPriority];
     }
     
@@ -489,7 +489,7 @@ point = tempPoint;                 \
                                                                              gridColor:leftColor
                                                                                 origin:frame.origin
                                                                                 length:frame.size.height
-                                                                                  edge:RectEdgeMake(UIPopoverArrowDirectionLeft, topWidth, 0, bottomWidth, 0)
+                                                                                  edge:RectEdgeMake(RectEdgeDirectionLeft, topWidth, 0, bottomWidth, 0)
                                                                               priority:leftPriority];
         }
     } else {
@@ -497,7 +497,7 @@ point = tempPoint;                 \
                                                                          gridColor:leftColor
                                                                             origin:frame.origin
                                                                             length:frame.size.height
-                                                                              edge:RectEdgeMake(UIPopoverArrowDirectionLeft, topWidth, 0, bottomWidth, 0)
+                                                                              edge:RectEdgeMake(RectEdgeDirectionLeft, topWidth, 0, bottomWidth, 0)
                                                                           priority:leftPriority];
         
     }
@@ -512,7 +512,7 @@ point = tempPoint;                 \
                                                                                      gridColor:rightColor
                                                                                         origin:CGPointMake(CGRectGetMaxX(frame), frame.origin.y)
                                                                                         length:frame.size.height
-                                                                                          edge:RectEdgeMake(UIPopoverArrowDirectionRight, topWidth, 0, bottomWidth, 0)
+                                                                                          edge:RectEdgeMake(RectEdgeDirectionRight, topWidth, 0, bottomWidth, 0)
                                                                                       priority:rightPriority];
         }
     } else {
@@ -520,14 +520,14 @@ point = tempPoint;                 \
                                                                                  gridColor:rightColor
                                                                                     origin:CGPointMake(CGRectGetMaxX(frame), frame.origin.y)
                                                                                     length:frame.size.height
-                                                                                      edge:RectEdgeMake(UIPopoverArrowDirectionRight, topWidth, 0, bottomWidth, 0)
+                                                                                      edge:RectEdgeMake(RectEdgeDirectionRight, topWidth, 0, bottomWidth, 0)
                                                                                   priority:rightPriority];
     }
 }
 
 - (void)renderMergedCells {
     __weak typeof(self)weak_self = self;
-    [self.mergedCellAddress.array enumerateObjectsUsingBlock:^(Address * _Nonnull address, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.mergedCellAddress enumerateObjectsUsingBlock:^(Address * _Nonnull address, NSUInteger idx, BOOL * _Nonnull stop) {
         NSValue *frameValue = weak_self.mergedCellRects[address];
         if (frameValue) {
             [weak_self layoutCell:address frame:frameValue.CGRectValue];
@@ -540,14 +540,14 @@ point = tempPoint;                 \
     [self.horizontalGridLayouts enumerateKeysAndObjectsUsingBlock:^(Address * _Nonnull address, ZMJGridLayout * _Nonnull gridLayout, BOOL * _Nonnull stop) {
         CGRect frame = CGRectZero;
         frame.origin = gridLayout.origin;
-        Direct top = gridLayout.edge.top;
-        if (top.notNull == YES) {
+        if (gridLayout.edge.top.notNull == YES) {
+            Direct top = gridLayout.edge.top;
             frame.origin.x -= top.left + (weak_self.intercellSpacing.width - top.left) / 2;
             frame.origin.y -= weak_self.intercellSpacing.height - (weak_self.intercellSpacing.height - gridLayout.gridWidth) / 2;
             frame.size.width = gridLayout.length + top.left + (weak_self.intercellSpacing.width - top.left) / 2 + top.right + (weak_self.intercellSpacing.width - top.right) / 2;
         }
-        Direct bottom = gridLayout.edge.bottom;
-        if (bottom.notNull == YES) {
+        if (gridLayout.edge.bottom.notNull == YES) {
+            Direct bottom = gridLayout.edge.bottom;
             frame.origin.x -= bottom.left + (weak_self.intercellSpacing.width - bottom.left) / 2;
             frame.origin.y -= (gridLayout.gridWidth - weak_self.intercellSpacing.height) / 2;
             frame.size.width = gridLayout.length + bottom.left + (weak_self.intercellSpacing.width - bottom.left) / 2 + bottom.right + (weak_self.intercellSpacing.width - bottom.right) / 2;
@@ -579,14 +579,15 @@ point = tempPoint;                 \
     [self.verticalGridLayouts enumerateKeysAndObjectsUsingBlock:^(Address * _Nonnull address, ZMJGridLayout * _Nonnull gridLayout, BOOL * _Nonnull stop) {
         CGRect frame = CGRectZero;
         frame.origin = gridLayout.origin;
-        Direct left = gridLayout.edge.left;
-        if (left.notNull == YES) {
+
+        if (gridLayout.edge.left.notNull == YES) {
+            Direct left = gridLayout.edge.left;
             frame.origin.x -= weak_self.intercellSpacing.width - (weak_self.intercellSpacing.width - gridLayout.gridWidth) / 2;
             frame.origin.y -= left.top + (weak_self.intercellSpacing.height - left.top) / 2;
-            frame.size.height = gridLayout.length + left.top + (weak_self.intercellSpacing.height - left.top) / 2 + left.bottom + (weak_self.intercellSpacing.width - left.bottom) / 2;
+            frame.size.height = gridLayout.length + left.top + (weak_self.intercellSpacing.height - left.top) / 2 + left.bottom + (weak_self.intercellSpacing.height - left.bottom) / 2;
         }
-        Direct right = gridLayout.edge.right;
-        if (right.notNull == YES) {
+        if (gridLayout.edge.right.notNull == YES) {
+            Direct right = gridLayout.edge.right;
             frame.origin.x -= (gridLayout.gridWidth - weak_self.intercellSpacing.width) / 2;
             frame.origin.y -= right.top + (weak_self.intercellSpacing.height - right.top) / 2;
             frame.size.height = gridLayout.length + right.top + (weak_self.intercellSpacing.height - right.top) / 2 + right.bottom + (weak_self.intercellSpacing.height - right.bottom) / 2;

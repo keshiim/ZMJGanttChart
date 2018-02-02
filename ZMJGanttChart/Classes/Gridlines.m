@@ -105,6 +105,19 @@
     self.priority == object.priority;
 }
 
+- (NSString *)description {
+    return [self debugDescription];
+}
+
+- (NSString *)debugDescription {
+    return [NSString stringWithFormat:@"gridWidth=%ld\ngridColor=%@\nlength=%ld\nedge=%@\npriority=%ld",
+            (long)self.gridWidth,
+            self.gridColor,
+            (long)self.length,
+            RectEdgeDescription(self.edge),
+            (long)self.priority];
+}
+
 @end
 
 
