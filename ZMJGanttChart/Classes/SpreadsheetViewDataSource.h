@@ -13,7 +13,8 @@
 @class SpreadsheetView;
 
 /// Implement this protocol to provide data to an `SpreadsheetView`.
-@protocol SpreadsheetViewDataSource
+@protocol SpreadsheetViewDataSource  <NSObject>
+@required
 /// Asks your data source object for the number of columns in the spreadsheet view.
 ///
 /// - Parameter spreadsheetView: The spreadsheet view requesting this information.
@@ -52,6 +53,7 @@
 ///   If you return nil from this method, the blank cell will be displayed by default.
 - (ZMJCell *)spreadsheetView:(SpreadsheetView *)spreadsheetView cellForItemAt:(NSIndexPath *)indexPath;
 
+@optional
 /// Asks your data source object for the array of cell ranges that indicate the range of merged cells in the spreadsheetView.
 ///
 /// - Parameter spreadsheetView: The spreadsheet view requesting this information.

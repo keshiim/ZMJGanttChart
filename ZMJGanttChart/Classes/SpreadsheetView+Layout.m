@@ -148,12 +148,20 @@
     if (self.dataSource == nil) {
         return [ZMJLayoutProperties new];
     }
+
+    NSInteger numberOfColumns = [self.dataSource respondsToSelector:@selector(numberOfColumns:)] ?
+                                [self.dataSource numberOfColumns:self] :
+                                0;
+    NSInteger numberOfRows    = [self.dataSource respondsToSelector:@selector(numberOfRows:)] ?
+                                [self.dataSource numberOfRows:self] :
+                                0;
     
-    NSInteger numberOfColumns = [self.dataSource numberOfColumns:self];
-    NSInteger numberOfRows    = [self.dataSource numberOfRows:self];
-    
-    NSInteger frozenColumns = [self.dataSource frozenColumns:self];
-    NSInteger frozenRows    = [self.dataSource frozenRows:self];
+    NSInteger frozenColumns = [self.dataSource respondsToSelector:@selector(frozenColumns:)] ?
+                              [self.dataSource frozenColumns:self] :
+                              0;
+    NSInteger frozenRows    = [self.dataSource respondsToSelector:@selector(frozenRows:)] ?
+                              [self.dataSource frozenRows:self] :
+                              0;
     if (numberOfColumns < 0) {
         [NSException exceptionWithName:@"" reason:@"`numberOfColumns(in:)` must return a value greater than or equal to 0" userInfo:nil];
     }
@@ -167,7 +175,8 @@
         [NSException exceptionWithName:@"" reason:@"`frozenRows(in:)` must return a value greater than or equal to 0" userInfo:nil];
     }
 
-    NSArray<ZMJCellRange *> *mergedCells = [self.dataSource mergedCells:self];
+    NSArray<ZMJCellRange *> *mergedCells = [self.dataSource respondsToSelector:@selector(mergedCells:)] ?
+                                           [self.dataSource mergedCells:self] : @[];
     NSDictionary<Location *, ZMJCellRange *> *mergedCellLayouts = ^NSDictionary<Location *, ZMJCellRange *> *(void) {
         NSMutableDictionary<Location *, ZMJCellRange *> *layouts = [NSMutableDictionary dictionary];
         

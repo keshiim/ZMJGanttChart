@@ -99,12 +99,12 @@
 #pragma mark - NSFastEnumeration
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained _Nullable [_Nonnull])buffer count:(NSUInteger)len {
 //    LOCK(NSUInteger count = [_pairs countByEnumeratingWithState:state objects:stackbuf count:len]);
-    LOCK(NSUInteger count = [_pairs countByEnumeratingWithState:state objects:buffer count:len]);
+    LOCK(NSUInteger count = [_pairs.allValues countByEnumeratingWithState:state objects:buffer count:len]);
     return count;
 }
 
 - (NSEnumerator *)objectEnumerator {
-    LOCK(NSEnumerator * e = [_pairs objectEnumerator]); return e;
+    LOCK(NSEnumerator * e = [_pairs.allValues objectEnumerator]); return e;
 }
 
 @end

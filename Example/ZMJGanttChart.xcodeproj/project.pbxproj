@@ -29,6 +29,8 @@
 		965CF10120242F00004E509E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 965CF10020242F00004E509E /* Assets.xcassets */; };
 		965CF10420242F00004E509E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 965CF10220242F00004E509E /* LaunchScreen.storyboard */; };
 		965CF10720242F00004E509E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 965CF10620242F00004E509E /* main.m */; };
+		965CF10D202801DB004E509E /* ZMJCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 965CF10C202801DB004E509E /* ZMJCells.m */; };
+		965CF10F20280832004E509E /* data.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 965CF10E20280832004E509E /* data.tsv */; };
 		967FFB07201F040C00461EB9 /* ZMJCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 967FFB06201F040C00461EB9 /* ZMJCells.m */; };
 		99866CC807B6E511EBE3BA9E /* Pods_ZMJGanttChart_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A7DEB2C2FCB2A24E91C988 /* Pods_ZMJGanttChart_Example.framework */; };
 		BEEE3E345855E70D10A353CE /* Pods_ZMJGanttChart_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B79741F1B5C02E894C8AA94B /* Pods_ZMJGanttChart_Tests.framework */; };
@@ -84,6 +86,9 @@
 		965CF10320242F00004E509E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		965CF10520242F00004E509E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		965CF10620242F00004E509E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		965CF10B202801DB004E509E /* ZMJCells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMJCells.h; sourceTree = "<group>"; };
+		965CF10C202801DB004E509E /* ZMJCells.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJCells.m; sourceTree = "<group>"; };
+		965CF10E20280832004E509E /* data.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.tsv; sourceTree = "<group>"; };
 		967FFB05201F040C00461EB9 /* ZMJCells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMJCells.h; sourceTree = "<group>"; };
 		967FFB06201F040C00461EB9 /* ZMJCells.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJCells.m; sourceTree = "<group>"; };
 		AC7E0EBE57F47EB601DE2537 /* Pods-ZMJGanttChart_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJGanttChart_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJGanttChart_Example/Pods-ZMJGanttChart_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -241,9 +246,12 @@
 				965CF0F820242F00004E509E /* AppDelegate.m */,
 				965CF0FA20242F00004E509E /* ViewController.h */,
 				965CF0FB20242F00004E509E /* ViewController.m */,
+				965CF10B202801DB004E509E /* ZMJCells.h */,
+				965CF10C202801DB004E509E /* ZMJCells.m */,
 				965CF0FD20242F00004E509E /* Main.storyboard */,
 				965CF10020242F00004E509E /* Assets.xcassets */,
 				965CF10220242F00004E509E /* LaunchScreen.storyboard */,
+				965CF10E20280832004E509E /* data.tsv */,
 				965CF10520242F00004E509E /* Info.plist */,
 				965CF10620242F00004E509E /* main.m */,
 			);
@@ -379,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				965CF10420242F00004E509E /* LaunchScreen.storyboard in Resources */,
+				965CF10F20280832004E509E /* data.tsv in Resources */,
 				965CF10120242F00004E509E /* Assets.xcassets in Resources */,
 				965CF0FF20242F00004E509E /* Main.storyboard in Resources */,
 			);
@@ -567,6 +576,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				965CF0FC20242F00004E509E /* ViewController.m in Sources */,
+				965CF10D202801DB004E509E /* ZMJCells.m in Sources */,
 				965CF10720242F00004E509E /* main.m in Sources */,
 				965CF0F920242F00004E509E /* AppDelegate.m in Sources */,
 			);
