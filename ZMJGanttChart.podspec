@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ZMJGanttChart'
-  s.version          = '0.1.1'
-  s.summary          = 'A short description of ZMJGanttChart.'
+  s.version          = '0.1.2'
+  s.summary          = 'Full configurable spreadsheet view user interfaces for iOS applications. With this framework, you can easily create complex layouts like schedule, gantt chart or timetable as if you are using Excel.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
