@@ -116,9 +116,9 @@
 
 - (LayoutAttributes)layoutAttributeForRowHeaderView {
     CGPoint insets =  self.circularScrollingOptions.headerStyle == HeaderStyle_rowHeaderStartsFirstColumn ?
-    CGPointMake(0, [(NSNumber *)[[self.layoutProperties.columnWidthCache subarrayWithRange:NSMakeRange(0, self.frozenColumns)] wbg_reduce:@(0) with:^NSNumber* _Nonnull(NSNumber* _Nullable prev, NSNumber * _Nonnull curr) {
+    CGPointMake([(NSNumber *)[[self.layoutProperties.columnWidthCache subarrayWithRange:NSMakeRange(0, self.frozenColumns)] wbg_reduce:@(0) with:^NSNumber* _Nonnull(NSNumber* _Nullable prev, NSNumber * _Nonnull curr) {
         return @(prev.floatValue + curr.floatValue);
-    }] floatValue] + self.intercellSpacing.width * self.layoutProperties.frozenColumns) :
+    }] floatValue] + self.intercellSpacing.width * self.layoutProperties.frozenColumns, 0) :
     CGPointZero;
     
     LayoutAttributes layout;

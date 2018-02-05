@@ -7,18 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Define.h"
-
-@protocol CircularScrollingConfigurationState;
 @protocol CircularScrollingConfiguration;
-
-@class CircularScrollingConfigurationState_None;
-@class CircularScrollingConfigurationState_Horizontally;
-@class CircularScrollingConfigurationState_Vertically;
-@class CircularScrollingConfigurationState_Both;
-@class CircularScrollingConfigurationState_Both_ColumnHeaderNotRepeated;
-@class CircularScrollingConfigurationState_Both_RowHeaderNotRepeated;
-@class CircularScrollingConfigurationState_Both_RowHeaderStartsFirstColumn;
-@class CircularScrollingConfigurationState_Both_ColumnHeaderStartsFirstRow;
 
 @class Configuration;
 @class Options;
@@ -26,84 +15,74 @@
 @class CircularScrollingConfigurationBuilder;
 
 #pragma mark - Protocol
-@protocol CircularScrollingConfigurationState
-@end
 
 @protocol CircularScrollingConfiguration
 - (Options *)options;
 @end
 
-
-#pragma mark - CircularScrollingConfigurationState subclasses
-@interface CircularScrollingConfigurationBuilder : NSObject <CircularScrollingConfigurationState, CircularScrollingConfiguration>
-
-@end
-
-@interface CircularScrollingConfigurationState_None : CircularScrollingConfigurationBuilder
-@end
-
-@interface CircularScrollingConfigurationState_Horizontally : CircularScrollingConfigurationBuilder
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_ColumnHeaderNotRepeated *ColumnHeaderNotRepeated;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_RowHeaderStartsFirstColumn *RowHeaderStartsFirstColumn;
-@end
-
-@interface CircularScrollingConfigurationState_Vertically : CircularScrollingConfigurationBuilder
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_RowHeaderNotRepeated    *RowHeaderNotRepeated;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_ColumnHeaderStartsFirstRow *ColumnHeaderStartsFirstRow;
-@end
-
-@interface CircularScrollingConfigurationState_Both : CircularScrollingConfigurationBuilder
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_ColumnHeaderNotRepeated *ColumnHeaderNotRepeated;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_RowHeaderNotRepeated    *RowHeaderNotRepeated;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_RowHeaderStartsFirstColumn *RowHeaderStartsFirstColumn;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_ColumnHeaderStartsFirstRow *ColumnHeaderStartsFirstRow;
-@end
-
-@interface CircularScrollingConfigurationState_Both_ColumnHeaderNotRepeated : CircularScrollingConfigurationBuilder
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_RowHeaderStartsFirstColumn *RowHeaderStartsFirstColumn;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_ColumnHeaderStartsFirstRow *ColumnHeaderStartsFirstRow;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_RowHeaderNotRepeated       *RowHeaderNotRepeated;
-@end
-
-@interface CircularScrollingConfigurationState_Both_RowHeaderNotRepeated : CircularScrollingConfigurationBuilder
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_RowHeaderStartsFirstColumn *RowHeaderStartsFirstColumn;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_ColumnHeaderStartsFirstRow *ColumnHeaderStartsFirstRow;
-@end
-
-@interface CircularScrollingConfigurationState_Both_RowHeaderStartsFirstColumn : CircularScrollingConfigurationBuilder
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_RowHeaderNotRepeated    *RowHeaderNotRepeated;
-@end
-
-@interface CircularScrollingConfigurationState_Both_ColumnHeaderStartsFirstRow : CircularScrollingConfigurationBuilder
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both_ColumnHeaderNotRepeated *ColumnHeaderNotRepeated;
-@end
+typedef NS_OPTIONS(NSUInteger, CircularScrollingConfigurationState) {
+    ZMJCircularScrolling_none         = 0,
+    
+    ZMJCircularScrolling_horizontally = 1 << 0,
+    ZMJCircularScrolling_horizontally_rowHeaderStartsFirstColumn = 1 << 1,
+    ZMJCircularScrolling_horizontally_columnHeaderNotRepeated    = 1 << 2,
+    ZMJCircularScrolling_horizontally_columnHeaderNotRepeated_rowHeaderStartsFirstColumn = 1 << 3,
+    
+    ZMJCircularScrolling_vertically = 1 << 4,
+    ZMJCircularScrolling_vertically_columnHeaderStartsFirstRow = 1 << 5,
+    ZMJCircularScrolling_vertically_rowHeaderNotRepeated = 1 << 6,
+    ZMJCircularScrolling_vertically_rowHeaderNotRepeated_columnHeaderStartsFirstRow = 1 << 7,
+    
+    ZMJCircularScrolling_both = 1 << 8,
+    ZMJCircularScrolling_both_rowHeaderStartsFirstColumn = 1 << 9,
+    ZMJCircularScrolling_both_columnHeaderStartsFirstRow = 1 << 10,
+    ZMJCircularScrolling_both_rowHeaderStartsFirstColumn_rowHeaderNotRepeated = 1 << 11,
+    ZMJCircularScrolling_both_columnHeaderStartsFirstRow_columnHeaderNotRepeated = 1 << 12,
+    
+    ZMJCircularScrolling_both_columnHeaderNotRepeated = 1 << 13,
+    ZMJCircularScrolling_both_columnHeaderNotRepeated_rowHeaderStartsFirstColumn = 1 << 14,
+    ZMJCircularScrolling_both_columnHeaderNotRepeated_columnHeaderStartsFirstRow = 1 << 15,
+    ZMJCircularScrolling_both_columnHeaderNotRepeated_rowHeaderNotRepeated = 1 << 16,
+    ZMJCircularScrolling_both_columnHeaderNotRepeated_rowHeaderNotRepeated_rowHeaderStartsFirstColumn = 1 << 17,
+    ZMJCircularScrolling_both_columnHeaderNotRepeated_rowHeaderNotRepeated_columnHeaderStartsFirstRow = 1 << 18,
+    
+    ZMJCircularScrolling_both_rowHeaderNotRepeated = 1 << 19,
+    ZMJCircularScrolling_both_rowHeaderNotRepeated_rowHeaderStartsFirstColumn = 1 << 20,
+    ZMJCircularScrolling_both_rowHeaderNotRepeated_columnHeaderStartsFirstRow = 1 << 21,
+    ZMJCircularScrolling_both_rowHeaderNotRepeated_columnHeaderNotRepeated = 1 << 22,
+    ZMJCircularScrolling_both_rowHeaderNotRepeated_columnHeaderNotRepeated_rowHeaderStartsFirstColumn = 1 << 23,
+    ZMJCircularScrolling_both_rowHeaderNotRepeated_columnHeaderNotRepeated_columnHeaderStartsFirstRow = 1 << 24,
+};
 
 #pragma mark - Class
-@interface Configuration: NSObject
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_None         *none;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Horizontally *horizontally;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Vertically   *vertically;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both         *both;
+@interface CircularScrollingConfigurationBuilder: NSObject <CircularScrollingConfiguration>
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithCircularScrollingState:(CircularScrollingConfigurationState)state;
++ (instancetype)configurationBuilderWithCircularScrollingState:(CircularScrollingConfigurationState)state;
 
-@property (class, nonatomic, strong) Options *options;
+@property (nonatomic, assign) CircularScrollingConfigurationState state;
+@end
+
+@interface Configuration: NSObject
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)instance;
+
+@property (nonatomic, strong) CircularScrollingConfigurationBuilder         *none;
+@property (nonatomic, strong) CircularScrollingConfigurationBuilder *horizontally;
+@property (nonatomic, strong) CircularScrollingConfigurationBuilder   *vertically;
+@property (nonatomic, strong) CircularScrollingConfigurationBuilder         *both;
 @end
 
 @interface Options : NSObject
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithDirection:(ZMJDirection)direction headerStyle:(ZMJHeaderStyle)headerStyle tableStyle:(ZMJTableStyle)tableStyle;
++ (instancetype)optionsWithDirection:(ZMJDirection)direction headerStyle:(ZMJHeaderStyle)headerStyle tableStyle:(ZMJTableStyle)tableStyle;
+
 @property (nonatomic, assign) ZMJDirection   direction;
 @property (nonatomic, assign) ZMJHeaderStyle headerStyle;
 @property (nonatomic, assign) ZMJTableStyle  tableStyle;
 @end
 
 @interface CircualrScrolling : NSObject
-
-@property (class, nonatomic, strong) Configuration *Configuration;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_None         *None;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Horizontally *Horizontally;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Vertically   *Vertically;
-@property (class, nonatomic, strong) CircularScrollingConfigurationState_Both         *Both;
-
-@property (class, nonatomic, assign) ZMJDirection      Direction;
-@property (class, nonatomic, assign) ZMJHeaderStyle    HeaderStyle;
-@property (class, nonatomic, assign) ZMJTableStyle     TableStyle;
 @end
 

@@ -46,17 +46,12 @@
     [self.spreadsheetView registerNib:[UINib nibWithNibName:NSStringFromClass([SlotCell class]) bundle:nil] forCellWithReuseIdentifier:NSStringFromClass([SlotCell class])];
     [self.spreadsheetView registerClass:[MyBlankCell class] forCellWithReuseIdentifier:NSStringFromClass([MyBlankCell class])];
     
-    self.spreadsheetView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:.85];
+    self.spreadsheetView.backgroundColor = [[UIColor lightTextColor] colorWithAlphaComponent:.7];
     
     CGFloat hairline = 1 / [UIScreen mainScreen].scale;
     self.spreadsheetView.intercellSpacing = CGSizeMake(hairline, hairline);
     self.spreadsheetView.gridStyle = [GridStyle style:GridStyle_solid width:hairline color:[UIColor lightGrayColor]];
-    self.spreadsheetView.circularScrolling = CircularScrollingConfigurationState_Horizontally.RowHeaderStartsFirstColumn;
-    Options *options = [Options new];
-    options.direction = Direction_horizontally;
-    options.headerStyle = HeaderStyle_rowHeaderStartsFirstColumn;
-    options.tableStyle = TableStyle_columnHeaderNotRepeated;
-//    CircularScrollingConfigurationState_Horizontally.RowHeaderStartsFirstColumn.options = options;
+    self.spreadsheetView.circularScrolling = [CircularScrollingConfigurationBuilder configurationBuilderWithCircularScrollingState:ZMJCircularScrolling_horizontally_rowHeaderStartsFirstColumn];
     
 }
 

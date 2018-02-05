@@ -67,8 +67,8 @@
     
     self.scrollsToTop = YES;
     
-    self.circularScrolling = Configuration.none;
-    self.circularScrollingOptions = Configuration.none.options;
+    self.circularScrolling = [Configuration instance].none;
+    self.circularScrollingOptions = [Configuration instance].none.options;
     self.circularScrollScalingFactor = CircularScrollScalingFactorMake(1, 1);
     self.centerOffset = CGPointZero;
     
@@ -107,13 +107,13 @@
     
     frame = self.bounds;
     frame.size.height = 0;
-    self.columnHeaderView.frame = frame;
-    self.columnHeaderView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.columnHeaderView.autoresizesSubviews = NO;
-    self.columnHeaderView.showsHorizontalScrollIndicator = NO;
-    self.columnHeaderView.showsVerticalScrollIndicator = NO;
-    self.columnHeaderView.hidden = YES;
-    self.columnHeaderView.delegate = self;
+    self.rowHeaderView.frame = frame;
+    self.rowHeaderView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.rowHeaderView.autoresizesSubviews = NO;
+    self.rowHeaderView.showsHorizontalScrollIndicator = NO;
+    self.rowHeaderView.showsVerticalScrollIndicator = NO;
+    self.rowHeaderView.hidden = YES;
+    self.rowHeaderView.delegate = self;
     
     self.cornerView.autoresizesSubviews = NO;
     self.cornerView.hidden = YES;
@@ -658,7 +658,7 @@
         self.showsHorizontalScrollIndicator = NO;
     }
     if (self.circularScrollingOptions.direction & Direction_vertically) {
-        self.showsHorizontalScrollIndicator = NO;
+        self.showsVerticalScrollIndicator = NO;
         self.scrollsToTop = NO;
     }
 }

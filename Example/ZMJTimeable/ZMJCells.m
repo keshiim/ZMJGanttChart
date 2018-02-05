@@ -32,7 +32,7 @@
     self.label.frame = self.bounds;
     
     self.label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.label.backgroundColor = [UIColor colorWithRed:0.2 green:0.3 blue:0.3 alpha:1];
+    self.label.backgroundColor = [UIColor colorWithRed:0.2 green:0.4 blue:0.8 alpha:1];
     self.label.font = [UIFont systemFontOfSize:12];
     self.label.textColor = [UIColor whiteColor];
     self.label.textAlignment = NSTextAlignmentCenter;
