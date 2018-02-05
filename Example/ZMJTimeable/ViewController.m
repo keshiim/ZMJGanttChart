@@ -56,7 +56,7 @@
     options.direction = Direction_horizontally;
     options.headerStyle = HeaderStyle_rowHeaderStartsFirstColumn;
     options.tableStyle = TableStyle_columnHeaderNotRepeated;
-    CircularScrollingConfigurationState_Horizontally.RowHeaderStartsFirstColumn.options = options;
+//    CircularScrollingConfigurationState_Horizontally.RowHeaderStartsFirstColumn.options = options;
     
 }
 
