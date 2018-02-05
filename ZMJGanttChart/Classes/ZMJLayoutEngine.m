@@ -210,7 +210,7 @@ point = tempPoint;                 \
     
     while (columnIndex < self.columnCount) {
         __block NSInteger columnStep = 1;
-        void(^defer)() = ^(void){
+        void(^defer)(void) = ^(void){
             columnIndex += columnStep;
         };
         

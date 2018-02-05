@@ -13,3 +13,7 @@ end
 target 'ZMJClassData' do
     pod 'ZMJGanttChart', :path => '../'
 end
+
+target 'ZMJTimeable' do
+    pod 'ZMJGanttChart', :path => '../'
+end

@@ -70,6 +70,15 @@ typedef struct SortedColumn {
     [self.spreadsheetView flashScrollIndicators];
 }
 
+- (void)viewWillLayoutSubviews {
+    if (@available(iOS 11.0, *)) {
+        self.spreadsheetView.frame = self.view.safeAreaLayoutGuide.layoutFrame;
+    } else {
+        // Fallback on earlier versions
+        self.spreadsheetView.frame = self.view.bounds;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -113,15 +122,6 @@ typedef struct SortedColumn {
                                                                                 forIndexPath:indexPath];
         cell.label.text = self.data[indexPath.row - 1][indexPath.column];
         return cell;
-    }
-}
-
-- (void)viewWillLayoutSubviews {
-    if (@available(iOS 11.0, *)) {
-        self.spreadsheetView.frame = self.view.safeAreaLayoutGuide.layoutFrame;
-    } else {
-        // Fallback on earlier versions
-        self.spreadsheetView.frame = self.view.bounds;
     }
 }
 

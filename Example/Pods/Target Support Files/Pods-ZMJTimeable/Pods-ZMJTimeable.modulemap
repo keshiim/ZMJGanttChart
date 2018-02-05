@@ -1,0 +1,6 @@
+framework module Pods_ZMJTimeable {
+  umbrella header "Pods-ZMJTimeable-umbrella.h"
+
+  export *
+  module * { export * }
+}
