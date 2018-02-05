@@ -14,13 +14,13 @@ typedef NS_ENUM(NSInteger, ZMJSorting) {
     descending
 };
 
-static inline NSString * getSymbol(ZMJSorting sorting) {
+static NSString * getSymbol(ZMJSorting sorting) {
     switch (sorting) {
         case ascending:
-            return @"\u{25B2}";
+            return @"\u25B2";
             break;
         case descending:
-            return @"\u{25BC}";
+            return @"\u25BC";
             break;
         default:
             break;
