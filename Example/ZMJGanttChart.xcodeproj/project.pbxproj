@@ -41,6 +41,13 @@
 		965CF15E2028402D004E509E /* ZMJCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 965CF15D2028402D004E509E /* ZMJCells.m */; };
 		965CF1602028422F004E509E /* SlotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965CF15F2028422F004E509E /* SlotCell.xib */; };
 		967FFB07201F040C00461EB9 /* ZMJCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 967FFB06201F040C00461EB9 /* ZMJCells.m */; };
+		96FA673620295AC500C11568 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FA673520295AC500C11568 /* AppDelegate.m */; };
+		96FA673920295AC500C11568 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FA673820295AC500C11568 /* ViewController.m */; };
+		96FA673C20295AC500C11568 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FA673A20295AC500C11568 /* Main.storyboard */; };
+		96FA673E20295AC500C11568 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96FA673D20295AC500C11568 /* Assets.xcassets */; };
+		96FA674120295AC500C11568 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FA673F20295AC500C11568 /* LaunchScreen.storyboard */; };
+		96FA674420295AC500C11568 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FA674320295AC500C11568 /* main.m */; };
+		96FA674A20295CE600C11568 /* ZMJCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FA674920295CE600C11568 /* ZMJCells.m */; };
 		99866CC807B6E511EBE3BA9E /* Pods_ZMJGanttChart_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A7DEB2C2FCB2A24E91C988 /* Pods_ZMJGanttChart_Example.framework */; };
 		BEEE3E345855E70D10A353CE /* Pods_ZMJGanttChart_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B79741F1B5C02E894C8AA94B /* Pods_ZMJGanttChart_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -114,6 +121,18 @@
 		965CF15F2028422F004E509E /* SlotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlotCell.xib; sourceTree = "<group>"; };
 		967FFB05201F040C00461EB9 /* ZMJCells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMJCells.h; sourceTree = "<group>"; };
 		967FFB06201F040C00461EB9 /* ZMJCells.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJCells.m; sourceTree = "<group>"; };
+		96FA673220295AC500C11568 /* ZMJSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZMJSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		96FA673420295AC500C11568 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		96FA673520295AC500C11568 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		96FA673720295AC500C11568 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		96FA673820295AC500C11568 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		96FA673B20295AC500C11568 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		96FA673D20295AC500C11568 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		96FA674020295AC500C11568 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		96FA674220295AC500C11568 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96FA674320295AC500C11568 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		96FA674820295CE600C11568 /* ZMJCells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMJCells.h; sourceTree = "<group>"; };
+		96FA674920295CE600C11568 /* ZMJCells.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJCells.m; sourceTree = "<group>"; };
 		AC7E0EBE57F47EB601DE2537 /* Pods-ZMJGanttChart_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJGanttChart_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJGanttChart_Example/Pods-ZMJGanttChart_Example.release.xcconfig"; sourceTree = "<group>"; };
 		B79741F1B5C02E894C8AA94B /* Pods_ZMJGanttChart_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJGanttChart_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C14F6ADA46A92779D54EFF91 /* Pods_ZMJTimeable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJTimeable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +180,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		96FA672F20295AC500C11568 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -172,6 +198,7 @@
 				6003F5B5195388D20070C39A /* Tests */,
 				965CF0F620242F00004E509E /* ZMJClassData */,
 				965CF14720283E9B004E509E /* ZMJTimeable */,
+				96FA673320295AC500C11568 /* ZMJSchedule */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				67868C33A337FC22E1B970A0 /* Pods */,
@@ -185,6 +212,7 @@
 				6003F5AE195388D20070C39A /* ZMJGanttChart_Tests.xctest */,
 				965CF0F520242F00004E509E /* ZMJClassData.app */,
 				965CF14620283E9B004E509E /* ZMJTimeable.app */,
+				96FA673220295AC500C11568 /* ZMJSchedule.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -315,6 +343,24 @@
 			path = ZMJTimeable;
 			sourceTree = "<group>";
 		};
+		96FA673320295AC500C11568 /* ZMJSchedule */ = {
+			isa = PBXGroup;
+			children = (
+				96FA673420295AC500C11568 /* AppDelegate.h */,
+				96FA673520295AC500C11568 /* AppDelegate.m */,
+				96FA673720295AC500C11568 /* ViewController.h */,
+				96FA673820295AC500C11568 /* ViewController.m */,
+				96FA674820295CE600C11568 /* ZMJCells.h */,
+				96FA674920295CE600C11568 /* ZMJCells.m */,
+				96FA673A20295AC500C11568 /* Main.storyboard */,
+				96FA673D20295AC500C11568 /* Assets.xcassets */,
+				96FA673F20295AC500C11568 /* LaunchScreen.storyboard */,
+				96FA674220295AC500C11568 /* Info.plist */,
+				96FA674320295AC500C11568 /* main.m */,
+			);
+			path = ZMJSchedule;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -399,6 +445,23 @@
 			productReference = 965CF14620283E9B004E509E /* ZMJTimeable.app */;
 			productType = "com.apple.product-type.application";
 		};
+		96FA673120295AC500C11568 /* ZMJSchedule */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96FA674720295AC500C11568 /* Build configuration list for PBXNativeTarget "ZMJSchedule" */;
+			buildPhases = (
+				96FA672E20295AC500C11568 /* Sources */,
+				96FA672F20295AC500C11568 /* Frameworks */,
+				96FA673020295AC500C11568 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZMJSchedule;
+			productName = ZMJSchedule;
+			productReference = 96FA673220295AC500C11568 /* ZMJSchedule.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -422,6 +485,11 @@
 						DevelopmentTeam = ZSE663HLJF;
 						ProvisioningStyle = Automatic;
 					};
+					96FA673120295AC500C11568 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = ZSE663HLJF;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "ZMJGanttChart" */;
@@ -441,6 +509,7 @@
 				6003F5AD195388D20070C39A /* ZMJGanttChart_Tests */,
 				965CF0F420242F00004E509E /* ZMJClassData */,
 				965CF14520283E9B004E509E /* ZMJTimeable */,
+				96FA673120295AC500C11568 /* ZMJSchedule */,
 			);
 		};
 /* End PBXProject section */
@@ -484,6 +553,16 @@
 				965CF15220283E9B004E509E /* Assets.xcassets in Resources */,
 				965CF15020283E9B004E509E /* Main.storyboard in Resources */,
 				965CF1602028422F004E509E /* SlotCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96FA673020295AC500C11568 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96FA674120295AC500C11568 /* LaunchScreen.storyboard in Resources */,
+				96FA673E20295AC500C11568 /* Assets.xcassets in Resources */,
+				96FA673C20295AC500C11568 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +817,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		96FA672E20295AC500C11568 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96FA673920295AC500C11568 /* ViewController.m in Sources */,
+				96FA674A20295CE600C11568 /* ZMJCells.m in Sources */,
+				96FA674420295AC500C11568 /* main.m in Sources */,
+				96FA673620295AC500C11568 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -801,6 +891,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				965CF15420283E9B004E509E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		96FA673A20295AC500C11568 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96FA673B20295AC500C11568 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		96FA673F20295AC500C11568 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96FA674020295AC500C11568 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1079,6 +1185,55 @@
 			};
 			name = Release;
 		};
+		96FA674520295AC500C11568 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = ZSE663HLJF;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ZMJSchedule/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = zmj.ZMJSchedule;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		96FA674620295AC500C11568 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ZSE663HLJF;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ZMJSchedule/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = zmj.ZMJSchedule;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1123,6 +1278,15 @@
 			buildConfigurations = (
 				965CF15920283E9B004E509E /* Debug */,
 				965CF15A20283E9B004E509E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96FA674720295AC500C11568 /* Build configuration list for PBXNativeTarget "ZMJSchedule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96FA674520295AC500C11568 /* Debug */,
+				96FA674620295AC500C11568 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
