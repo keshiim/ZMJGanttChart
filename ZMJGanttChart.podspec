@@ -9,16 +9,19 @@
 Pod::Spec.new do |s|
   s.name             = 'ZMJGanttChart'
   s.version          = '0.1.2'
-  s.summary          = 'Full configurable spreadsheet view user interfaces for iOS applications. With this framework, you can easily create complex layouts like schedule, gantt chart or timetable as if you are using Excel.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
+  s.summary          = 'Full configurable sheet view user interfaces for iOS applications. eg:GanttChart, Schedul, TimeAble etc.'
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Full configurable sheet view user interfaces for iOS applications. With this framework,
+you can easily create complex layouts like schedule, gantt chart or timetable as if you are using Excel.
+
+Features
+- Fixed column and row headers
+- Merge cells
+- Circular infinite scrolling automatically
+- Customize grids and borders for each cell
+- Customize inter cell spacing vertically and horizontally
+- Fast scrolling, memory efficient
+- `UICollectionView` like API
                        DESC
 
   s.homepage         = 'https://github.com/keshiim/ZMJGanttChart'
