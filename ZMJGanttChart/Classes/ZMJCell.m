@@ -117,6 +117,15 @@
     self.hasBorder = borders.top.border_enum != BorderStyle_None || borders.bottom.border_enum != BorderStyle_None || borders.left.border_enum != BorderStyle_None ||borders.right.border_enum != BorderStyle_None;
 }
 
+- (BOOL)hasBorder {
+    _hasBorder =
+    self.borders.top.border_enum    != BorderStyle_None ||
+    self.borders.bottom.border_enum != BorderStyle_None ||
+    self.borders.left.border_enum   != BorderStyle_None ||
+    self.borders.right.border_enum  != BorderStyle_None;
+    return _hasBorder;
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     if (animated) {
         [UIView animateWithDuration:[CATransaction animationDuration] animations:^{

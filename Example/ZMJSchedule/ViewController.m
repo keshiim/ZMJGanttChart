@@ -68,7 +68,7 @@
     self.spreadsheetView.contentInset = UIEdgeInsetsMake(4, 0, 4, 0);
     
     self.spreadsheetView.intercellSpacing = CGSizeMake(4, 1);
-    self.spreadsheetView.gridStyle = GridStyle_none;
+    self.spreadsheetView.gridStyle = [GridStyle borderStyleNone];
     
     [self.spreadsheetView registerClass:[DateCell class]     forCellWithReuseIdentifier:NSStringFromClass([DateCell class])];
     [self.spreadsheetView registerClass:[TimeTitleCell class]forCellWithReuseIdentifier:NSStringFromClass([TimeTitleCell class])];
@@ -128,7 +128,7 @@
 }
 
 - (ZMJCell *)spreadsheetView:(SpreadsheetView *)spreadsheetView cellForItemAt:(NSIndexPath *)indexPath {
-    if ((indexPath.column >= 1 && indexPath <= self.dates.count + 1) &&
+    if ((indexPath.column >= 1 && indexPath.row <= self.dates.count + 1) &&
         (indexPath.row    == 0))
     {
         DateCell *cell  = (DateCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([DateCell class])
@@ -179,6 +179,7 @@
         }
         return cell;
     }
+    return nil;
 }
 
 // MARK: Delegate
@@ -195,7 +196,7 @@
         _spreadsheetView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:_spreadsheetView];
     }
-    return _spreadsheetView
+    return _spreadsheetView;
 }
 
 @end

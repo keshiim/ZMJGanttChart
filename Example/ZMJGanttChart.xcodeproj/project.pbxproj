@@ -50,6 +50,7 @@
 		96FA674A20295CE600C11568 /* ZMJCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FA674920295CE600C11568 /* ZMJCells.m */; };
 		99866CC807B6E511EBE3BA9E /* Pods_ZMJGanttChart_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A7DEB2C2FCB2A24E91C988 /* Pods_ZMJGanttChart_Example.framework */; };
 		BEEE3E345855E70D10A353CE /* Pods_ZMJGanttChart_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B79741F1B5C02E894C8AA94B /* Pods_ZMJGanttChart_Tests.framework */; };
+		D95A9EC792FF4F06608E7FEE /* Pods_ZMJSchedule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF97805CA837561EC98FDF4D /* Pods_ZMJSchedule.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,10 +136,13 @@
 		96FA674920295CE600C11568 /* ZMJCells.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJCells.m; sourceTree = "<group>"; };
 		AC7E0EBE57F47EB601DE2537 /* Pods-ZMJGanttChart_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJGanttChart_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJGanttChart_Example/Pods-ZMJGanttChart_Example.release.xcconfig"; sourceTree = "<group>"; };
 		B79741F1B5C02E894C8AA94B /* Pods_ZMJGanttChart_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJGanttChart_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE5D8B8F8E093C20B272ED90 /* Pods-ZMJSchedule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJSchedule.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJSchedule/Pods-ZMJSchedule.debug.xcconfig"; sourceTree = "<group>"; };
 		C14F6ADA46A92779D54EFF91 /* Pods_ZMJTimeable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJTimeable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44F6E50A73897D18E1E81B1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E4E6FB00AF2B2030D6D09EF3 /* Pods-ZMJTimeable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJTimeable.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJTimeable/Pods-ZMJTimeable.debug.xcconfig"; sourceTree = "<group>"; };
+		E5CDC42BACF3A8FE197F074A /* Pods-ZMJSchedule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJSchedule.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJSchedule/Pods-ZMJSchedule.release.xcconfig"; sourceTree = "<group>"; };
 		FF4FC170972564B69B694DCA /* Pods-ZMJGanttChart_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJGanttChart_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJGanttChart_Tests/Pods-ZMJGanttChart_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		FF97805CA837561EC98FDF4D /* Pods_ZMJSchedule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJSchedule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D95A9EC792FF4F06608E7FEE /* Pods_ZMJSchedule.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +233,7 @@
 				B79741F1B5C02E894C8AA94B /* Pods_ZMJGanttChart_Tests.framework */,
 				1E319EA79ABF6E3B81572D87 /* Pods_ZMJClassData.framework */,
 				C14F6ADA46A92779D54EFF91 /* Pods_ZMJTimeable.framework */,
+				FF97805CA837561EC98FDF4D /* Pods_ZMJSchedule.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -301,6 +307,8 @@
 				87B26E083A32C57A651359F1 /* Pods-ZMJClassData.release.xcconfig */,
 				E4E6FB00AF2B2030D6D09EF3 /* Pods-ZMJTimeable.debug.xcconfig */,
 				26F143F1445D734D76D38E42 /* Pods-ZMJTimeable.release.xcconfig */,
+				BE5D8B8F8E093C20B272ED90 /* Pods-ZMJSchedule.debug.xcconfig */,
+				E5CDC42BACF3A8FE197F074A /* Pods-ZMJSchedule.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -449,9 +457,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96FA674720295AC500C11568 /* Build configuration list for PBXNativeTarget "ZMJSchedule" */;
 			buildPhases = (
+				2667799ADA46F89F589890C2 /* [CP] Check Pods Manifest.lock */,
 				96FA672E20295AC500C11568 /* Sources */,
 				96FA672F20295AC500C11568 /* Frameworks */,
 				96FA673020295AC500C11568 /* Resources */,
+				ADC0FBB4455301A598D4D2C7 /* [CP] Embed Pods Frameworks */,
+				43F24F63A56875F0305FB6C6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -656,6 +667,39 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2667799ADA46F89F589890C2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZMJSchedule-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		43F24F63A56875F0305FB6C6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZMJSchedule/Pods-ZMJSchedule-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7E64C87B1FC629301FD76125 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -717,6 +761,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZMJGanttChart_Example/Pods-ZMJGanttChart_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ADC0FBB4455301A598D4D2C7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZMJSchedule/Pods-ZMJSchedule-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ZMJGanttChart-iOS11.2/ZMJGanttChart.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZMJGanttChart.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZMJSchedule/Pods-ZMJSchedule-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F44C89A2787EA9FF2CC624C1 /* [CP] Embed Pods Frameworks */ = {
@@ -1187,6 +1249,7 @@
 		};
 		96FA674520295AC500C11568 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE5D8B8F8E093C20B272ED90 /* Pods-ZMJSchedule.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1211,6 +1274,7 @@
 		};
 		96FA674620295AC500C11568 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5CDC42BACF3A8FE197F074A /* Pods-ZMJSchedule.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;

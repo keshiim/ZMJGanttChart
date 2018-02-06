@@ -130,6 +130,12 @@
     [self.contentView addSubview:self.label];
 }
 
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    
+    self.label.frame = CGRectInset(self.bounds, 6, 0);
+}
+
 @end
 
 @implementation ScheduleCell : ZMJCell
@@ -152,6 +158,8 @@
 }
 
 - (void)setupviews {
+    self.backgroundView = [UIView new];
+    
     self.label = [UILabel new];
     self.label.frame = self.bounds;
     self.label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
