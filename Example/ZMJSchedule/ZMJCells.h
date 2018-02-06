@@ -14,17 +14,18 @@
 @end
 
 @interface DayTitleCell : ZMJCell
-
+@property (nonatomic, strong) UILabel *label;
 @end
 
 @interface TimeTitleCell : ZMJCell
-
+@property (nonatomic, strong) UILabel *label;
 @end
 
 @interface TimeCell : ZMJCell
-
+@property (nonatomic, strong) UILabel *label;
 @end
 
 @interface ScheduleCell : ZMJCell
-
+@property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) UIColor *color;
 @end
