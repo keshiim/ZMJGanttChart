@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ZMJGanttChart'
-  s.version          = '0.1.3'
+  s.version          = '0.1.4'
   s.summary          = 'Full configurable sheet view user interfaces for iOS applications. eg:GanttChart, Schedul, TimeAble etc.'
   s.description      = <<-DESC
 Full configurable sheet view user interfaces for iOS applications. With this framework,
@@ -25,7 +25,7 @@ Features
                        DESC
 
   s.homepage         = 'https://github.com/keshiim/ZMJGanttChart'
-  s.screenshots      = 'https://github.com/keshiim/ZMJGanttChart/blob/master/Resource/GanttChart.png', 'https://github.com/keshiim/ZMJGanttChart/blob/master/Resource/Timetable.png','https://github.com/keshiim/ZMJGanttChart/blob/master/Resource/DailySchedule_portrait.png', 'https://github.com/keshiim/ZMJGanttChart/blob/master/Resource/classData_sort.png'
+  #s.screenshots      = 'https://github.com/keshiim/ZMJGanttChart/blob/master/Resource/GanttChart.png', 'https://github.com/keshiim/ZMJGanttChart/blob/master/Resource/Timetable.png','https://github.com/keshiim/ZMJGanttChart/blob/master/Resource/DailySchedule_portrait.png', 'https://github.com/keshiim/ZMJGanttChart/blob/master/Resource/classData_sort.png'
 
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'zheng mingjun' => 'keshiim@163.com' }
