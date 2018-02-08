@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ZMJGanttChart'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'Full configurable sheet view user interfaces for iOS applications. eg:GanttChart, Schedul, TimeAble etc.'
   s.description      = <<-DESC
 Full configurable sheet view user interfaces for iOS applications. With this framework,
