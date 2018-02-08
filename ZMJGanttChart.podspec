@@ -25,21 +25,21 @@ Features
                        DESC
 
   s.homepage         = 'https://github.com/keshiim/ZMJGanttChart'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.screenshots      = 'https://github.com/keshiim/ZMJGanttChart/blob/master/Resource/GanttChart.png', 'https://github.com/keshiim/ZMJGanttChart/blob/master/Resource/Timetable.png','https://github.com/keshiim/ZMJGanttChart/blob/master/Resource/DailySchedule_portrait.png', 'https://github.com/keshiim/ZMJGanttChart/blob/master/Resource/classData_sort.png'
+
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'keshiim' => 'keshiim@163.com' }
+  s.author           = { 'zheng mingjun' => 'keshiim@163.com' }
   s.source           = { :git => 'https://github.com/keshiim/ZMJGanttChart.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/keshiim'
 
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'ZMJGanttChart/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'ZMJGanttChart' => ['ZMJGanttChart/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'ZMJGanttChart' => ['ZMJGanttChart/Assets/*.png']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'UIKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
