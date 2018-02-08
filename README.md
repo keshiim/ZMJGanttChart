@@ -46,6 +46,9 @@ The minimum requirement is connecting a data source to return the number of colu
 
 @interface ViewController () <SpreadsheetViewDelegate, SpreadsheetViewDataSource>
 @property (nonatomic, strong) SpreadsheetView *spreadsheetView;
+@end
+
+@implementation ViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
 
