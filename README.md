@@ -72,6 +72,19 @@ The minimum requirement is connecting a data source to return the number of colu
     }
 }
 
+#pragma mark - getters
+- (SpreadsheetView *)spreadsheetView {
+    if (!_spreadsheetView) {
+        _spreadsheetView = ({
+        SpreadsheetView *ssv = [SpreadsheetView new];
+        ssv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.view addSubview:ssv];
+        ssv;
+        });
+    }
+    return _spreadsheetView;
+}
+
 // MARK: DataSource
 - (NSInteger)numberOfColumns:(SpreadsheetView *)spreadsheetView {
     return 10;
