@@ -98,7 +98,7 @@ Freezing a column or row behaves as a fixed column/row header.
 #### Column Header
 ```objc
 - (NSInteger)frozenColumns:(SpreadsheetView *)spreadsheetView {
-    return 1;
+    return 2;
 }
 ```
 <img src="Resource/ColumnHeader.gif" style="width: 200px;" width="200"></img>
@@ -186,7 +186,7 @@ spreadsheetView.intercellSpacing = CGSizeMake(1, 1);
 
 #### Gridlines
 
-<img src="Resources/Grid.png" style="width: 200px;" width="200"></img>
+<img src="Resource/Grid.png" style="width: 200px;" width="200"></img>
 
 `SpreadsheetView`'s `gridStyle` property is applied to the entire table.
 ```objc
