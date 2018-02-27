@@ -15,16 +15,20 @@
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSDate *endDate;
 
-@property (nonatomic, strong) NSArray<NSString *>            *years;
-@property (nonatomic, strong) NSArray<NSString *>            *weaks;
-@property (nonatomic, strong, readonly) NSArray<NSDate   *>  *months;
-@property (nonatomic, strong, readonly) NSArray<NSDate   *>  *days;
-@property (nonatomic, strong) NSArray<ZMJTask *>             *tasks;
-@property (nonatomic, strong) NSArray<UIColor  *>            *colors;
+@property (nonatomic, strong, readonly) NSArray<NSDate *> *years;
+@property (nonatomic, strong, readonly) NSArray<NSDate *> *weeks;
+@property (nonatomic, strong, readonly) NSArray<NSDate *> *months;
+@property (nonatomic, strong, readonly) NSArray<NSDate *> *days;
+@property (nonatomic, strong) NSArray<ZMJTask *>          *tasks;
+@property (nonatomic, strong) NSArray<UIColor *>          *colors;
 
 @property (nonatomic, strong) SpreadsheetView *spreadsheetView;
 @end
-
+typedef NS_ENUM(NSInteger, ZMJTimeUnit) {
+    ZMJTimeUnit_week,
+    ZMJTimeUnit_month,
+    ZMJTimeUnit_year,
+};
 @implementation ViewController
 
 - (instancetype)init
@@ -47,8 +51,6 @@
 
 
 - (void)setupMembers {
-    self.years = @[@"2017年12月", @"2018年1月"];
-    self.weaks = @[@"Week #1", @"Week #2", @"Week #3", @"Week #4", @"Week #5", @"Week #6", @"Week #7", @"Week #8"];
     self.tasks = @[[ZMJTask taskWithName:@"Office itinerancy" startDate:dateFromString(@"2017-12-7") endDate:dateFromString(@"2017-12-15")],
                    [ZMJTask taskWithName:@"Office facingy" startDate:dateFromString(@"2017-12-8") endDate:dateFromString(@"2017-12-12")],
                    [ZMJTask taskWithName:@"Office itinerancy" startDate:dateFromString(@"2017-12-10") endDate:dateFromString(@"2017-12-12")],
@@ -136,14 +138,6 @@
     return _endDate;
 }
 
-- (NSInteger)startDateLength {
-    return [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:self.startDate].length;
-}
-
-- (NSInteger)endDateLength {
-    return [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:self.endDate].length;
-}
-
 - (NSArray<NSDate *> *)days {
     if (self.startDate && self.endDate) {
         return [self getDayArrayLeftDate:self.startDate rightDate:self.endDate];
@@ -151,18 +145,50 @@
     return nil;
 }
 
+- (NSArray<NSDate *> *)years {
+    return [self fetchDateAccordingTimeUnit:ZMJTimeUnit_year];
+}
+
 - (NSArray<NSDate *> *)months {
-    NSCalendarUnit calendarUnit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekday | NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekOfYear;
+    return [self fetchDateAccordingTimeUnit:ZMJTimeUnit_month];
+}
+
+- (NSArray<NSDate *> *)weeks {
+    return [self fetchDateAccordingTimeUnit:ZMJTimeUnit_week];
+}
+
+- (NSArray<NSDate *> *)fetchDateAccordingTimeUnit:(ZMJTimeUnit)timeUnit {
+    NSCalendarUnit calendarUnit =   NSCalendarUnitYear |
+                                    NSCalendarUnitMonth |
+                                    NSCalendarUnitDay |
+                                    NSCalendarUnitHour |
+                                    NSCalendarUnitMinute |
+                                    NSCalendarUnitSecond |
+                                    NSCalendarUnitWeekOfMonth |
+                                    NSCalendarUnitWeekday |
+                                    NSCalendarUnitWeekOfMonth |
+                                    NSCalendarUnitWeekOfYear;
     NSCalendar *greCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSInteger previousMonth = -1;
+    NSInteger  previousDate = -1;
     NSMutableArray<NSDate *> *_months = [NSMutableArray array];
     for (NSDate *date in self.days) {
         NSDateComponents *dateComponents = [greCalendar components:calendarUnit
                                                           fromDate:date];
-        
-        if ([date isEqualToDate:self.days.firstObject] || (previousMonth != dateComponents.month)) {
+        long long dateComponentTimeUnitValue = NSIntegerMin;
+        switch (timeUnit) {
+            case ZMJTimeUnit_week:
+                dateComponentTimeUnitValue = dateComponents.weekOfYear;
+                break;
+            case ZMJTimeUnit_month:
+                dateComponentTimeUnitValue = dateComponents.month;
+                break;
+            case ZMJTimeUnit_year:
+                dateComponentTimeUnitValue = dateComponents.year;
+                break;
+        }
+        if ([date isEqualToDate:self.days.firstObject] || (previousDate != dateComponentTimeUnitValue)) {
             [_months addObject:date];
-            previousMonth = dateComponents.month;
+            previousDate = dateComponentTimeUnitValue;
         }
     }
     return _months.copy;
@@ -196,6 +222,41 @@
     return _monthCellRanges.copy;
 }
 
+- (NSArray<ZMJCellRange *> *)weekCellRangesWithRow:(NSInteger)row {
+    static NSMutableArray<ZMJCellRange *> *_monthCellRanges = nil;
+    if (_monthCellRanges == nil) {
+        _monthCellRanges = [NSMutableArray array];
+    }
+    if (_monthCellRanges.count != 0) {
+        return _monthCellRanges.copy;
+    }
+    Location *fromLocation = nil;
+    Location *toLocation   = nil;
+    for (NSDate *fristDayOfWeek in self.weeks) {
+        for (NSDate *date in self.days) {
+            if ([date isEqualToDate:fristDayOfWeek] ||
+                ([date isEqualToDate:self.days.lastObject] && [fristDayOfWeek isEqualToDate:self.weeks.lastObject])) {
+                if ([self.days indexOfObject:date] > 0) {
+                    toLocation = [Location locationWithRow:row column:[self.days indexOfObject:date] - 1];
+                }
+                BOOL addFlag = NO;
+                if (fromLocation && toLocation) {
+                    [_monthCellRanges addObject:[ZMJCellRange cellRangeFrom:fromLocation
+                                                                         to:toLocation]];
+                    toLocation = nil;
+                    addFlag    = YES;
+                }
+                fromLocation = [Location locationWithRow:row column:[self.days indexOfObject:date]];
+                if (addFlag) {
+                    break;
+                }
+            }
+        }
+    }
+    
+    return _monthCellRanges.copy;
+}
+
 //MARK: DataSource
 - (NSInteger)numberOfColumns:(SpreadsheetView *)spreadsheetView {
     return self.days.count - 1;
@@ -206,7 +267,7 @@
 }
 
 - (CGFloat)spreadsheetView:(SpreadsheetView *)spreadsheetView widthForColumn:(NSInteger)column {
-    return 50.f;
+    return 50.f/3;
 }
 
 - (CGFloat)spreadsheetView:(SpreadsheetView *)spreadsheetView heightForRow:(NSInteger)row {
@@ -228,7 +289,7 @@
 - (NSArray<ZMJCellRange *> *)mergedCells:(SpreadsheetView *)spreadsheetView {
     NSMutableArray<ZMJCellRange *> *result = [NSMutableArray array];
     NSArray<ZMJCellRange *> *titleHeader = [self monthCellRangesWithRow:0];
-    
+    NSArray<ZMJCellRange *> *weekTitleHeader = [self weekCellRangesWithRow:1];
     __weak typeof(self) weak_self = self;
     NSArray<ZMJCellRange *> *charts = [self.tasks wbg_mapWithIndex:^id _Nullable(ZMJTask * _Nonnull task, NSUInteger index) {
         return (task.startDate && task.dueDate) ?
@@ -240,6 +301,7 @@
         nil;
     }];
     [result addObjectsFromArray:titleHeader];
+    [result addObjectsFromArray:weekTitleHeader];
     [result addObjectsFromArray:charts];
     return result.copy;
 }
@@ -263,6 +325,18 @@
             cell.label.text = [self formateMonthLimmited:getVilabelDateBlock(row, column)];
         } else {
             cell.label.text = [self dailyAppendWeaklyForDate:self.days[column]];
+            
+            __weak typeof(self)weak_self = self;
+            NSInteger(^getVilabelIdxBlock)(NSInteger r, NSInteger c) = ^NSInteger(NSInteger r, NSInteger c) {
+                for (NSInteger idx = 0; idx < [weak_self weekCellRangesWithRow:r].count; idx++) {
+                    ZMJCellRange *range = [weak_self weekCellRangesWithRow:r][idx];
+                    if (range.from.row == r && range.from.column == c) {
+                        return idx + 1;
+                    }
+                }
+                return 0;
+            };
+            cell.label.text = [NSString stringWithFormat:@"第%@周", [self translationArabicNum:getVilabelIdxBlock(row, column)]];
         }
         cell.gridlines.left  = [GridStyle style:GridStyle_default width:0 color:nil];
         cell.gridlines.right = [GridStyle style:GridStyle_default width:0 color:nil];
@@ -283,12 +357,25 @@
             } else {
                 cell.direction = ZMJDashlineDirectionNone;
             }
+            cell.gridlines.right   = [GridStyle borderStyleNone];
         } else {
             cell.label.text = @"";
             cell.color = [UIColor clearColor];
+            cell.gridlines.right   = [GridStyle style:GridStyle_default width:0 color:nil];
         }
         cell.gridlines.bottom  = [GridStyle borderStyleNone];
         cell.gridlines.top     = [GridStyle borderStyleNone];
+        
+        __weak typeof(self)weak_self = self;
+        BOOL(^enableLeftGridlineBlock)(NSInteger r, NSInteger c) = ^BOOL(NSInteger r, NSInteger c) {
+            for (ZMJCellRange *range in [weak_self weekCellRangesWithRow:1]) {
+                if (range.from.column == c) {
+                    return YES;
+                }
+            }
+            return NO;
+        };
+        cell.gridlines.left    = enableLeftGridlineBlock(row, column) ? [GridStyle style:GridStyle_default width:0 color:nil] : [GridStyle borderStyleNone];
         return cell;
     }
     return nil;
