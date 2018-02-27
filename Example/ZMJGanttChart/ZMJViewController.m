@@ -216,7 +216,7 @@
         NSInteger start = [task[1] integerValue];
         NSInteger end   = [task[2] integerValue];
         return [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2 column:start + 2]
-                                        to:[Location locationWithRow:index + 2 column:start + end + 2]];
+                                        to:[Location locationWithRow:index + 2 column:start + end - 1 + 2]];
     }];
     [result addObjectsFromArray:titleHeader];
     [result addObjectsFromArray:weekHeader];

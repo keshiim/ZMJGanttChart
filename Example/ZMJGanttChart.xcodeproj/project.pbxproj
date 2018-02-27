@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0367035297D6EAEF517D24CE /* Pods_ZMJClassData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E319EA79ABF6E3B81572D87 /* Pods_ZMJClassData.framework */; };
 		33DDF51299A5F4544A8F3258 /* Pods_ZMJTimeable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C14F6ADA46A92779D54EFF91 /* Pods_ZMJTimeable.framework */; };
+		49A4B8CE1BE42700D3F53B6E /* Pods_ZMJGanttList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51BCE3CDC971F21DFF27A17 /* Pods_ZMJGanttList.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -24,6 +25,14 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		96514AA52043FDA600E5C24E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96514AA42043FDA600E5C24E /* AppDelegate.m */; };
+		96514AA82043FDA600E5C24E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96514AA72043FDA600E5C24E /* ViewController.m */; };
+		96514AAB2043FDA600E5C24E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96514AA92043FDA600E5C24E /* Main.storyboard */; };
+		96514AAD2043FDA600E5C24E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96514AAC2043FDA600E5C24E /* Assets.xcassets */; };
+		96514AB02043FDA600E5C24E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96514AAE2043FDA600E5C24E /* LaunchScreen.storyboard */; };
+		96514AB32043FDA600E5C24E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96514AB22043FDA600E5C24E /* main.m */; };
+		96514AB92043FE3900E5C24E /* ZMJCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 96514AB82043FE3900E5C24E /* ZMJCells.m */; };
+		96514ABC2045356300E5C24E /* ZMJTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 96514ABB2045356300E5C24E /* ZMJTask.m */; };
 		965CF0F920242F00004E509E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 965CF0F820242F00004E509E /* AppDelegate.m */; };
 		965CF0FC20242F00004E509E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 965CF0FB20242F00004E509E /* ViewController.m */; };
 		965CF0FF20242F00004E509E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 965CF0FD20242F00004E509E /* Main.storyboard */; };
@@ -68,6 +77,7 @@
 		26A7DEB2C2FCB2A24E91C988 /* Pods_ZMJGanttChart_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJGanttChart_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26F143F1445D734D76D38E42 /* Pods-ZMJTimeable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJTimeable.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJTimeable/Pods-ZMJTimeable.release.xcconfig"; sourceTree = "<group>"; };
 		2842C32E0EFAC7CEDF616BC6 /* Pods-ZMJClassData.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJClassData.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJClassData/Pods-ZMJClassData.debug.xcconfig"; sourceTree = "<group>"; };
+		5C27BC1DD12E1896E735E7DB /* Pods-ZMJGanttList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJGanttList.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJGanttList/Pods-ZMJGanttList.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* ZMJGanttChart_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZMJGanttChart_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -89,11 +99,26 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		65722C83EF792291446A7A03 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7FE382F1EA8DAE130117A2CC /* Pods-ZMJGanttList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJGanttList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJGanttList/Pods-ZMJGanttList.debug.xcconfig"; sourceTree = "<group>"; };
 		849133DD23F5ED1B6963BA6A /* Pods-ZMJGanttChart_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJGanttChart_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJGanttChart_Tests/Pods-ZMJGanttChart_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		87B26E083A32C57A651359F1 /* Pods-ZMJClassData.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJClassData.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJClassData/Pods-ZMJClassData.release.xcconfig"; sourceTree = "<group>"; };
 		8D19974282C9AB4D64D3C5FC /* ZMJGanttChart.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ZMJGanttChart.podspec; path = ../ZMJGanttChart.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		94ABAF77DDE72AF07EC0C8C4 /* Pods-ZMJGanttChart_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJGanttChart_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJGanttChart_Example/Pods-ZMJGanttChart_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		96514AA12043FDA600E5C24E /* ZMJGanttList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZMJGanttList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		96514AA32043FDA600E5C24E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		96514AA42043FDA600E5C24E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		96514AA62043FDA600E5C24E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		96514AA72043FDA600E5C24E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		96514AAA2043FDA600E5C24E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		96514AAC2043FDA600E5C24E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		96514AAF2043FDA600E5C24E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		96514AB12043FDA600E5C24E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96514AB22043FDA600E5C24E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		96514AB72043FE3900E5C24E /* ZMJCells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMJCells.h; sourceTree = "<group>"; };
+		96514AB82043FE3900E5C24E /* ZMJCells.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJCells.m; sourceTree = "<group>"; };
+		96514ABA2045356300E5C24E /* ZMJTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMJTask.h; sourceTree = "<group>"; };
+		96514ABB2045356300E5C24E /* ZMJTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJTask.m; sourceTree = "<group>"; };
 		965CF0F520242F00004E509E /* ZMJClassData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZMJClassData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		965CF0F720242F00004E509E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		965CF0F820242F00004E509E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -135,6 +160,7 @@
 		96FA674820295CE600C11568 /* ZMJCells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMJCells.h; sourceTree = "<group>"; };
 		96FA674920295CE600C11568 /* ZMJCells.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJCells.m; sourceTree = "<group>"; };
 		AC7E0EBE57F47EB601DE2537 /* Pods-ZMJGanttChart_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJGanttChart_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJGanttChart_Example/Pods-ZMJGanttChart_Example.release.xcconfig"; sourceTree = "<group>"; };
+		B51BCE3CDC971F21DFF27A17 /* Pods_ZMJGanttList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJGanttList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B79741F1B5C02E894C8AA94B /* Pods_ZMJGanttChart_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJGanttChart_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE5D8B8F8E093C20B272ED90 /* Pods-ZMJSchedule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZMJSchedule.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZMJSchedule/Pods-ZMJSchedule.debug.xcconfig"; sourceTree = "<group>"; };
 		C14F6ADA46A92779D54EFF91 /* Pods_ZMJTimeable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZMJTimeable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +191,14 @@
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
 				BEEE3E345855E70D10A353CE /* Pods_ZMJGanttChart_Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96514A9E2043FDA600E5C24E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49A4B8CE1BE42700D3F53B6E /* Pods_ZMJGanttList.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +238,7 @@
 				965CF0F620242F00004E509E /* ZMJClassData */,
 				965CF14720283E9B004E509E /* ZMJTimeable */,
 				96FA673320295AC500C11568 /* ZMJSchedule */,
+				96514AA22043FDA600E5C24E /* ZMJGanttList */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				67868C33A337FC22E1B970A0 /* Pods */,
@@ -218,6 +253,7 @@
 				965CF0F520242F00004E509E /* ZMJClassData.app */,
 				965CF14620283E9B004E509E /* ZMJTimeable.app */,
 				96FA673220295AC500C11568 /* ZMJSchedule.app */,
+				96514AA12043FDA600E5C24E /* ZMJGanttList.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -234,6 +270,7 @@
 				1E319EA79ABF6E3B81572D87 /* Pods_ZMJClassData.framework */,
 				C14F6ADA46A92779D54EFF91 /* Pods_ZMJTimeable.framework */,
 				FF97805CA837561EC98FDF4D /* Pods_ZMJSchedule.framework */,
+				B51BCE3CDC971F21DFF27A17 /* Pods_ZMJGanttList.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -309,8 +346,30 @@
 				26F143F1445D734D76D38E42 /* Pods-ZMJTimeable.release.xcconfig */,
 				BE5D8B8F8E093C20B272ED90 /* Pods-ZMJSchedule.debug.xcconfig */,
 				E5CDC42BACF3A8FE197F074A /* Pods-ZMJSchedule.release.xcconfig */,
+				7FE382F1EA8DAE130117A2CC /* Pods-ZMJGanttList.debug.xcconfig */,
+				5C27BC1DD12E1896E735E7DB /* Pods-ZMJGanttList.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		96514AA22043FDA600E5C24E /* ZMJGanttList */ = {
+			isa = PBXGroup;
+			children = (
+				96514AA32043FDA600E5C24E /* AppDelegate.h */,
+				96514AA42043FDA600E5C24E /* AppDelegate.m */,
+				96514AA62043FDA600E5C24E /* ViewController.h */,
+				96514AA72043FDA600E5C24E /* ViewController.m */,
+				96514AB72043FE3900E5C24E /* ZMJCells.h */,
+				96514AB82043FE3900E5C24E /* ZMJCells.m */,
+				96514ABA2045356300E5C24E /* ZMJTask.h */,
+				96514ABB2045356300E5C24E /* ZMJTask.m */,
+				96514AA92043FDA600E5C24E /* Main.storyboard */,
+				96514AAC2043FDA600E5C24E /* Assets.xcassets */,
+				96514AAE2043FDA600E5C24E /* LaunchScreen.storyboard */,
+				96514AB12043FDA600E5C24E /* Info.plist */,
+				96514AB22043FDA600E5C24E /* main.m */,
+			);
+			path = ZMJGanttList;
 			sourceTree = "<group>";
 		};
 		965CF0F620242F00004E509E /* ZMJClassData */ = {
@@ -413,6 +472,26 @@
 			productReference = 6003F5AE195388D20070C39A /* ZMJGanttChart_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		96514AA02043FDA600E5C24E /* ZMJGanttList */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96514AB62043FDA600E5C24E /* Build configuration list for PBXNativeTarget "ZMJGanttList" */;
+			buildPhases = (
+				946103D20F80B89A45259F55 /* [CP] Check Pods Manifest.lock */,
+				96514A9D2043FDA600E5C24E /* Sources */,
+				96514A9E2043FDA600E5C24E /* Frameworks */,
+				96514A9F2043FDA600E5C24E /* Resources */,
+				A2CC957E59A73264B978D8E7 /* [CP] Embed Pods Frameworks */,
+				6485530C0299038DFA92CF67 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZMJGanttList;
+			productName = ZMJGanttList;
+			productReference = 96514AA12043FDA600E5C24E /* ZMJGanttList.app */;
+			productType = "com.apple.product-type.application";
+		};
 		965CF0F420242F00004E509E /* ZMJClassData */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 965CF10A20242F00004E509E /* Build configuration list for PBXNativeTarget "ZMJClassData" */;
@@ -486,6 +565,11 @@
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
+					96514AA02043FDA600E5C24E = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = ZSE663HLJF;
+						ProvisioningStyle = Automatic;
+					};
 					965CF0F420242F00004E509E = {
 						CreatedOnToolsVersion = 9.2;
 						DevelopmentTeam = ZSE663HLJF;
@@ -521,6 +605,7 @@
 				965CF0F420242F00004E509E /* ZMJClassData */,
 				965CF14520283E9B004E509E /* ZMJTimeable */,
 				96FA673120295AC500C11568 /* ZMJSchedule */,
+				96514AA02043FDA600E5C24E /* ZMJGanttList */,
 			);
 		};
 /* End PBXProject section */
@@ -542,6 +627,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96514A9F2043FDA600E5C24E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96514AB02043FDA600E5C24E /* LaunchScreen.storyboard in Resources */,
+				96514AAD2043FDA600E5C24E /* Assets.xcassets in Resources */,
+				96514AAB2043FDA600E5C24E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,6 +795,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZMJSchedule/Pods-ZMJSchedule-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6485530C0299038DFA92CF67 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZMJGanttList/Pods-ZMJGanttList-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7E64C87B1FC629301FD76125 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -748,6 +858,24 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZMJTimeable/Pods-ZMJTimeable-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		946103D20F80B89A45259F55 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZMJGanttList-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A0EC3F2B2298CD53AD01B5D4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -761,6 +889,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZMJGanttChart_Example/Pods-ZMJGanttChart_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2CC957E59A73264B978D8E7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZMJGanttList/Pods-ZMJGanttList-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ZMJGanttChart-iOS11.2/ZMJGanttChart.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZMJGanttChart.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZMJGanttList/Pods-ZMJGanttList-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ADC0FBB4455301A598D4D2C7 /* [CP] Embed Pods Frameworks */ = {
@@ -857,6 +1003,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		96514A9D2043FDA600E5C24E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96514AA82043FDA600E5C24E /* ViewController.m in Sources */,
+				96514ABC2045356300E5C24E /* ZMJTask.m in Sources */,
+				96514AB92043FE3900E5C24E /* ZMJCells.m in Sources */,
+				96514AB32043FDA600E5C24E /* main.m in Sources */,
+				96514AA52043FDA600E5C24E /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		965CF0F120242F00004E509E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -921,6 +1079,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				71719F9E1E33DC2100824A3D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		96514AA92043FDA600E5C24E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96514AAA2043FDA600E5C24E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		96514AAE2043FDA600E5C24E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96514AAF2043FDA600E5C24E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1145,6 +1319,57 @@
 			};
 			name = Release;
 		};
+		96514AB42043FDA600E5C24E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FE382F1EA8DAE130117A2CC /* Pods-ZMJGanttList.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = ZSE663HLJF;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ZMJGanttList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = zmj.ZMJGanttList;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		96514AB52043FDA600E5C24E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C27BC1DD12E1896E735E7DB /* Pods-ZMJGanttList.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ZSE663HLJF;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ZMJGanttList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = zmj.ZMJGanttList;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		965CF10820242F00004E509E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2842C32E0EFAC7CEDF616BC6 /* Pods-ZMJClassData.debug.xcconfig */;
@@ -1324,6 +1549,15 @@
 			buildConfigurations = (
 				6003F5C3195388D20070C39A /* Debug */,
 				6003F5C4195388D20070C39A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96514AB62043FDA600E5C24E /* Build configuration list for PBXNativeTarget "ZMJGanttList" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96514AB42043FDA600E5C24E /* Debug */,
+				96514AB52043FDA600E5C24E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

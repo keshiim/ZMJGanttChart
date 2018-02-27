@@ -21,3 +21,7 @@ end
 target 'ZMJSchedule' do
     pod 'ZMJGanttChart', :path => '../'
 end
+
+target 'ZMJGanttList' do
+    pod 'ZMJGanttChart', :path => '../'
+end

@@ -1,0 +1,6 @@
+framework module Pods_ZMJGanttList {
+  umbrella header "Pods-ZMJGanttList-umbrella.h"
+
+  export *
+  module * { export * }
+}
