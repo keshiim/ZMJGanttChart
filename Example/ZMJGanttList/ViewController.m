@@ -56,7 +56,9 @@
                    [ZMJTask taskWithName:@"Air condition check" startDate:dateFromString(@"2017-12-7") endDate:dateFromString(@"2017-12-19")],
                    [ZMJTask taskWithName:@"Office itinerancy" startDate:dateFromString(@"2017-12-24") endDate:dateFromString(@"2017-12-30")],
                    [ZMJTask taskWithName:@"Office facingy" startDate:dateFromString(@"2017-12-18") endDate:dateFromString(@"2018-1-2")],
-                   [ZMJTask taskWithName:@"Office facingy" startDate:nil endDate:dateFromString(@"2017-12-8")]];
+                   [ZMJTask taskWithName:@"Office facingy" startDate:nil endDate:dateFromString(@"2017-12-8")],
+                   [ZMJTask taskWithName:@"Office facingy" startDate:dateFromString(@"2017-12-9") endDate:nil],
+                   ];
     self.colors = @[[UIColor colorWithRed:72/255.f  green:194/255.f blue:169/255.f  alpha:1],
                     [UIColor colorWithRed:255/255.f green:121/255.f blue:121/255.f alpha:1],
                     [UIColor colorWithRed:204/255.f green:204/255.f blue:204/255.f alpha:1],

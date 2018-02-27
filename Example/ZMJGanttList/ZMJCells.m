@@ -198,9 +198,9 @@
     border.fillColor = nil;
     border.path = [UIBezierPath bezierPathWithRect:CGRectInset(imageView.bounds, 1, 1)].CGPath;
     border.frame = imageView.bounds;
-    border.lineWidth = 2.f;
+    border.lineWidth = 2.4f;
     border.lineCap = @"square";
-    border.lineDashPattern = @[@2, @5];
+    border.lineDashPattern = @[@2.4, @5];
     [imageView.layer addSublayer:border];
     
     
