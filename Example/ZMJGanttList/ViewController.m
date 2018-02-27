@@ -11,6 +11,18 @@
 #import "ZMJCells.h"
 #import "ZMJTask.h"
 
+typedef NS_ENUM(NSInteger, ZMJTimeUnit) {
+    ZMJTimeUnit_week,
+    ZMJTimeUnit_month,
+    ZMJTimeUnit_year,
+};
+
+typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
+    ZMJDisplayMode_daily,
+    ZMJDisplayMode_weekly,
+    ZMJDisplayMode_monthly,
+};
+
 @interface ViewController () <SpreadsheetViewDelegate, SpreadsheetViewDataSource>
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSDate *endDate;
@@ -23,12 +35,9 @@
 @property (nonatomic, strong) NSArray<UIColor *>          *colors;
 
 @property (nonatomic, strong) SpreadsheetView *spreadsheetView;
+@property (nonatomic, assign) ZMJDisplayMode   displayMode;
 @end
-typedef NS_ENUM(NSInteger, ZMJTimeUnit) {
-    ZMJTimeUnit_week,
-    ZMJTimeUnit_month,
-    ZMJTimeUnit_year,
-};
+
 @implementation ViewController
 
 - (instancetype)init
@@ -77,6 +86,8 @@ typedef NS_ENUM(NSInteger, ZMJTimeUnit) {
     [self.spreadsheetView registerClass:[ZMJHeaderCell class]   forCellWithReuseIdentifier:[ZMJHeaderCell description]];
     [self.spreadsheetView registerClass:[ZMJTaskCell class]     forCellWithReuseIdentifier:[ZMJTaskCell description]];
     [self.spreadsheetView registerClass:[ZMJChartBarCell class] forCellWithReuseIdentifier:[ZMJChartBarCell description]];
+    
+    self.displayMode = ZMJDisplayMode_weekly;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -100,6 +111,13 @@ typedef NS_ENUM(NSInteger, ZMJTimeUnit) {
 }
 
 //MARK: properties
+- (void)setDisplayMode:(ZMJDisplayMode)displayMode {
+    _displayMode = displayMode;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//       [self.spreadsheetView reloadDataIfNeeded];
+    });
+}
+
 - (SpreadsheetView *)spreadsheetView {
     if (!_spreadsheetView) {
         _spreadsheetView = ({
@@ -267,7 +285,17 @@ typedef NS_ENUM(NSInteger, ZMJTimeUnit) {
 }
 
 - (CGFloat)spreadsheetView:(SpreadsheetView *)spreadsheetView widthForColumn:(NSInteger)column {
-    return 50.f/3;
+    switch (self.displayMode) {
+        case ZMJDisplayMode_daily:
+            return 50.f;
+            break;
+        case ZMJDisplayMode_weekly:
+            return 50.f/3;
+            break;
+        case ZMJDisplayMode_monthly:
+            return 50.f/3;
+            break;
+    }
 }
 
 - (CGFloat)spreadsheetView:(SpreadsheetView *)spreadsheetView heightForRow:(NSInteger)row {
@@ -288,21 +316,51 @@ typedef NS_ENUM(NSInteger, ZMJTimeUnit) {
 
 - (NSArray<ZMJCellRange *> *)mergedCells:(SpreadsheetView *)spreadsheetView {
     NSMutableArray<ZMJCellRange *> *result = [NSMutableArray array];
-    NSArray<ZMJCellRange *> *titleHeader = [self monthCellRangesWithRow:0];
-    NSArray<ZMJCellRange *> *weekTitleHeader = [self weekCellRangesWithRow:1];
-    __weak typeof(self) weak_self = self;
-    NSArray<ZMJCellRange *> *charts = [self.tasks wbg_mapWithIndex:^id _Nullable(ZMJTask * _Nonnull task, NSUInteger index) {
-        return (task.startDate && task.dueDate) ?
-        [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
-                                                              column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
-                                        to:[Location locationWithRow:index + 2
-                                                              column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]
-         ] :
-        nil;
-    }];
-    [result addObjectsFromArray:titleHeader];
-    [result addObjectsFromArray:weekTitleHeader];
-    [result addObjectsFromArray:charts];
+    switch (self.displayMode) {
+        case ZMJDisplayMode_daily:
+        {
+            NSArray<ZMJCellRange *> *titleHeader = [self monthCellRangesWithRow:0];
+            __weak typeof(self) weak_self = self;
+            NSArray<ZMJCellRange *> *charts = [self.tasks wbg_mapWithIndex:^id _Nullable(ZMJTask * _Nonnull task, NSUInteger index) {
+                return (task.startDate && task.dueDate) ?
+                [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
+                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
+                                         to:[Location locationWithRow:index + 2
+                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]
+                 ] :
+                nil;
+            }];
+            [result addObjectsFromArray:titleHeader];
+            [result addObjectsFromArray:charts];
+        }
+            break;
+        case ZMJDisplayMode_weekly:
+        {
+            NSArray<ZMJCellRange *> *titleHeader = [self monthCellRangesWithRow:0];
+            NSArray<ZMJCellRange *> *weekTitleHeader = [self weekCellRangesWithRow:1];
+            __weak typeof(self) weak_self = self;
+            NSArray<ZMJCellRange *> *charts = [self.tasks wbg_mapWithIndex:^id _Nullable(ZMJTask * _Nonnull task, NSUInteger index) {
+                return (task.startDate && task.dueDate) ?
+                [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
+                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
+                                         to:[Location locationWithRow:index + 2
+                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]
+                 ] :
+                nil;
+            }];
+            [result addObjectsFromArray:titleHeader];
+            [result addObjectsFromArray:weekTitleHeader];
+            [result addObjectsFromArray:charts];
+        }
+            break;
+        case ZMJDisplayMode_monthly:
+        {
+            
+        }
+            break;
+            
+    }
+    
     return result.copy;
 }
 
@@ -324,19 +382,31 @@ typedef NS_ENUM(NSInteger, ZMJTimeUnit) {
             
             cell.label.text = [self formateMonthLimmited:getVilabelDateBlock(row, column)];
         } else {
-            cell.label.text = [self dailyAppendWeaklyForDate:self.days[column]];
-            
-            __weak typeof(self)weak_self = self;
-            NSInteger(^getVilabelIdxBlock)(NSInteger r, NSInteger c) = ^NSInteger(NSInteger r, NSInteger c) {
-                for (NSInteger idx = 0; idx < [weak_self weekCellRangesWithRow:r].count; idx++) {
-                    ZMJCellRange *range = [weak_self weekCellRangesWithRow:r][idx];
-                    if (range.from.row == r && range.from.column == c) {
-                        return idx + 1;
-                    }
+            switch (self.displayMode) {
+                case ZMJDisplayMode_daily:
+                    cell.label.text = [self dailyAppendWeaklyForDate:self.days[column]];
+                    break;
+                case ZMJDisplayMode_weekly:
+                {
+                    __weak typeof(self)weak_self = self;
+                    NSInteger(^getVilabelIdxBlock)(NSInteger r, NSInteger c) = ^NSInteger(NSInteger r, NSInteger c) {
+                        for (NSInteger idx = 0; idx < [weak_self weekCellRangesWithRow:r].count; idx++) {
+                            ZMJCellRange *range = [weak_self weekCellRangesWithRow:r][idx];
+                            if (range.from.row == r && range.from.column == c) {
+                                return idx + 1;
+                            }
+                        }
+                        return 0;
+                    };
+                    cell.label.text = [NSString stringWithFormat:@"第%@周", [self translationArabicNum:getVilabelIdxBlock(row, column)]];
                 }
-                return 0;
-            };
-            cell.label.text = [NSString stringWithFormat:@"第%@周", [self translationArabicNum:getVilabelIdxBlock(row, column)]];
+                    break;
+                case ZMJDisplayMode_monthly:
+                {
+                    
+                }
+                    break;
+            }
         }
         cell.gridlines.left  = [GridStyle style:GridStyle_default width:0 color:nil];
         cell.gridlines.right = [GridStyle style:GridStyle_default width:0 color:nil];
@@ -357,7 +427,10 @@ typedef NS_ENUM(NSInteger, ZMJTimeUnit) {
             } else {
                 cell.direction = ZMJDashlineDirectionNone;
             }
-            cell.gridlines.right   = [GridStyle borderStyleNone];
+            
+            if (self.displayMode != ZMJDisplayMode_daily) {
+                cell.gridlines.right   = [GridStyle borderStyleNone];
+            }
         } else {
             cell.label.text = @"";
             cell.color = [UIColor clearColor];
@@ -366,16 +439,29 @@ typedef NS_ENUM(NSInteger, ZMJTimeUnit) {
         cell.gridlines.bottom  = [GridStyle borderStyleNone];
         cell.gridlines.top     = [GridStyle borderStyleNone];
         
-        __weak typeof(self)weak_self = self;
-        BOOL(^enableLeftGridlineBlock)(NSInteger r, NSInteger c) = ^BOOL(NSInteger r, NSInteger c) {
-            for (ZMJCellRange *range in [weak_self weekCellRangesWithRow:1]) {
-                if (range.from.column == c) {
-                    return YES;
-                }
+        switch (self.displayMode) {
+            case ZMJDisplayMode_daily:
+                break;
+            case ZMJDisplayMode_weekly:
+            {
+                __weak typeof(self)weak_self = self;
+                BOOL(^enableLeftGridlineBlock)(NSInteger r, NSInteger c) = ^BOOL(NSInteger r, NSInteger c) {
+                    for (ZMJCellRange *range in [weak_self weekCellRangesWithRow:1]) {
+                        if (range.from.column == c) {
+                            return YES;
+                        }
+                    }
+                    return NO;
+                };
+                cell.gridlines.left    = enableLeftGridlineBlock(row, column) ? [GridStyle style:GridStyle_default width:0 color:nil] : [GridStyle borderStyleNone];
             }
-            return NO;
-        };
-        cell.gridlines.left    = enableLeftGridlineBlock(row, column) ? [GridStyle style:GridStyle_default width:0 color:nil] : [GridStyle borderStyleNone];
+                break;
+            case ZMJDisplayMode_monthly:
+            {
+                
+            }
+                break;
+        }
         return cell;
     }
     return nil;
