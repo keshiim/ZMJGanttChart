@@ -56,7 +56,7 @@
                    [ZMJTask taskWithName:@"Air condition check" startDate:dateFromString(@"2017-12-7") endDate:dateFromString(@"2017-12-19")],
                    [ZMJTask taskWithName:@"Office itinerancy" startDate:dateFromString(@"2017-12-24") endDate:dateFromString(@"2017-12-30")],
                    [ZMJTask taskWithName:@"Office facingy" startDate:dateFromString(@"2017-12-18") endDate:dateFromString(@"2018-1-2")],
-                   ];
+                   [ZMJTask taskWithName:@"Office facingy" startDate:nil endDate:dateFromString(@"2017-12-8")]];
     self.colors = @[[UIColor colorWithRed:72/255.f  green:194/255.f blue:169/255.f  alpha:1],
                     [UIColor colorWithRed:255/255.f green:121/255.f blue:121/255.f alpha:1],
                     [UIColor colorWithRed:204/255.f green:204/255.f blue:204/255.f alpha:1],
@@ -226,14 +226,16 @@
 - (NSArray<ZMJCellRange *> *)mergedCells:(SpreadsheetView *)spreadsheetView {
     NSMutableArray<ZMJCellRange *> *result = [NSMutableArray array];
     NSArray<ZMJCellRange *> *titleHeader = [self monthCellRangesWithRow:0];
+    
     __weak typeof(self) weak_self = self;
     NSArray<ZMJCellRange *> *charts = [self.tasks wbg_mapWithIndex:^id _Nullable(ZMJTask * _Nonnull task, NSUInteger index) {
-        
-        return [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
+        return (task.startDate && task.dueDate) ?
+        [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
                                         to:[Location locationWithRow:index + 2
                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]
-                ];
+         ] :
+        nil;
     }];
     [result addObjectsFromArray:titleHeader];
     [result addObjectsFromArray:charts];
@@ -265,11 +267,20 @@
         return cell;
     } else {
         ZMJChartBarCell *cell = (ZMJChartBarCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJChartBarCell description] forIndexPath:indexPath];
-        NSInteger start = [self getDistanceLeftDate:self.startDate rightDate:self.tasks[row - 2].startDate];
+        ZMJTask *task = self.tasks[row - 2];
+        NSInteger start = [self getDistanceLeftDate:self.startDate rightDate:task.startDate ?: task.dueDate];
         if (start == column) {
             cell.label.text = self.tasks[row - 2].taskName;
             NSInteger colorIndex = arc4random() % 3;
             cell.color = self.colors[colorIndex];
+            
+            if (task.startDate == nil) {
+                cell.direction = ZMJDashlineDirectionLeft;
+            } else if (task.dueDate == nil) {
+                cell.direction = ZMJDashlineDirectionRight;
+            } else {
+                cell.direction = ZMJDashlineDirectionNone;
+            }
         } else {
             cell.label.text = @"";
             cell.color = [UIColor clearColor];

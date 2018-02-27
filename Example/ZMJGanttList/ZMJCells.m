@@ -82,12 +82,23 @@
 }
 @end
 
+@interface ZMJChartBarCell ()
+@property (nonatomic, strong) UIImageView *dashImageView;
+@property (nonatomic, assign) CGSize intercellSize;
+@end
 @implementation ZMJChartBarCell : ZMJCell
 - (UILabel *)label {
     if (!_label) {
         _label = [UILabel new];
     }
     return _label;
+}
+
+- (UIImageView *)dashImageView {
+    if (!_dashImageView) {
+        _dashImageView = [[UIImageView alloc] init];
+    }
+    return _dashImageView;
 }
 
 - (UIView *)colorBarView {
@@ -103,17 +114,58 @@
         self.colorBarView.backgroundColor = color;
     }
 }
+- (void)preppareForReuse {
+    self.dashImageView.hidden = YES;
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.colorBarView.frame = CGRectInset(self.bounds, 2, 2);
+    switch (self.direction) {
+        case ZMJDashlineDirectionNone:
+        {
+            self.colorBarView.frame = CGRectInset(self.bounds, self.intercellSize.width, self.intercellSize.height);
+            self.dashImageView.frame= CGRectZero;
+        }
+            break;
+        case ZMJDashlineDirectionLeft:
+        {
+            CGRect frame = CGRectInset(self.bounds, self.intercellSize.width, self.intercellSize.height);
+            self.dashImageView.frame = frame;
+            self.dashImageView.hidden = NO;
+            self.colorBarView.frame = CGRectMake(floorf(frame.size.width * 1 / 4) + self.intercellSize.width,
+                                                 frame.origin.y,
+                                                 floorf(frame.size.width * 3 / 4) + self.intercellSize.width,
+                                                 frame.size.height);
+            [self drawLineByImageView:self.dashImageView withFrame:frame];
+        }
+            break;
+        case ZMJDashlineDirectionRight:
+        {
+            CGRect frame = CGRectInset(self.bounds, self.intercellSize.width, self.intercellSize.height);
+            self.dashImageView.frame = frame;
+            self.dashImageView.hidden = NO;
+            self.colorBarView.frame = CGRectMake(frame.origin.x, frame.origin.y, floorf(frame.size.width * 3 / 4), frame.size.height);
+            [self drawLineByImageView:self.dashImageView withFrame:frame];
+        }
+            break;
+        default:
+            break;
+    }
+    self.label.frame = self.colorBarView.frame;
+}
+
+- (void)setDirection:(ZMJDashlineDirection)direction {
+    _direction = direction;
+    [self setNeedsLayout];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.intercellSize = CGSizeMake(2, 4);
+        [self.contentView addSubview:self.dashImageView];
         [self.contentView addSubview:self.colorBarView];
         
         self.label.frame = self.bounds;
@@ -135,6 +187,43 @@
     }
     return self;
 }
+
+// 返回虚线image的方法
+- (void)drawLineByImageView:(UIImageView *)imageView withFrame:(CGRect)frame {
+    [imageView.layer.sublayers enumerateObjectsUsingBlock:^(CALayer * _Nonnull subLayer, NSUInteger idx, BOOL * _Nonnull stop) {
+        [subLayer removeFromSuperlayer];
+    }];
+    CAShapeLayer *border = [CAShapeLayer layer];
+    border.strokeColor = self.color.CGColor;
+    border.fillColor = nil;
+    border.path = [UIBezierPath bezierPathWithRect:CGRectInset(imageView.bounds, 1, 1)].CGPath;
+    border.frame = imageView.bounds;
+    border.lineWidth = 2.f;
+    border.lineCap = @"square";
+    border.lineDashPattern = @[@2, @5];
+    [imageView.layer addSublayer:border];
+    
+    
+    /*
+    UIGraphicsBeginImageContext(imageView.frame.size); //开始画线 划线的frame
+    [imageView.image drawInRect:CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height)];
+    CGContextRef line = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(line, 4);
+    //设置线条终点形状
+    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
+    // 2是每个虚线的长度 5空白的长度
+    CGFloat lengths[] = {2, 8};
+    // 设置颜色
+    CGContextSetStrokeColorWithColor(line, [UIColor colorWithWhite:0.408 alpha:1.000].CGColor);
+    CGContextSetLineDash(line, 0, lengths, 2); //画虚线
+    CGContextMoveToPoint(line, 0.0, 0.0); //开始画线
+    CGContextAddRect(line, CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height));
+    CGContextStrokePath(line);
+    // UIGraphicsGetImageFromCurrentImageContext()返回的就是image
+    return UIGraphicsGetImageFromCurrentImageContext();
+     */
+}
+
 @end
 
 

@@ -16,8 +16,14 @@
 @property (nonatomic, strong) UILabel *label;
 @end
 
+typedef NS_ENUM(NSInteger, ZMJDashlineDirection) {
+    ZMJDashlineDirectionNone = 0,
+    ZMJDashlineDirectionLeft ,
+    ZMJDashlineDirectionRight,
+};
 @interface ZMJChartBarCell : ZMJCell
 @property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) UIView  *colorBarView;
 @property (nonatomic, strong) UIColor *color;
+@property (nonatomic, assign) ZMJDashlineDirection direction;
 @end
