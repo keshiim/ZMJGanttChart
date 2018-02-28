@@ -184,6 +184,7 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
                                     NSCalendarUnitSecond |
                                     NSCalendarUnitWeekOfMonth |
                                     NSCalendarUnitWeekday |
+                                    NSCalendarUnitWeekdayOrdinal |
                                     NSCalendarUnitWeekOfMonth |
                                     NSCalendarUnitWeekOfYear;
     NSCalendar *greCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -195,7 +196,7 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
         long long dateComponentTimeUnitValue = NSIntegerMin;
         switch (timeUnit) {
             case ZMJTimeUnit_week:
-                dateComponentTimeUnitValue = dateComponents.weekOfMonth;
+                dateComponentTimeUnitValue = dateComponents.weekdayOrdinal;
                 break;
             case ZMJTimeUnit_month:
                 dateComponentTimeUnitValue = dateComponents.month;
@@ -326,10 +327,10 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
             return 50.f;
             break;
         case ZMJDisplayMode_weekly:
-            return 50.f;
+            return 50.f/3;
             break;
         case ZMJDisplayMode_monthly:
-            return 50.f/3;
+            return 50.f/6;
             break;
     }
 }
@@ -358,13 +359,19 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
             NSArray<ZMJCellRange *> *titleHeader = [self monthCellRangesWithRow:0];
             __weak typeof(self) weak_self = self;
             NSArray<ZMJCellRange *> *charts = [self.tasks wbg_mapWithIndex:^id _Nullable(ZMJTask * _Nonnull task, NSUInteger index) {
-                return (task.startDate && task.dueDate) ?
-                [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
-                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
-                                         to:[Location locationWithRow:index + 2
-                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]
-                 ] :
-                nil;
+                ZMJCellRange *cellRange = nil;
+                if (task.startDate && task.dueDate) {
+                    cellRange = [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
+                                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
+                                                         to:[Location locationWithRow:index + 2
+                                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]];
+                } else {
+                    cellRange = [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
+                                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate ?: task.dueDate]]
+                                                         to:[Location locationWithRow:index + 2
+                                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate ?: task.dueDate]]];
+                }
+                return cellRange;
             }];
             [result addObjectsFromArray:titleHeader];
             [result addObjectsFromArray:charts];
@@ -376,13 +383,27 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
             NSArray<ZMJCellRange *> *weekTitleHeader = [self weekCellRangesWithRow:1];
             __weak typeof(self) weak_self = self;
             NSArray<ZMJCellRange *> *charts = [self.tasks wbg_mapWithIndex:^id _Nullable(ZMJTask * _Nonnull task, NSUInteger index) {
-                return (task.startDate && task.dueDate) ?
-                [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
-                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
-                                         to:[Location locationWithRow:index + 2
-                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]
-                 ] :
-                nil;
+                ZMJCellRange *cellRange = nil;
+                if (task.startDate && task.dueDate) {
+                    cellRange = [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
+                                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
+                                                         to:[Location locationWithRow:index + 2
+                                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]];
+                } else {
+                    if (task.startDate) { //startDate not nil
+                        cellRange = [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
+                                                                                   column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
+                                                             to:[Location locationWithRow:index + 2
+                                                                                   column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate] + 2]];
+                    } else { //dueDate not nil
+                        NSInteger start = getMinIndex([weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate], 2);
+                        cellRange = [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
+                                                                                   column:start]
+                                                             to:[Location locationWithRow:index + 2
+                                                                                   column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]];
+                    }
+                }
+                return cellRange;
             }];
             [result addObjectsFromArray:titleHeader];
             [result addObjectsFromArray:weekTitleHeader];
@@ -396,13 +417,27 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
             
             __weak typeof(self) weak_self = self;
             NSArray<ZMJCellRange *> *charts = [self.tasks wbg_mapWithIndex:^id _Nullable(ZMJTask * _Nonnull task, NSUInteger index) {
-                return (task.startDate && task.dueDate) ?
-                [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
-                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
-                                         to:[Location locationWithRow:index + 2
-                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]
-                 ] :
-                nil;
+                ZMJCellRange *cellRange = nil;
+                if (task.startDate && task.dueDate) {
+                    cellRange = [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
+                                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
+                                                         to:[Location locationWithRow:index + 2
+                                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]];
+                } else {
+                    if (task.startDate) { //startDate not nil
+                        cellRange = [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
+                                                                                   column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
+                                                             to:[Location locationWithRow:index + 2
+                                                                                   column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate] + 5]];
+                    } else { //dueDate not nil
+                        NSInteger start = getMinIndex([weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate], 5);
+                        cellRange = [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
+                                                                                   column:start]
+                                                             to:[Location locationWithRow:index + 2
+                                                                                   column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]];
+                    }
+                }
+                return cellRange;
             }];
             [result addObjectsFromArray:titleHeader];
             [result addObjectsFromArray:monthTitleHeader];
@@ -494,7 +529,24 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
     } else {
         ZMJChartBarCell *cell = (ZMJChartBarCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJChartBarCell description] forIndexPath:indexPath];
         ZMJTask *task = self.tasks[row - 2];
+        
         NSInteger start = [self getDistanceLeftDate:self.startDate rightDate:task.startDate ?: task.dueDate];
+        if (task.startDate == nil) {
+            switch (self.displayMode) {
+                case ZMJDisplayMode_daily:
+                    break;
+                case ZMJDisplayMode_weekly:
+                {
+                    start = getMinIndex([self getDistanceLeftDate:self.startDate rightDate:task.dueDate], 2);
+                }
+                    break;
+                case ZMJDisplayMode_monthly:
+                {
+                    start = getMinIndex([self getDistanceLeftDate:self.startDate rightDate:task.dueDate], 5);
+                }
+                    break;
+            }
+        }
         if (start == column) {
             cell.label.text = self.tasks[row - 2].taskName;
             NSInteger colorIndex = arc4random() % 3;
@@ -620,7 +672,7 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
     NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian]; // 指定日历的算法
     NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday | NSCalendarUnitWeekdayOrdinal | NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekOfYear fromDate:date];
     
-    return [comps weekOfMonth];
+    return [comps weekdayOrdinal];
 }
 
 /**
@@ -742,7 +794,7 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
     return results.copy;
 }
 
-//获取两个日期之间的所有日期，精确到天
+//获取两个日期之间的距离
 - (NSInteger)getDistanceLeftDate:(NSDate *)aLeftDate rightDate:(NSDate *)aRightDate {
     NSAssert(aLeftDate <= aRightDate, @"aLeftDate must less equal aRightDate!");
     
@@ -786,5 +838,14 @@ NSDate *dateFromString(NSString *dateStr) {
         [formatter setDateFormat:@"yyyy-MM-dd"];
     }
     return [formatter dateFromString:dateStr];
+}
+
+NSInteger getMinIndex(NSInteger begin, NSInteger offset) {
+    for (NSInteger i = offset; i >= 0; i--) {
+        if (begin - offset >= 0) {
+            return begin - offset;
+        }
+    }
+    return 0;
 }
 @end
