@@ -87,7 +87,7 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
     [self.spreadsheetView registerClass:[ZMJTaskCell class]     forCellWithReuseIdentifier:[ZMJTaskCell description]];
     [self.spreadsheetView registerClass:[ZMJChartBarCell class] forCellWithReuseIdentifier:[ZMJChartBarCell description]];
     
-    self.displayMode = ZMJDisplayMode_weekly;
+    self.displayMode = ZMJDisplayMode_monthly;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -212,6 +212,42 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
     return _months.copy;
 }
 
+//MARK: Generate ZMJCellRanges
+- (NSArray<ZMJCellRange *> *)yearCellRangesWithRow:(NSInteger)row {
+    static NSMutableArray<ZMJCellRange *> *_yearCellRanges = nil;
+    if (_yearCellRanges == nil) {
+        _yearCellRanges = [NSMutableArray array];
+    }
+    if (_yearCellRanges.count != 0) {
+        return _yearCellRanges.copy;
+    }
+    Location *fromLocation = nil;
+    Location *toLocation   = nil;
+    for (NSDate *fristDayOfYear in self.years) {
+        for (NSDate *date in self.days) {
+            if ([date isEqualToDate:fristDayOfYear] ||
+                ([date isEqualToDate:self.days.lastObject] && [fristDayOfYear isEqualToDate:self.years.lastObject])) {
+                if ([self.days indexOfObject:date] > 0) {
+                    toLocation = [Location locationWithRow:row column:[self.days indexOfObject:date] - 1];
+                }
+                BOOL addFlag = NO;
+                if (fromLocation && toLocation) {
+                    [_yearCellRanges addObject:[ZMJCellRange cellRangeFrom:fromLocation
+                                                                        to:toLocation]];
+                    toLocation = nil;
+                    addFlag    = YES;
+                }
+                fromLocation = [Location locationWithRow:row column:[self.days indexOfObject:date]];
+                if (addFlag && ![fristDayOfYear isEqualToDate:self.years.lastObject]) {
+                    break;
+                }
+            }
+        }
+    }
+    
+    return _yearCellRanges.copy;
+}
+
 - (NSArray<ZMJCellRange *> *)monthCellRanges {
     return [self monthCellRangesWithRow:0];
 }
@@ -241,12 +277,12 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
 }
 
 - (NSArray<ZMJCellRange *> *)weekCellRangesWithRow:(NSInteger)row {
-    static NSMutableArray<ZMJCellRange *> *_monthCellRanges = nil;
-    if (_monthCellRanges == nil) {
-        _monthCellRanges = [NSMutableArray array];
+    static NSMutableArray<ZMJCellRange *> *_weekCellRanges = nil;
+    if (_weekCellRanges == nil) {
+        _weekCellRanges = [NSMutableArray array];
     }
-    if (_monthCellRanges.count != 0) {
-        return _monthCellRanges.copy;
+    if (_weekCellRanges.count != 0) {
+        return _weekCellRanges.copy;
     }
     Location *fromLocation = nil;
     Location *toLocation   = nil;
@@ -259,20 +295,20 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
                 }
                 BOOL addFlag = NO;
                 if (fromLocation && toLocation) {
-                    [_monthCellRanges addObject:[ZMJCellRange cellRangeFrom:fromLocation
+                    [_weekCellRanges addObject:[ZMJCellRange cellRangeFrom:fromLocation
                                                                          to:toLocation]];
                     toLocation = nil;
                     addFlag    = YES;
                 }
                 fromLocation = [Location locationWithRow:row column:[self.days indexOfObject:date]];
-                if (addFlag) {
+                if (addFlag && ![fristDayOfWeek isEqualToDate:self.weeks.lastObject]) {
                     break;
                 }
             }
         }
     }
     
-    return _monthCellRanges.copy;
+    return _weekCellRanges.copy;
 }
 
 //MARK: DataSource
@@ -336,7 +372,7 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
             break;
         case ZMJDisplayMode_weekly:
         {
-            NSArray<ZMJCellRange *> *titleHeader = [self monthCellRangesWithRow:0];
+            NSArray<ZMJCellRange *> *titleHeader     = [self monthCellRangesWithRow:0];
             NSArray<ZMJCellRange *> *weekTitleHeader = [self weekCellRangesWithRow:1];
             __weak typeof(self) weak_self = self;
             NSArray<ZMJCellRange *> *charts = [self.tasks wbg_mapWithIndex:^id _Nullable(ZMJTask * _Nonnull task, NSUInteger index) {
@@ -355,7 +391,22 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
             break;
         case ZMJDisplayMode_monthly:
         {
+            NSArray<ZMJCellRange *> *titleHeader      = [self yearCellRangesWithRow:0];
+            NSArray<ZMJCellRange *> *monthTitleHeader = [self monthCellRangesWithRow:1];
             
+            __weak typeof(self) weak_self = self;
+            NSArray<ZMJCellRange *> *charts = [self.tasks wbg_mapWithIndex:^id _Nullable(ZMJTask * _Nonnull task, NSUInteger index) {
+                return (task.startDate && task.dueDate) ?
+                [ZMJCellRange cellRangeFrom:[Location locationWithRow:index + 2
+                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.startDate]]
+                                         to:[Location locationWithRow:index + 2
+                                                               column:[weak_self getDistanceLeftDate:weak_self.startDate rightDate:task.dueDate]]
+                 ] :
+                nil;
+            }];
+            [result addObjectsFromArray:titleHeader];
+            [result addObjectsFromArray:monthTitleHeader];
+            [result addObjectsFromArray:charts];
         }
             break;
     }
@@ -368,18 +419,39 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
     NSInteger row    = indexPath.row;
     if (row < 2) {
         ZMJHeaderCell *cell = (ZMJHeaderCell *)[spreadsheetView dequeueReusableCellWithReuseIdentifier:[ZMJHeaderCell description] forIndexPath:indexPath];
+        __weak typeof(self)weak_self = self;
         if (row == 0) {
-            __weak typeof(self)weak_self = self;
-            NSDate *(^getVilabelDateBlock)(NSInteger r, NSInteger c) = ^NSDate *(NSInteger r, NSInteger c) {
-                for (ZMJCellRange *range in [weak_self monthCellRangesWithRow:r]) {
-                    if (range.from.row == r && range.from.column == c) {
-                        return weak_self.months[[[weak_self monthCellRangesWithRow:r] indexOfObject:range]];
-                    }
+            switch (self.displayMode) {
+                case ZMJDisplayMode_daily:
+                case ZMJDisplayMode_weekly:
+                {
+                    NSDate *(^getVilabelDateBlock)(NSInteger r, NSInteger c) = ^NSDate *(NSInteger r, NSInteger c) {
+                        for (ZMJCellRange *range in [weak_self monthCellRangesWithRow:r]) {
+                            if (range.from.row == r && range.from.column == c) {
+                                return weak_self.months[[[weak_self monthCellRangesWithRow:r] indexOfObject:range]];
+                            }
+                        }
+                        return nil;
+                    };
+                    
+                    cell.label.text = [self formateMonthLimmited:getVilabelDateBlock(row, column)];
                 }
-                return nil;
-            };
-            
-            cell.label.text = [self formateMonthLimmited:getVilabelDateBlock(row, column)];
+                    break;
+                case ZMJDisplayMode_monthly:
+                {
+                    NSDate *(^getVilabelDateBlock)(NSInteger r, NSInteger c) = ^NSDate *(NSInteger r, NSInteger c) {
+                        for (ZMJCellRange *range in [weak_self yearCellRangesWithRow:r]) {
+                            if (range.from.row == r && range.from.column == c) {
+                                return weak_self.years[[[weak_self yearCellRangesWithRow:r] indexOfObject:range]];
+                            }
+                        }
+                        return nil;
+                    };
+                    
+                    cell.label.text = [self formateYearLimmited:getVilabelDateBlock(row, column)];
+                }
+                    break;
+            }
         } else {
             switch (self.displayMode) {
                 case ZMJDisplayMode_daily:
@@ -387,7 +459,6 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
                     break;
                 case ZMJDisplayMode_weekly:
                 {
-                    __weak typeof(self)weak_self = self;
                     NSInteger(^getVilabelIdxBlock)(NSInteger r, NSInteger c) = ^NSInteger(NSInteger r, NSInteger c) {
                         for (NSInteger idx = 0; idx < [weak_self weekCellRangesWithRow:r].count; idx++) {
                             ZMJCellRange *range = [weak_self weekCellRangesWithRow:r][idx];
@@ -403,7 +474,16 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
                     break;
                 case ZMJDisplayMode_monthly:
                 {
-                    
+                    NSInteger(^getVilabelIdxBlock)(NSInteger r, NSInteger c) = ^NSInteger(NSInteger r, NSInteger c) {
+                        for (NSInteger idx = 0; idx < [weak_self monthCellRangesWithRow:r].count; idx++) {
+                            ZMJCellRange *range = [weak_self monthCellRangesWithRow:r][idx];
+                            if (range.from.row == r && range.from.column == c) {
+                                return idx;
+                            }
+                        }
+                        return 0;
+                    };
+                    cell.label.text = [NSString stringWithFormat:@"第%@月", [self translationArabicNum:[self getmonthOrdinalWithDate:self.years[getVilabelIdxBlock(row, column)]]]];
                 }
                     break;
             }
@@ -439,12 +519,12 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
         cell.gridlines.bottom  = [GridStyle borderStyleNone];
         cell.gridlines.top     = [GridStyle borderStyleNone];
         
+        __weak typeof(self)weak_self = self;
         switch (self.displayMode) {
             case ZMJDisplayMode_daily:
                 break;
             case ZMJDisplayMode_weekly:
             {
-                __weak typeof(self)weak_self = self;
                 BOOL(^enableLeftGridlineBlock)(NSInteger r, NSInteger c) = ^BOOL(NSInteger r, NSInteger c) {
                     for (ZMJCellRange *range in [weak_self weekCellRangesWithRow:1]) {
                         if (range.from.column == c) {
@@ -453,12 +533,20 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
                     }
                     return NO;
                 };
-                cell.gridlines.left    = enableLeftGridlineBlock(row, column) ? [GridStyle style:GridStyle_default width:0 color:nil] : [GridStyle borderStyleNone];
+                cell.gridlines.left = enableLeftGridlineBlock(row, column) ? [GridStyle style:GridStyle_default width:0 color:nil] : [GridStyle borderStyleNone];
             }
                 break;
             case ZMJDisplayMode_monthly:
             {
-                
+                BOOL(^enableLeftGridlineBlock)(NSInteger r, NSInteger c) = ^BOOL(NSInteger r, NSInteger c) {
+                    for (ZMJCellRange *range in [weak_self monthCellRangesWithRow:1]) {
+                        if (range.from.column == c) {
+                            return YES;
+                        }
+                    }
+                    return NO;
+                };
+                cell.gridlines.left = enableLeftGridlineBlock(row, column) ? [GridStyle style:GridStyle_default width:0 color:nil] : [GridStyle borderStyleNone];
             }
                 break;
         }
@@ -536,6 +624,17 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
 }
 
 /**
+ *  获取指定的日期当年的第几月
+ */
+- (NSInteger)getmonthOrdinalWithDate:(NSDate *)date
+{
+    NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian]; // 指定日历的算法
+    NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday | NSCalendarUnitWeekdayOrdinal | NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekOfYear | NSCalendarUnitMonth fromDate:date];
+    
+    return [comps month];
+}
+
+/**
  *  将阿拉伯数字转换为中文数字
  */
 - (NSString *)translationArabicNum:(NSInteger)arabicNum {
@@ -600,6 +699,20 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
     if (!formatter) {
         formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM"];
+    }
+    return [formatter stringFromDate:theDay];
+}
+
+/**
+ *  yyyy
+ */
+- (NSString *)formateYearLimmited:(NSDate *)theDay {
+    NSAssert(theDay != nil, @"theDay is null.");
+    
+    static NSDateFormatter * formatter = nil;
+    if (!formatter) {
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy"];
     }
     return [formatter stringFromDate:theDay];
 }
