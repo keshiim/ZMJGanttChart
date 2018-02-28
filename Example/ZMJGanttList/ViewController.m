@@ -195,7 +195,7 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
         long long dateComponentTimeUnitValue = NSIntegerMin;
         switch (timeUnit) {
             case ZMJTimeUnit_week:
-                dateComponentTimeUnitValue = dateComponents.weekOfYear;
+                dateComponentTimeUnitValue = dateComponents.weekOfMonth;
                 break;
             case ZMJTimeUnit_month:
                 dateComponentTimeUnitValue = dateComponents.month;
@@ -290,7 +290,7 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
             return 50.f;
             break;
         case ZMJDisplayMode_weekly:
-            return 50.f/3;
+            return 50.f;
             break;
         case ZMJDisplayMode_monthly:
             return 50.f/3;
@@ -358,7 +358,6 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
             
         }
             break;
-            
     }
     
     return result.copy;
@@ -393,12 +392,13 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
                         for (NSInteger idx = 0; idx < [weak_self weekCellRangesWithRow:r].count; idx++) {
                             ZMJCellRange *range = [weak_self weekCellRangesWithRow:r][idx];
                             if (range.from.row == r && range.from.column == c) {
-                                return idx + 1;
+                                return idx;
                             }
                         }
                         return 0;
                     };
-                    cell.label.text = [NSString stringWithFormat:@"第%@周", [self translationArabicNum:getVilabelIdxBlock(row, column)]];
+                    
+                    cell.label.text = [NSString stringWithFormat:@"第%@周", [self translationArabicNum:[self getweekdayOrdinalWithDate:self.weeks[getVilabelIdxBlock(row, column)]]]];
                 }
                     break;
                 case ZMJDisplayMode_monthly:
@@ -522,6 +522,17 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
     
     // 1 是周日，2是周一 3.以此类推
     return [self translationArabicNum:[comps weekday]];
+}
+
+/**
+ *  获取指定的日期当前月的第几周
+ */
+- (NSInteger)getweekdayOrdinalWithDate:(NSDate *)date
+{
+    NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian]; // 指定日历的算法
+    NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday | NSCalendarUnitWeekdayOrdinal | NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekOfYear fromDate:date];
+    
+    return [comps weekOfMonth];
 }
 
 /**
