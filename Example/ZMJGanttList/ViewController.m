@@ -636,6 +636,9 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
 /// Delegate
 - (void)spreadsheetView:(SpreadsheetView *)spreadsheetView didSelectItemAt:(NSIndexPath *)indexPath {
     NSLog(@"Selected: (row: %ld, column: %ld)", (long)indexPath.row, (long)indexPath.column);
+    ZMJCell *cell = [spreadsheetView cellForItemAt:indexPath];
+    if (![cell isKindOfClass:[ZMJChartBarCell class]]) {[self.tipView dismissWithCompletion:nil]; return;}
+    
     ZMJTask *task = self.tasks[indexPath.row - 2];
     NSInteger start = [self getDistanceLeftDate:self.startDate rightDate:task.startDate ?: task.dueDate];
     if (task.startDate == nil) {
@@ -654,8 +657,8 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
                 break;
         }
     }
-    ZMJCell *cell = [spreadsheetView cellForItemAt:indexPath];
-    if (![cell isKindOfClass:[ZMJChartBarCell class]] || start != indexPath.column) {
+    
+    if (start != indexPath.column) {
         [self.tipView dismissWithCompletion:nil];
         return;
     }
