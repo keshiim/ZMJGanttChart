@@ -24,4 +24,6 @@ end
 
 target 'ZMJGanttList' do
     pod 'ZMJGanttChart', :path => '../'
+    pod 'ZMJTipView', '~> 0.1'
+    pod 'YYCategories', '~> 1.0.4'
 end

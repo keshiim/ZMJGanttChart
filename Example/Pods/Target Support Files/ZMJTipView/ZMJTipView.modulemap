@@ -1,0 +1,6 @@
+framework module ZMJTipView {
+  umbrella header "ZMJTipView-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -50,6 +50,8 @@
 		965CF15E2028402D004E509E /* ZMJCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 965CF15D2028402D004E509E /* ZMJCells.m */; };
 		965CF1602028422F004E509E /* SlotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965CF15F2028422F004E509E /* SlotCell.xib */; };
 		967FFB07201F040C00461EB9 /* ZMJCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 967FFB06201F040C00461EB9 /* ZMJCells.m */; };
+		969E75DF2047C174007C1784 /* ZMJTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 969E75DE2047C174007C1784 /* ZMJTaskView.m */; };
+		969E75E22047C1CD007C1784 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 969E75E12047C1CD007C1784 /* UIView+Frame.m */; };
 		96FA673620295AC500C11568 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FA673520295AC500C11568 /* AppDelegate.m */; };
 		96FA673920295AC500C11568 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FA673820295AC500C11568 /* ViewController.m */; };
 		96FA673C20295AC500C11568 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96FA673A20295AC500C11568 /* Main.storyboard */; };
@@ -147,6 +149,10 @@
 		965CF15F2028422F004E509E /* SlotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlotCell.xib; sourceTree = "<group>"; };
 		967FFB05201F040C00461EB9 /* ZMJCells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZMJCells.h; sourceTree = "<group>"; };
 		967FFB06201F040C00461EB9 /* ZMJCells.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZMJCells.m; sourceTree = "<group>"; };
+		969E75DD2047C174007C1784 /* ZMJTaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMJTaskView.h; sourceTree = "<group>"; };
+		969E75DE2047C174007C1784 /* ZMJTaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMJTaskView.m; sourceTree = "<group>"; };
+		969E75E02047C1CC007C1784 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		969E75E12047C1CD007C1784 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		96FA673220295AC500C11568 /* ZMJSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZMJSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96FA673420295AC500C11568 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		96FA673520295AC500C11568 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -363,6 +369,10 @@
 				96514AB82043FE3900E5C24E /* ZMJCells.m */,
 				96514ABA2045356300E5C24E /* ZMJTask.h */,
 				96514ABB2045356300E5C24E /* ZMJTask.m */,
+				969E75DD2047C174007C1784 /* ZMJTaskView.h */,
+				969E75DE2047C174007C1784 /* ZMJTaskView.m */,
+				969E75E02047C1CC007C1784 /* UIView+Frame.h */,
+				969E75E12047C1CD007C1784 /* UIView+Frame.m */,
 				96514AA92043FDA600E5C24E /* Main.storyboard */,
 				96514AAC2043FDA600E5C24E /* Assets.xcassets */,
 				96514AAE2043FDA600E5C24E /* LaunchScreen.storyboard */,
@@ -899,10 +909,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ZMJGanttList/Pods-ZMJGanttList-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ZMJGanttChart-iOS11.2/ZMJGanttChart.framework",
+				"${BUILT_PRODUCTS_DIR}/YYCategories/YYCategories.framework",
+				"${BUILT_PRODUCTS_DIR}/ZMJTipView/ZMJTipView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZMJGanttChart.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCategories.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZMJTipView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1010,6 +1024,8 @@
 				96514AA82043FDA600E5C24E /* ViewController.m in Sources */,
 				96514ABC2045356300E5C24E /* ZMJTask.m in Sources */,
 				96514AB92043FE3900E5C24E /* ZMJCells.m in Sources */,
+				969E75E22047C1CD007C1784 /* UIView+Frame.m in Sources */,
+				969E75DF2047C174007C1784 /* ZMJTaskView.m in Sources */,
 				96514AB32043FDA600E5C24E /* main.m in Sources */,
 				96514AA52043FDA600E5C24E /* AppDelegate.m in Sources */,
 			);

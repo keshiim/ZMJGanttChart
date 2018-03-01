@@ -10,6 +10,10 @@
 #import <ZMJGanttChart/ZMJGanttChart.h>
 #import "ZMJCells.h"
 #import "ZMJTask.h"
+#import <ZMJTipView/ZMJTipView.h>
+#import "ZMJTaskView.h"
+#import "UIView+Frame.h"
+@import YYCategories.UIView_YYAdd;
 
 typedef NS_ENUM(NSInteger, ZMJTimeUnit) {
     ZMJTimeUnit_week,
@@ -23,7 +27,7 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
     ZMJDisplayMode_monthly,
 };
 
-@interface ViewController () <SpreadsheetViewDelegate, SpreadsheetViewDataSource>
+@interface ViewController () <SpreadsheetViewDelegate, SpreadsheetViewDataSource, ZMJTipViewDelegate>
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSDate *endDate;
 
@@ -36,6 +40,7 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
 
 @property (nonatomic, strong) SpreadsheetView *spreadsheetView;
 @property (nonatomic, assign) ZMJDisplayMode   displayMode;
+@property (nonatomic, strong) ZMJTipView      *tipView;
 @end
 
 @implementation ViewController
@@ -87,7 +92,7 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
     [self.spreadsheetView registerClass:[ZMJTaskCell class]     forCellWithReuseIdentifier:[ZMJTaskCell description]];
     [self.spreadsheetView registerClass:[ZMJChartBarCell class] forCellWithReuseIdentifier:[ZMJChartBarCell description]];
     
-    self.displayMode = ZMJDisplayMode_monthly;
+    self.displayMode = ZMJDisplayMode_daily;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -211,6 +216,27 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
         }
     }
     return _months.copy;
+}
+
+- (ZMJTipView *)tipView {
+    if (!_tipView) {
+        ZMJPreferences *preferences = [ZMJPreferences new];
+        preferences.drawing.font = [UIFont fontWithName:@"Futura-Medium" size:13];
+        preferences.drawing.foregroundColor = [UIColor whiteColor];
+        preferences.drawing.backgroundColor = [UIColor whiteColor];
+        ZMJTipView.globalPreferences = preferences;
+        
+        _tipView = [[ZMJTipView alloc] initWithText:nil preferences:nil delegate:self];
+        _tipView.fakeView = ({
+            ZMJTaskView *taskView = [ZMJTaskView new];
+            taskView.width = self.tipView.preferences.positioning.maxWidth;
+            taskView.taskTitle = @"ZMJTipView show task!";
+            taskView.startTime = @"2018-02-10 15:33:22";
+            taskView.endTime = @"2019-02-10 15:33:22";
+            taskView;
+        });
+    }
+    return _tipView;
 }
 
 //MARK: Generate ZMJCellRanges
@@ -610,8 +636,47 @@ typedef NS_ENUM(NSInteger, ZMJDisplayMode) {
 /// Delegate
 - (void)spreadsheetView:(SpreadsheetView *)spreadsheetView didSelectItemAt:(NSIndexPath *)indexPath {
     NSLog(@"Selected: (row: %ld, column: %ld)", (long)indexPath.row, (long)indexPath.column);
+    ZMJTask *task = self.tasks[indexPath.row - 2];
+    NSInteger start = [self getDistanceLeftDate:self.startDate rightDate:task.startDate ?: task.dueDate];
+    if (task.startDate == nil) {
+        switch (self.displayMode) {
+            case ZMJDisplayMode_daily:
+                break;
+            case ZMJDisplayMode_weekly:
+            {
+                start = getMinIndex([self getDistanceLeftDate:self.startDate rightDate:task.dueDate], 2);
+            }
+                break;
+            case ZMJDisplayMode_monthly:
+            {
+                start = getMinIndex([self getDistanceLeftDate:self.startDate rightDate:task.dueDate], 5);
+            }
+                break;
+        }
+    }
+    ZMJCell *cell = [spreadsheetView cellForItemAt:indexPath];
+    if (![cell isKindOfClass:[ZMJChartBarCell class]] || start != indexPath.column) {
+        [self.tipView dismissWithCompletion:nil];
+        return;
+    }
+    if (!self.tipView.isShowing) {
+        ZMJTaskView *taskview = (ZMJTaskView *)self.tipView.fakeView;
+        taskview.taskTitle = task.taskName;
+        taskview.startTime = date2String(task.startDate) ?: @"--";
+        taskview.endTime   = date2String(task.dueDate) ?: @"--";
+        [self.tipView showAnimated:YES forView:cell withinSuperview:nil];
+        spreadsheetView.scrollEnabled = NO;
+    }
 }
 
+//MARK: ZMJTipViewDelegate
+- (void)tipViewDidDimiss:(ZMJTipView *)tipView {
+    self.spreadsheetView.scrollEnabled = YES;
+}
+
+- (void)tipViewDidSelected:(ZMJTipView *)tipView {
+    
+}
 
 //MARK: Utils
 // 获取当月的天数
@@ -838,6 +903,15 @@ NSDate *dateFromString(NSString *dateStr) {
         [formatter setDateFormat:@"yyyy-MM-dd"];
     }
     return [formatter dateFromString:dateStr];
+}
+
+NSString *date2String(NSDate *date) {
+    static NSDateFormatter *formatter = nil;
+    if (!formatter) {
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd hh:mm"];
+    }
+    return [formatter stringFromDate:date];
 }
 
 NSInteger getMinIndex(NSInteger begin, NSInteger offset) {
