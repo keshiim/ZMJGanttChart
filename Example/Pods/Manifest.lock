@@ -4,7 +4,7 @@ PODS:
     - YYCategories/no-arc (= 1.0.4)
   - YYCategories/no-arc (1.0.4)
   - ZMJGanttChart (0.1.4)
-  - ZMJTipView (0.1.4)
+  - ZMJTipView (0.1.5)
 
 DEPENDENCIES:
   - Kiwi
@@ -20,7 +20,7 @@ SPEC CHECKSUMS:
   Kiwi: fbeafef0f00e4d8f7dcb3420a4930afe70af77f7
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
   ZMJGanttChart: 738f9dbd2a56c21bc41c1e2b071fa6a017c7f81a
-  ZMJTipView: cbefca3fdf17be8b92d7890ed9a3d00c851c97a7
+  ZMJTipView: e0dca70fabde36bee70a06122f2ef2f4403c2aa2
 
 PODFILE CHECKSUM: a1b73b7d7f5e09e9ab9c507f7c299f20fde19825
 
