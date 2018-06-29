@@ -28,7 +28,7 @@
 @property (nonatomic, strong) NSIndexPath *indexPath;
 
 - (NSComparisonResult)compare:(ZMJCell *)aValue;
-- (void)preppareForReuse;
+- (void)prepareForReuse;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 @end
