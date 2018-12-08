@@ -210,7 +210,7 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 
 - (void)reloadData;
 
-- (ZMJCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier  forIndexPath:(NSIndexPath *)indexPath;
+- (__kindof ZMJCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier  forIndexPath:(NSIndexPath *)indexPath;
 
 - (void)scrollToItemIndexPath:(NSIndexPath *)indexPath at:(ZMJScrollPosition)scrollPosition animated:(BOOL)animated;
 

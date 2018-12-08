@@ -195,7 +195,7 @@
     [self setNeedsLayout];
 }
 
-- (ZMJCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath {
+- (__kindof ZMJCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath {
     ReuseQueue<ZMJCell *> * reuseQueue = [self.cellReuseQueues objectForKey:identifier];
     if (reuseQueue) {
         ZMJCell *cell = [reuseQueue dequeue];
