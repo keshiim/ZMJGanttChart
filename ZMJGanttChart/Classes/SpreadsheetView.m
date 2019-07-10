@@ -200,7 +200,7 @@
     if (reuseQueue) {
         ZMJCell *cell = [reuseQueue dequeue];
         if (cell) {
-            [cell preppareForReuse];
+//             [cell preppareForReuse];
             return cell;
         }
     } else {
