@@ -194,13 +194,15 @@
     self.needsReload = YES;
     [self setNeedsLayout];
 }
+- (void)prepareForReuse {
+}
 
-- (ZMJCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath {
+- (__kindof ZMJCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath {
     ReuseQueue<ZMJCell *> * reuseQueue = [self.cellReuseQueues objectForKey:identifier];
     if (reuseQueue) {
         ZMJCell *cell = [reuseQueue dequeue];
         if (cell) {
-//             [cell preppareForReuse];
+            [cell prepareForReuse];
             return cell;
         }
     } else {

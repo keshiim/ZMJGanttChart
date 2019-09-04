@@ -41,7 +41,7 @@
     [self insertSubview:self.contentView atIndex:0];
 }
 
-- (void)preppareForReuse {}
+- (void)prepareForReuse {}
 
 - (UIView *)contentView {
     if (!_contentView) {
