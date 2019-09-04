@@ -194,6 +194,8 @@
     self.needsReload = YES;
     [self setNeedsLayout];
 }
+- (void)prepareForReuse {
+}
 
 - (__kindof ZMJCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath {
     ReuseQueue<ZMJCell *> * reuseQueue = [self.cellReuseQueues objectForKey:identifier];
