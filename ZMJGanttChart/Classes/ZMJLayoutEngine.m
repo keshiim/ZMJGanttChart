@@ -231,7 +231,7 @@ point = tempPoint;                 \
                 cellHeight = mergedCell.size.height;
             } else {
                 for (NSInteger col = mergedCell.from.column; col <= mergedCell.to.column; ++col) {
-                    cellWidth += self.columnWidthCache[column].floatValue + self.intercellSpacing.width;
+                    cellWidth += self.columnWidthCache[col].floatValue + self.intercellSpacing.width;
                 }
                 for (NSInteger r = mergedCell.from.row; r <= mergedCell.to.row; ++r) {
                     cellHeight += self.rowHeightCache[r].floatValue + self.intercellSpacing.height;
