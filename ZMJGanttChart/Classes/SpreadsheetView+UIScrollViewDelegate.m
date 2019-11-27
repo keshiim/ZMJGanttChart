@@ -55,6 +55,7 @@
         frame.origin.y = 0;
         self.rowHeaderView.frame = frame;
         
+        CGFloat offset = self.tableView.contentOffset.y * -1;
         CGPoint headerViewOffset = self.tableHeaderView.contentOffset;
         CGSize headerSize = self.tableHeaderView.frame.size;
         headerViewOffset.y = headerSize.height - offset;
