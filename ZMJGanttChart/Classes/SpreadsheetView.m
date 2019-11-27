@@ -36,6 +36,7 @@
 @synthesize scrollEnabled    = _scrollEnabled;
 @synthesize indicatorStyle   = _indicatorStyle;
 @synthesize decelerationRate = _decelerationRate;
+@synthesize tableHeaderView = _tableHeaderView;
 
 #pragma mark - Init
 - (instancetype)init
@@ -54,6 +55,13 @@
         [self setup];
     }
     return self;
+}
+
+- (void)setTableHeaderView:(UIScrollView *)tableHeaderView {
+    _tableHeaderView = tableHeaderView;
+    CGSize headerSize = tableHeaderView.frame.size;
+    self.tableView.contentInset = UIEdgeInsetsMake(headerSize.height, 0, 0, 0);
+    [self.rootView addSubview:tableHeaderView];
 }
 
 - (void)setup {
@@ -788,6 +796,13 @@
         _rootView = [UIScrollView new];
     }
     return _rootView;
+}
+
+- (UIScrollView *)tableHeaderView {
+    if (!_tableHeaderView) {
+        _tableHeaderView = [UIScrollView new];
+    }
+    return _tableHeaderView;
 }
 
 - (UIScrollView *)overlayView {

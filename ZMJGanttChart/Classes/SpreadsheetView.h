@@ -243,6 +243,8 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 @property (nonatomic, strong) ZMJLayoutProperties *layoutProperties;
 @property (nonatomic, strong) NSIndexPath          *pendingSelectionIndexPath;
 
+@property (nonatomic, strong) UIScrollView  *tableHeaderView;
+
 @end
 
 @interface SpreadsheetView (ForCategory) <UIScrollViewDelegate>
