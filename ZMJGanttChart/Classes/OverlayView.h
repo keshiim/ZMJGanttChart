@@ -17,6 +17,8 @@ typedef void (^TouchOnHeader)(BOOL isTouchOnHeader);
 
 @property (nonatomic, copy) TouchOnHeader touchOnHeader;
 
+@property (nonatomic, assign) BOOL isEndAnimation;
+
 @end
 
 

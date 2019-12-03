@@ -125,6 +125,7 @@
     
     self.cornerView.autoresizesSubviews = NO;
     self.cornerView.hidden = YES;
+    self.cornerView.userInteractionEnabled = YES;
     self.cornerView.delegate = self;
     
     self.overlayView.frame = self.bounds;
@@ -138,16 +139,16 @@
     [self.rootView addSubview:self.cornerView];
     [super addSubview:self.overlayView];
     
-    __weak typeof(self)weak_self = self;
-    [@[self.tableView, self.columnHeaderView, self.rowHeaderView, self.cornerView, self.overlayView] enumerateObjectsUsingBlock:^(UIScrollView* _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
-        //FIXME: HERE💥
-        [weak_self addGestureRecognizer:scrollView.panGestureRecognizer];
-        if (IOS_VERSION_11_OR_LATER && [scrollView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
-            if (@available(iOS 11.0, *)) {
-                scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-            }
-        }
-    }];
+//    __weak typeof(self)weak_self = self;
+//    [@[self.tableView, self.columnHeaderView, self.rowHeaderView, self.cornerView, self.overlayView] enumerateObjectsUsingBlock:^(UIScrollView* _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
+//        //FIXME: HERE💥
+//        [weak_self addGestureRecognizer:scrollView.panGestureRecognizer];
+//        if (IOS_VERSION_11_OR_LATER && [scrollView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
+//            if (@available(iOS 11.0, *)) {
+//                scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAlways;
+//            }
+//        }
+//    }];
 }
 
 - (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
