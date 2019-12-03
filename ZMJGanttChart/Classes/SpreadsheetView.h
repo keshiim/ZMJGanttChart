@@ -12,6 +12,7 @@
 #import "CircualrScrolling.h"
 #import "ZMJScrollView.h"
 #import "ZMJLayoutEngine.h"
+#import "OverlayView.h"
 
 typedef struct CircularScrollScalingFactor {
     NSInteger horizontal;
@@ -238,7 +239,7 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 @property (nonatomic, strong) ZMJScrollView *rowHeaderView;
 @property (nonatomic, strong) ZMJScrollView *cornerView;
 @property (nonatomic, strong) ZMJScrollView *tableView;
-@property (nonatomic, strong) UIScrollView  *overlayView;
+@property (nonatomic, strong) OverlayView  *overlayView;
 @property (nonatomic, strong) UIScrollView  *rootView;
 @property (nonatomic, strong) ZMJLayoutProperties *layoutProperties;
 @property (nonatomic, strong) NSIndexPath          *pendingSelectionIndexPath;

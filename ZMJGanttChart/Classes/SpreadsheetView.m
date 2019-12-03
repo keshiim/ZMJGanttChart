@@ -61,7 +61,7 @@
     _tableHeaderView = tableHeaderView;
     CGSize headerSize = tableHeaderView.frame.size;
     self.tableView.contentInset = UIEdgeInsetsMake(headerSize.height, 0, 0, 0);
-    [self.rootView addSubview:tableHeaderView];
+    self.overlayView.tableHeaderView = tableHeaderView;
 }
 
 - (void)setup {
@@ -805,9 +805,9 @@
     return _tableHeaderView;
 }
 
-- (UIScrollView *)overlayView {
+- (OverlayView *)overlayView {
     if (!_overlayView) {
-        _overlayView = [UIScrollView new];
+        _overlayView = [OverlayView new];
     }
     return _overlayView;
 }

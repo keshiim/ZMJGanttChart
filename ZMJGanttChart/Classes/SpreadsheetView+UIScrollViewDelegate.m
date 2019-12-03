@@ -47,6 +47,11 @@
         frame = self.rowHeaderView.frame;
         frame.origin.y = offset;
         self.rowHeaderView.frame = frame;
+        
+        CGPoint headerViewOffset = self.tableHeaderView.contentOffset;
+        CGSize headerSize = self.tableHeaderView.frame.size;
+        headerViewOffset.y = headerSize.height - offset ;
+        self.tableHeaderView.contentOffset = headerViewOffset;
     } else {
         CGRect frame = self.cornerView.frame;
         frame.origin.y = 0;
@@ -54,12 +59,6 @@
         frame = self.rowHeaderView.frame;
         frame.origin.y = 0;
         self.rowHeaderView.frame = frame;
-        
-        CGFloat offset = self.tableView.contentOffset.y * -1;
-        CGPoint headerViewOffset = self.tableHeaderView.contentOffset;
-        CGSize headerSize = self.tableHeaderView.frame.size;
-        headerViewOffset.y = headerSize.height - offset;
-        self.tableHeaderView.contentOffset = headerViewOffset;
     }
     
     CGPoint offset = self.rowHeaderView.contentOffset;
