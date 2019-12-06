@@ -245,7 +245,7 @@ CircularScrollScalingFactorMake(NSInteger horizontal, NSInteger vertical)
 @property (nonatomic, strong) NSIndexPath          *pendingSelectionIndexPath;
 
 @property (nonatomic, strong) UIScrollView  *tableHeaderView;
-
+@property (nonatomic, copy) void (^onScrollEnd)(BOOL);
 @end
 
 @interface SpreadsheetView (ForCategory) <UIScrollViewDelegate>

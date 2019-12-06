@@ -9,15 +9,12 @@
 
 
 typedef void (^TouchOnHeader)(BOOL isTouchOnHeader);
-@interface OverlayView : UIScrollView <UIScrollViewDelegate>
+@interface OverlayView : UIScrollView
 
 @property (nonatomic, strong) UIScrollView  *tableHeaderView;
-
 @property (nonatomic, assign) BOOL isTouchOnHeader;
-
 @property (nonatomic, copy) TouchOnHeader touchOnHeader;
-
-@property (nonatomic, assign) BOOL isEndAnimation;
+@property (nonatomic, assign) BOOL isAnimation;
 
 @end
 
