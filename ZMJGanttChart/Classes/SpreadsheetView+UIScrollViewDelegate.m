@@ -96,6 +96,9 @@
     }];
     ![self.delegate respondsToSelector:@selector(spreadsheetView:didSelectItemAt:)]?: [self.delegate spreadsheetView:self didSelectItemAt:indexPath];
     self.pendingSelectionIndexPath = nil;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     self.overlayView.isAnimation = false;
 }
 

@@ -14,11 +14,10 @@
     
 }
 
-
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     CGSize headerSize = self.tableHeaderView.frame.size;
     BOOL isTouchOnHeader = point.y < headerSize.height;
-    if (self.touchOnHeader != nil && self.isAnimation == false) {
+    if (self.touchOnHeader != nil && self.isAnimation == false && isTouchOnHeader == YES) {
         self.touchOnHeader(isTouchOnHeader);
     }
     return [super hitTest:point withEvent:event];
