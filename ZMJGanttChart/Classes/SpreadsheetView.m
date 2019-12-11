@@ -36,6 +36,7 @@
 @synthesize scrollEnabled    = _scrollEnabled;
 @synthesize indicatorStyle   = _indicatorStyle;
 @synthesize decelerationRate = _decelerationRate;
+@synthesize tableHeaderView = _tableHeaderView;
 
 #pragma mark - Init
 - (instancetype)init
@@ -54,6 +55,13 @@
         [self setup];
     }
     return self;
+}
+
+- (void)setTableHeaderView:(UIScrollView *)tableHeaderView {
+    _tableHeaderView = tableHeaderView;
+    CGSize headerSize = tableHeaderView.frame.size;
+    self.tableView.contentInset = UIEdgeInsetsMake(headerSize.height, 0, 0, 0);
+    self.overlayView.tableHeaderView = tableHeaderView;
 }
 
 - (void)setup {
@@ -117,6 +125,7 @@
     
     self.cornerView.autoresizesSubviews = NO;
     self.cornerView.hidden = YES;
+    self.cornerView.userInteractionEnabled = YES;
     self.cornerView.delegate = self;
     
     self.overlayView.frame = self.bounds;
@@ -130,16 +139,16 @@
     [self.rootView addSubview:self.cornerView];
     [super addSubview:self.overlayView];
     
-    __weak typeof(self)weak_self = self;
-    [@[self.tableView, self.columnHeaderView, self.rowHeaderView, self.cornerView, self.overlayView] enumerateObjectsUsingBlock:^(UIScrollView* _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
-        //FIXME: HERE💥
-        [weak_self addGestureRecognizer:scrollView.panGestureRecognizer];
-        if (IOS_VERSION_11_OR_LATER && [scrollView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
-            if (@available(iOS 11.0, *)) {
-                scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-            }
-        }
-    }];
+//    __weak typeof(self)weak_self = self;
+//    [@[self.tableView, self.columnHeaderView, self.rowHeaderView, self.cornerView, self.overlayView] enumerateObjectsUsingBlock:^(UIScrollView* _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
+//        //FIXME: HERE💥
+//        [weak_self addGestureRecognizer:scrollView.panGestureRecognizer];
+//        if (IOS_VERSION_11_OR_LATER && [scrollView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
+//            if (@available(iOS 11.0, *)) {
+//                scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAlways;
+//            }
+//        }
+//    }];
 }
 
 - (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
@@ -790,9 +799,16 @@
     return _rootView;
 }
 
-- (UIScrollView *)overlayView {
+- (UIScrollView *)tableHeaderView {
+    if (!_tableHeaderView) {
+        _tableHeaderView = [UIScrollView new];
+    }
+    return _tableHeaderView;
+}
+
+- (OverlayView *)overlayView {
     if (!_overlayView) {
-        _overlayView = [UIScrollView new];
+        _overlayView = [OverlayView new];
     }
     return _overlayView;
 }
